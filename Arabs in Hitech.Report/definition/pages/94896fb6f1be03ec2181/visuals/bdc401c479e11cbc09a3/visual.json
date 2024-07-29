@@ -628,6 +628,7 @@
     "filters": [
       {
         "name": "Filter52a4d3ea34be903d77cd",
+        "ordinal": 0,
         "field": {
           "Column": {
             "Expression": {
@@ -697,7 +698,62 @@
           ]
         },
         "howCreated": "User"
+      },
+      {
+        "name": "Filterdd040fb9d23b4e079460",
+        "ordinal": 3,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Training Subject"
+              }
+            },
+            "Property": "תחום הכשרה"
+          }
+        },
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "t",
+              "Entity": "Training Subject",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "Comparison": {
+                      "ComparisonKind": 0,
+                      "Left": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "t"
+                            }
+                          },
+                          "Property": "תחום הכשרה"
+                        }
+                      },
+                      "Right": {
+                        "Literal": {
+                          "Value": "null"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "type": "Advanced",
+        "howCreated": "User"
       }
-    ]
+    ],
+    "filterSortOrder": "Custom"
   }
 }

@@ -102,7 +102,7 @@ table 'Fact Lamas Graduates by Nafa'
 				    #"Subtracted from Column" = Table.TransformColumns(#"Changed Type2", {{"First Year", each _ - 1, type number}}),
 				    #"Subtracted from Column1" = Table.TransformColumns(#"Subtracted from Column", {{"Second Year", each _ - 1, type number}}),
 				    #"Extracted Text After Delimiter" = Table.TransformColumns(#"Subtracted from Column1", {{"Subject", each Text.AfterDelimiter(_, "="), type text}}),
-				    #"Added Custom1" = Table.AddColumn(#"Extracted Text After Delimiter", "Population Subsection", each "בוגרים", type text),
+				    #"Added Custom1" = Table.AddColumn(#"Extracted Text After Delimiter", "Population Subsection", each "מקבלי תארים", type text),
 				    #"Replaced Value2" = Table.ReplaceValue(#"Added Custom1","נפת ","",Replacer.ReplaceText,{"נפה"}),
 				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","אזור ","",Replacer.ReplaceText,{"נפה"}),
 				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3",", ","+",Replacer.ReplaceText,{"Years"}),
@@ -116,4 +116,6 @@ table 'Fact Lamas Graduates by Nafa'
 				    #"Changed Type3"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
-  "name": "8096f5ac35bd2b56b4aa",
+  "name": "624b4b66f059546478c7",
   "position": {
-    "x": 80,
-    "y": 944,
-    "z": 40000,
-    "width": 400,
-    "height": 48,
-    "tabOrder": 40000
+    "x": 1024,
+    "y": 1296,
+    "z": 36001,
+    "width": 336,
+    "height": 176,
+    "tabOrder": 36001
   },
   "visual": {
     "visualType": "textbox",
@@ -19,11 +19,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "לתקן בכל המקומות למילה אוכלוסייה (עם שני י)",
+                    "value": "אפרת: כרגע זה כמות. האם זה הופך לשיעור? אני צריכה להבין מה מנסים להשיג ע\"י הגרף החדש. ההסבר לא ברור.",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "14pt",
-                      "color": "#00ac0c"
+                      "fontSize": "16pt",
+                      "color": "#fe9666"
                     }
                   }
                 ],

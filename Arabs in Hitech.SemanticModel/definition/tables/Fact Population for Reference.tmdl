@@ -85,13 +85,13 @@ table 'Fact Population for Reference'
 			    SWITCH(
 			        SELECTEDVALUE('Population Subsection'[Population Subsection]),
 			        "סטודנטים", [Population Reference Higher Ed Students Ages],
-			        "בוגרים", [Population Reference Higher Ed Graduates Ages]
+			        "מקבלי תארים", [Population Reference Higher Ed Graduates Ages]
 			    ),
 			    "Training",
 			    SWITCH(
 			        SELECTEDVALUE('Population Subsection'[Population Subsection]),
 			        "סטודנטים", [Population Reference Training Students Ages],
-			        "בוגרים", [Population Reference Training Graduates Ages]
+			        "מקבלי תארים", [Population Reference Training Graduates Ages]
 			    ),
 			    "12th Grade", [Population Reference 12th Garde Ages],
 			    "Employment", [Population Reference Employment Ages]

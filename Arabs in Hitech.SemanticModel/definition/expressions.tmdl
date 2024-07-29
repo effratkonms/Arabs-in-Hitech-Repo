@@ -247,7 +247,7 @@ expression '3_3 Graduates' =
 		    #"Removed Other Columns" = Table.SelectColumns(#"Invoked Custom Function",{"Year", "Handle 3_3 Graduates Sheet"}),
 		    #"Expanded Handle 3_3 Graduates Sheet" = Table.ExpandTableColumn(#"Removed Other Columns", "Handle 3_3 Graduates Sheet", {"מקצוע לימוד", "סך הכל", " ערבים"}, {"מקצוע לימוד", "סך הכל", " ערבים"}),
 		    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Handle 3_3 Graduates Sheet",{{"מקצוע לימוד", type text}, {"סך הכל", Int64.Type}, {" ערבים", Int64.Type}}),
-		    #"Added Custom" = Table.AddColumn(#"Changed Type", "סטודנטים/בוגרים", each "בוגרים", type text),
+		    #"Added Custom" = Table.AddColumn(#"Changed Type", "סטודנטים/בוגרים", each "מקבלי תארים", type text),
 		    #"Renamed Columns" = Table.RenameColumns(#"Added Custom",{{"סך הכל", "Total"}, {" ערבים", "Arabs"}, {"מקצוע לימוד", "Subject"}, {"סטודנטים/בוגרים", "Population Subsection"}}),
 		    #"Added Custom1" = Table.AddColumn(#"Renamed Columns", "Data Source", each "3.3", type text)
 		in

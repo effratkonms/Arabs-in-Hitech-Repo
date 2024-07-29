@@ -1,39 +1,57 @@
 table Titles
 	lineageTag: 0c119b39-7a1c-4c69-b625-7747f266a74f
 
-	measure 'Title: Screen 01, Bottom-Right Table' = [Selected Subsection] & " במקצועות טכנולוגיים ומדעיים (כלל האוכלוסייה וחברה ערבית)"
+	measure 'Title: Screen 01, Bottom-Right Table' = [Selected Subsection] & "* במקצועות טכנולוגיים ומדעיים (כלל האוכלוסייה וחברה ערבית)"
 		lineageTag: 1c199867-c568-4697-a15a-a26fcc8a592a
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Title: Screen 01, Top' = [Selected Subsection] & " מהחברה הערבית במקצועות טכנולוגיים ומדעיים"
+	measure 'Title: Screen 01, Top' = [Selected Subsection] & "* מהחברה הערבית במקצועות טכנולוגיים ומדעיים"
 		lineageTag: ebac8aef-a7ae-48d4-b153-cec65b1f1cdc
 
-	measure 'Title: Screen 01, Bottom-Right Chart' =
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Title: Screen 01, Bottom-Right Chart' = ```
 			
-			"שיעור החברה הערבית מתוך כלל ה"
-			& [Selected Subsection]
-			//  &
-			// " במקצועות הטכנולוגיים ומדעיים"
+			VAR selected = [Selected Subsection]
+			RETURN
+			"שיעור החברה הערבית מתוך כלל"
+			& 
+			SWITCH(
+			    selected,
+			    "סטודנטים", "הסטודנטים",
+			    "מקבלי תארים", "מקבלי התארים"
+			)
+			```
 		lineageTag: 6007fcf1-466b-4c6d-9181-21b24cfc017e
 
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	measure 'Title: Screen 01, Bottom-Left Table' = ```
-			[Selected Subsection] & ", " & [Selected Society] //" מהחברה הערבית - כלל המקצועות"
+			[Selected Subsection] & "*, " & [Selected Society] //" מהחברה הערבית - כלל המקצועות"
 			
 			```
 		lineageTag: fb6a29e5-370a-4213-a465-0f8b95137249
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Title: Screen 01, Bottom-Left Chart' =
+	measure 'Title: Screen 01, Bottom-Left Chart' = ```
 			
-			"שיעור ה"
-			& [Selected Subsection] &
+			VAR selected = [Selected Subsection]
+			RETURN
+			"שיעור "
+			& 
+			SWITCH(
+			    selected,
+			    "סטודנטים", "הסטודנטים",
+			    "מקבלי תארים", "מקבלי התארים"
+			)
+			&
 			" במקצועות טכנולוגיים ומדעיים"
-			// & " מתוך כלל ה"
-			// & [Selected Subsection]
-			// & " בחברה העברית"
+			```
 		lineageTag: ea2ceae6-aec8-4c88-b202-fa47e7904044
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Title: Screen 01, Page Title' =
 			
@@ -46,10 +64,18 @@ table Titles
 			
 			// "כמות ושיעור "
 			// &
-			[Selected Subsection]
+			VAR selected = [Selected Subsection]
+			RETURN
+			SWITCH(
+			    selected,
+			    "סטודנטים", "לימודים ב",
+			    "מקבלי תארים", "מקבלי תארים ב"
+			)
 			&
-			" למקצועות טכנולוגיים ומדעיים"
+			"מקצועות טכנולוגיים ומדעיים"
 		lineageTag: 4693f7ae-6346-4ecd-af0a-098df3918829
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	partition Titles = m
 		mode: import

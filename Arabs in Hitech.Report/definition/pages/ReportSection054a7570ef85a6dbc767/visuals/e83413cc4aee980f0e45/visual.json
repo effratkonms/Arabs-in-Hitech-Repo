@@ -1,0 +1,360 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "e83413cc4aee980f0e45",
+  "position": {
+    "x": 112,
+    "y": 784,
+    "z": 29001,
+    "width": 1424,
+    "height": 688,
+    "tabOrder": 29001
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendar"
+                    }
+                  },
+                  "Property": "Year"
+                }
+              },
+              "queryRef": "Calendar.Year",
+              "nativeQueryRef": "Year"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Metric"
+                    }
+                  },
+                  "Property": "Key Metric, Arab % Technological Subjects of All Subjects"
+                }
+              },
+              "queryRef": "Key Metric.Key Metric, Arab % Technological Subjects of All Subjects",
+              "nativeQueryRef": "החברה הערבית",
+              "displayName": "החברה הערבית"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Metric"
+                    }
+                  },
+                  "Property": "Key Metric, All Populations % Technological Subjects of All Subjects"
+                }
+              },
+              "queryRef": "Key Metric.Key Metric, All Populations % Technological Subjects of All Subjects",
+              "nativeQueryRef": "כלל האוכלוסייה",
+              "displayName": "כלל האוכלוסייה"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Metric"
+                    }
+                  },
+                  "Property": "Key Metric, All Populations, All Technological Subjects"
+                }
+              },
+              "queryRef": "Key Metric.Key Metric, All Populations, All Technological Subjects",
+              "nativeQueryRef": "Key Metric, All Populations, All Technological Subjects"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Metric"
+                    }
+                  },
+                  "Property": "Key Metric, All Populations, All Subjects"
+                }
+              },
+              "queryRef": "Key Metric.Key Metric, All Populations, All Subjects",
+              "nativeQueryRef": "Key Metric, All Populations, All Subjects"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Metric"
+                    }
+                  },
+                  "Property": "Key Metric, All Populations, All Subjects"
+                }
+              },
+              "queryRef": "Key Metric.Key Metric, All Populations, All Subjects",
+              "nativeQueryRef": "Key Metric, All Populations, All Subjects"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Metric"
+                    }
+                  },
+                  "Property": "Key Metric, All Populations"
+                }
+              },
+              "queryRef": "Key Metric.Key Metric, All Populations",
+              "nativeQueryRef": "Key Metric, All Populations"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Calendar"
+                  }
+                },
+                "Property": "Year"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "general": [
+        {
+          "properties": {}
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "202.1908042504162D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Key Metric.Key Metric, All Populations, All Technological Subjects"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "167.06891554968354D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Key Metric.Key Metric, All Populations, All Subjects"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "144.9470037159079D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Key Metric.Key Metric, All Populations"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Titles"
+                    }
+                  },
+                  "Property": "Title: Screen 01, Bottom-Left Chart"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'right'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'right'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "7D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

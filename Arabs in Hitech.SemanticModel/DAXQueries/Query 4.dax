@@ -1,0 +1,50 @@
+DEFINE
+	MEASURE 'Core Measures'[SUM Higher Ed] = SUM('Fact Higher Education'[Value])
+	MEASURE 'Core Measures'[SUM Students by Institution] = SUM('Fact Lamas Students by Institution'[Value])
+	MEASURE 'Core Measures'[SUM Students by Gender] = SUM('Fact Lamas Students by Gender'[Value])
+	MEASURE 'Core Measures'[SUM Graduates by Nafa] = SUM('Fact Lamas Graduates by Nafa'[Value])
+	MEASURE 'Key Metric'[Key Metric] = VAR RESULT =
+		SWITCH(
+			SELECTEDVALUE('Key Metric'[Metric]),
+			"SUM Higher Ed", [SUM Higher Ed],
+			"SUM Students by Institution", [SUM Students by Institution],
+			"SUM Students by Gender", [SUM Students by Gender],
+			"SUM Graduates by Nafa", [SUM Graduates by Nafa]
+		)
+		RETURN
+			ROUNDUP(
+				result,
+				0
+			)
+	MEASURE 'Key Metric'[Key Metric, All Populations] = CALCULATE(
+			[Key Metric],
+			ALL(Population)
+		)
+	MEASURE 'Key Metric'[Key Metric, All Populations, All Technological Subjects] = CALCULATE(
+			[Key Metric, All Populations],
+			FILTER(
+				ALL(Subject),
+				Subject[תחום] <> "לא הייטק"
+			)
+		)
+	MEASURE 'Key Metric'[Key Metric, All Populations, All Subjects] = CALCULATE(
+			[Key Metric, All Populations],
+			ALL(Subject)
+		)
+	MEASURE 'Key Metric'[Key Metric, All Populations % Technological Subjects of All Subjects] = DIVIDE(
+			[Key Metric, All Populations, All Technological Subjects],
+			[Key Metric, All Populations, All Subjects]
+		)
+
+EVALUATE
+	SUMMARIZECOLUMNS(
+		"SUM Higher Ed", 'Core Measures'[SUM Higher Ed],
+		"SUM Students by Institution", 'Core Measures'[SUM Students by Institution],
+		"SUM Students by Gender", 'Core Measures'[SUM Students by Gender],
+		"SUM Graduates by Nafa", 'Core Measures'[SUM Graduates by Nafa],
+		"Key Metric", 'Key Metric'[Key Metric],
+		"Key Metric, All Populations", 'Key Metric'[Key Metric, All Populations],
+		"Key Metric, All Populations, All Technological Subjects", 'Key Metric'[Key Metric, All Populations, All Technological Subjects],
+		"Key Metric, All Populations, All Subjects", 'Key Metric'[Key Metric, All Populations, All Subjects],
+		"Key Metric, All Populations % Technological Subjects of All Subjects", 'Key Metric'[Key Metric, All Populations % Technological Subjects of All Subjects]
+	)
