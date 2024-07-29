@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "fc8bf1c823d08bc92082",
+  "position": {
+    "x": 1664.3514070006863,
+    "y": 471.76389842141384,
+    "z": 35000,
+    "width": 209.52642415923128,
+    "height": 168.67536032944406,
+    "tabOrder": 35000
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LinkedIn Main"
+                    }
+                  },
+                  "Property": "Count Rows LinkedIn Main"
+                }
+              },
+              "queryRef": "LinkedIn Main.Count Rows LinkedIn Main",
+              "nativeQueryRef": "מועסקים במשרות הייטק מתוך בעלי השכלת הייטק",
+              "displayName": "מועסקים במשרות הייטק מתוך בעלי השכלת הייטק"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LinkedIn Main"
+                  }
+                },
+                "Property": "Count Rows LinkedIn Main"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

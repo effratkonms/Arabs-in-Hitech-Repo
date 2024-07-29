@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "b905fc4f40c03056e4b0",
+  "position": {
+    "x": 1104,
+    "y": 1232,
+    "z": 34000,
+    "width": 672,
+    "height": 96,
+    "tabOrder": 34000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "לשלב את שני הגרפים לגרף אחד- \"אזור נבחר - חברה ערבית\", \"אזור נבחר - כלל החברה\", \"ממוצע ארצי - חברה ערבית\" – לא מתפלטר, \"ממוצע ארצי - כלל האוכלוסייה\" – לא מתפלטר",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt",
+                      "color": "#f80000"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "right"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

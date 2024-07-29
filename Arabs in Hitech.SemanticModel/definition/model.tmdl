@@ -1,0 +1,174 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-IL
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Source\Definitions
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup Source
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup Source\Sharepoint
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Source\Source Data\01 Higher Education'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Source\Source Data'
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup Parameters
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Functions
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'Functions\Handle 2_3 Students Sheet'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Functions\Handle 3_3 Graduates Sheet'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'Data Model'
+
+	annotation PBI_QueryGroupOrder = 4
+
+queryGroup 'Data Model\Facts'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Data Model\Dimensions'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'Data Model\Control'
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup 'Source\Source Data\02 Higer Education Lamas'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'Functions\Handle Lamas Higher Ed'
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup 'Source\Source Data\03 Bagrut'
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup 'Source\Source Data\04 Population'
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup 'Source\Source Data\04 Population\Population 2000 - 2019'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Source\Source Data\01 Higher Education\Manual Override'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Source\Source Data\04 Population\Population After 2019'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'Source\Source Data\05 Graduates Salaries 2021'
+
+	annotation PBI_QueryGroupOrder = 4
+
+queryGroup 'Source\Source Data\06 Employment'
+
+	annotation PBI_QueryGroupOrder = 5
+
+queryGroup 'Source\Source Data\06 Employment\Handle Tenure File'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Source\Source Data\07 Training'
+
+	annotation PBI_QueryGroupOrder = 6
+
+queryGroup '08 Bagrut Tech'
+
+	annotation PBI_QueryGroupOrder = 3
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.130.930.0 (24.06)
+
+annotation PBI_QueryOrder = ["pSharepoint","Sharepoint Folder","BI Definitions","LUTs","Ages LUT","Subjects And Occupations LUT","Occupations LUT","Subject Names Errors 2_3 LUT","Education Years LUT","Source Data","01 Higher Education","2_3 Students Source","2_3 Students","08 Rashut Bagrut-Tech to Rashut Corrected Lamas LUT","3_3 Graduates Source","3_3 Graduates","3_3 Graduates Sample Sheet","Handle 3_3 Graduates Sheet for Fn DISCONNECTED","Manual Totals Source","2_3 Students Sample Sheet","Handle 2_3 Students Sheet for Fn DISCONNECTED","p01ReplaceLowNumberWith","Handle 2_3 Students Sheet","Handle 3_3 Graduates Sheet","Manual Totals","Higher Education Clean","08 Population","Subject","Subject Category","Higher Education Attributes","Higher Education Hitech","Higher Education Non-Hitech","Fact Higher Education","02 Higer Education Lamas","Higer Education Lamas Source","Sample table for Handle Lamas Higher Ed","Fact Lamas Students by Institution","Fact Lamas Students by Gender","Fact Lamas Graduates by Nafa","LUTs Lamas","Lamas Cities 2023 LUT","Lamas City","Lamas Council Corrected","Nafa","Handle Lamas Higher Ed for Fn DISCONNECTED","Handle Lamas Higher Ed","Lamas Institutions LUT","Institution","Institution Type #","Gender","Appended Higer Ed","Years","Calendar","Institution Type","Population","Degree","New / Existing","Population Subsection","Core Measures","Key Metric","Titles","03 Bagrut","Bagrut - Transparency in Education Source","Bagrut - Additional Data Source","Bagrut Merged","Fact Bagrut Qualifiers","Fact Bagrut Denom","LUTs Transparency","Cities Councils Transparency LUT","Key Metrics","Key Metric Bagrut Template","04 Population","2020 & Later Source","Population 2000 - 2019 Source","2000 - 2019 Sample Sheet","Population 2000 - 2019 for Fn -DISCONNECTED","Ages","Population 2000 - 2019","Population 2000 - 2019 Clean","2000 - 2019 for Control","Override Institution Name","Population 2000 - 2019 Before Append","Population After 2019 Sample File","pPopAfter2019SampleFile","Handle Population After 2019 for Fn","Handle Population After 2019","Population After 2019 Before Append","Fact Population for Reference","Nafot WKT w YS","Map Legend","Subject Category Manual Override","Societies","Quantity or Density","2021 Salaries Source","Salaries 2021","Graduates 2021","Fact 2021 Graduates Salaries","06 Employment Source","06 Tenure Source","Tenure Rows CSV Data","06 Main Source","06 Companies Source","Company Size Order LUT","06 Gender Source","06 Positions Source","06 Posistion Categories Source","LinkedIn Main","LinkedIn Companies","LinkedIn Positions","Tenure Sample File","pTenureSampleFile","Handle Tenure File for Fn","Handle Tenure File","06 Location to District LUT","07 Nafa LUT","07 Training Source","07 Students by Nafa Source","07 Graduates by Nafa Source","07 Students by Gender Source","07 Students by Nafa Clean","07 Graduates by Nafa Clean","07 Students by Gender Clean","p02ReplaceLowNumberWith","p04ReplaceLowNumberWith","Fact 07 Students by Nafa","Fact 07 Graduates by Nafa","Fact 07 Students by Gender","Training Subject","Training Measures","Manual Selected Population","Age Category","08 Bargrut Tech Folder","08 Bargrut Tech: Source","08 Bargrut Tech Target: Source","Fact 08 Bargrut Tech","Fact 08 Bargrut Tech Target","Fact 08 Mistrot Tech Target","Fact 08 Mistrot Tech","08 Bargrut Tech: Clean","p07ReplaceLowNumberWith","08 Misrot Tech Target: Source","08 Misrot Tech: Source"]
+
+annotation PBI_ProTooling = ["DaxQueryView_Desktop","DevMode"]
+
+annotation __TEdtr = 1
+
+ref table 'Manual Totals Source'
+ref table Subject
+ref table 'Fact Higher Education'
+ref table 'Fact Lamas Students by Institution'
+ref table 'Fact Lamas Students by Gender'
+ref table 'Fact Lamas Graduates by Nafa'
+ref table 'Lamas City'
+ref table Institution
+ref table Gender
+ref table Years
+ref table Calendar
+ref table 'Institution Type'
+ref table Population
+ref table Degree
+ref table 'New / Existing'
+ref table 'Population Subsection'
+ref table Nafa
+ref table 'Core Measures'
+ref table 'Key Metric'
+ref table Titles
+ref table 'Subject Category'
+ref table 'Fact Bagrut Qualifiers'
+ref table 'Fact Bagrut Denom'
+ref table 'Key Metric Bagrut Template'
+ref table 'Bagrut Parameters'
+ref table Ages
+ref table '2000 - 2019 for Control'
+ref table 'Ages LUT'
+ref table 'Fact Population for Reference'
+ref table 'Map Legend'
+ref table 'CG Select Population'
+ref table 'CG Zero if Blank'
+ref table 'Nafot WKT w YS'
+ref table Societies
+ref table 'Quantity or Density'
+ref table 'Fact 2021 Graduates Salaries'
+ref table 'LinkedIn Main'
+ref table 'LinkedIn Companies'
+ref table 'LinkedIn Positions'
+ref table 'Fact 07 Students by Nafa'
+ref table 'Fact 07 Graduates by Nafa'
+ref table 'Fact 07 Students by Gender'
+ref table 'Training Subject'
+ref table 'Training Measures'
+ref table 'Manual Selected Population'
+ref table 'Age Category'
+ref table 'Fact 08 Bargrut Tech'
+ref table 'Fact 08 Bargrut Tech Target'
+ref table 'Fact 08 Mistrot Tech Target'
+ref table 'Fact 08 Mistrot Tech'
+ref table '08 Population'
+ref table 'Lamas Council Corrected'
+
+ref cultureInfo en-US
+

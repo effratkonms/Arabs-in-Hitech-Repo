@@ -1,0 +1,75 @@
+table 'Fact 08 Bargrut Tech Target'
+	lineageTag: 218b1c9a-0a37-4ab6-bbe4-8c8c20a83146
+
+	measure 'Bagrut-Tech Target, Arabs' = AVERAGE('Fact 08 Bargrut Tech Target'[Arab])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: c1b76c62-933b-4f01-92de-54a27e2ec5c0
+
+	measure 'Bagrut-Tech Target, All Population' = AVERAGE('Fact 08 Bargrut Tech Target'[All])
+		lineageTag: 367b7927-b663-4af9-ac5e-9d537f67547c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Bagrut-Tech Target' =
+			
+			SWITCH(
+			    SELECTEDVALUE('Manual Selected Population'[Population]),
+			    "החברה הערבית", [Bagrut-Tech Target, Arabs],
+			    [Bagrut-Tech Target, All Population]
+			)
+			// VAR maxYear = MAX('Calendar'[Year])
+			// RETURN
+			// IF(maxYear = 2028, .15)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: a3ba0e6b-cb6c-47be-a80a-6421771b86a5
+
+	column Year
+		dataType: int64
+		lineageTag: eeeb0140-4390-4547-93d8-25a17bd81880
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Point Type'
+		dataType: string
+		lineageTag: 2be42799-536c-49e6-833f-f54d3efccab6
+		summarizeBy: none
+		sourceColumn: Point Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column All
+		dataType: double
+		lineageTag: cf00a1cf-32ba-4c03-88c1-290fb0a078c4
+		summarizeBy: sum
+		sourceColumn: All
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Arab
+		dataType: double
+		lineageTag: 904ef4fe-f2e5-4a4c-b9eb-82f3f9524c73
+		summarizeBy: sum
+		sourceColumn: Arab
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Fact 08 Bargrut Tech Target' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = #"08 Bargrut Tech Target: Source",
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Year", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

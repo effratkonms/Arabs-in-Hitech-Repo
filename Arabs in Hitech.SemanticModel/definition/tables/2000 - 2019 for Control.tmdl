@@ -1,0 +1,126 @@
+table '2000 - 2019 for Control'
+	lineageTag: d4cd4a8f-b0a7-4546-9435-6e98488ec256
+
+	measure 'Count Rows Population' = COUNTROWS('2000 - 2019 for Control')
+		formatString: 0
+		lineageTag: 8000eb09-4008-4dd1-86e4-1de39569337f
+
+	measure 'Total Pop ".."' =
+			
+			CALCULATE(
+			    [Total Population],
+			    '2000 - 2019 for Control'[Value] = 1.5
+			)
+		formatString: #,0.0
+		lineageTag: 5567ec21-abcb-4378-9829-78b347fe950b
+
+	measure 'Total Population' = SUM('2000 - 2019 for Control'[Value])
+		lineageTag: 3b5242d8-ff24-4023-a7e9-0f0a015e6960
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Population All Totals' =
+			
+			CALCULATE(
+			    [Total Population],
+			    '2000 - 2019 for Control'[Age] = "סה""כ" &&
+			    '2000 - 2019 for Control'[District] = "סה""כ" &&
+			    '2000 - 2019 for Control'[Nafa] = "סה""כ" &&
+			    '2000 - 2019 for Control'[Population] = "סה""כ" &&
+			    '2000 - 2019 for Control'[Sex] = "סה""כ"
+			)
+		lineageTag: df4970ef-6fa2-4226-8548-0b4b6eb43657
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Population No Totals' =
+			
+			CALCULATE(
+			    [Total Population],
+			    '2000 - 2019 for Control'[Age] <> "סה""כ" &&
+			    '2000 - 2019 for Control'[District] <> "סה""כ" && // remove
+			    '2000 - 2019 for Control'[Nafa] <> "סה""כ" && // remove
+			    // ('2000 - 2019 for Control'[District] <> "סה""כ" && '2000 - 2019 for Control'[Nafa] = "סה""כ" ||
+			    // '2000 - 2019 for Control'[District] = "סה""כ" && '2000 - 2019 for Control'[Nafa] <> "סה""כ") &&
+			    '2000 - 2019 for Control'[Population] <> "סה""כ" &&
+			    '2000 - 2019 for Control'[Sex] <> "סה""כ"
+			)
+		lineageTag: 0ffa9c0d-008e-47b1-aa32-6023f062284f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Pop Diff' = [Population All Totals] - [Population No Totals]
+		lineageTag: a4f20368-1b36-4b16-964d-14385bd2ff4b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Value
+		dataType: double
+		lineageTag: 39548adb-2fed-4adb-8a21-0fe0e4a15496
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b83e166-368a-43f9-a747-d3d19e6a029f
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = User
+
+	column Population
+		dataType: string
+		lineageTag: cd1af5aa-ef5c-473e-9b1b-c5cb870554dd
+		summarizeBy: none
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	column District
+		dataType: string
+		lineageTag: c3ae7557-3d0b-4f88-ac15-fd2f827dabbd
+		summarizeBy: none
+		sourceColumn: District
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nafa
+		dataType: string
+		lineageTag: dc2f6798-c03f-4674-bc75-30c0c8e6a0f3
+		summarizeBy: none
+		sourceColumn: Nafa
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sex
+		dataType: string
+		lineageTag: e282f27f-1d31-4657-8b0b-d6b892aec946
+		summarizeBy: none
+		sourceColumn: Sex
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
+		dataType: string
+		lineageTag: 0d1c4235-2c01-4df4-bcee-b39a4a269e02
+		summarizeBy: none
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '2000 - 2019 for Control' = m
+		mode: import
+		queryGroup: 'Source\Source Data\04 Population'
+		source =
+				let
+				    Source = #"Population 2000 - 2019 Clean"
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

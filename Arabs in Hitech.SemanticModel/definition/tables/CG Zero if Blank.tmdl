@@ -1,0 +1,30 @@
+table 'CG Zero if Blank'
+	lineageTag: dac09e43-b225-40ab-8ea2-e75237d76560
+
+	calculationGroup
+		precedence: 1
+
+		calculationItem 'Zero if Blank' =
+				
+				VAR result = SELECTEDMEASURE()
+				RETURN
+				IF(ISBLANK(result), 0, result)
+
+	column 'Zero if Blank'
+		dataType: string
+		lineageTag: 3b040072-15bf-4ec5-99b7-4fc0d9c1b22a
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		lineageTag: 2e446f47-a3f9-418a-8de0-fa144873454a
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

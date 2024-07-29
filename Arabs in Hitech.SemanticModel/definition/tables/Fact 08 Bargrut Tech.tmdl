@@ -1,0 +1,123 @@
+table 'Fact 08 Bargrut Tech'
+	lineageTag: 434275b1-d679-421f-b7a1-96c1b2a16e0e
+
+	measure 'SUM Bagrut-Tech, 12th Grade Students' = SUM('Fact 08 Bargrut Tech'[12 Grade])
+		lineageTag: 41622629-ef5d-48c1-8415-cecc18ae74c6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SUM Bagrut-Tech, Eligible for Bagrut-Tech' = SUM('Fact 08 Bargrut Tech'[Bagrut-Tech])
+		formatString: 0
+		lineageTag: a8efd935-4cc7-4cba-b19b-33ef6be8ee8a
+
+	measure 'Bagrut-Tech, % Eligible' = DIVIDE([SUM Bagrut-Tech, Eligible for Bagrut-Tech], [SUM Bagrut-Tech, 12th Grade Students])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 4c48755e-6f3e-4820-badb-68c53d754042
+
+	measure 'Eligible for Bagrut-Tech, Girls' =
+			
+			CALCULATE(
+			    [SUM Bagrut-Tech, Eligible for Bagrut-Tech],
+			    Gender[Gender] = "נשים"
+			)
+		lineageTag: a5181e04-e588-4f5b-be07-3eb762b062e6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Eligible for Bagrut-Tech, All Genders' =
+			
+			CALCULATE(
+			    [SUM Bagrut-Tech, Eligible for Bagrut-Tech],
+			    ALL(Gender)
+			)
+		lineageTag: c4999181-a755-4e09-a848-a630959bf710
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Bargut-Tech, % Girls of Eligible' = DIVIDE([Eligible for Bagrut-Tech, Girls], [Eligible for Bagrut-Tech, All Genders])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: a21d7bec-75fd-4b5d-87fa-7190c890d467
+
+	measure '12th Gradeders for Bagrut-Tech, Girls' =
+			
+			CALCULATE(
+			    [SUM Bagrut-Tech, 12th Grade Students],
+			    Gender[Gender] = "נשים"
+			)
+		lineageTag: dda64dc7-4ff5-459c-80ef-2694cf208cbb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '12th Gradeders for Bagrut-Tech, All Genders' =
+			
+			CALCULATE(
+			    [SUM Bagrut-Tech, 12th Grade Students],
+			    ALL(Gender)
+			)
+		lineageTag: 92011fdd-7dad-440f-a461-81de116b3664
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Bargut-Tech, % Girls of 12th Graders' = DIVIDE([12th Gradeders for Bagrut-Tech, Girls], [12th Gradeders for Bagrut-Tech, All Genders])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 3b9e82ea-0372-43c7-9775-452e5b046da1
+
+	column 'שם רשות מקומית'
+		dataType: string
+		lineageTag: 856078ea-0cca-47a8-927b-ad62a371264a
+		summarizeBy: none
+		sourceColumn: שם רשות מקומית
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		lineageTag: 9860984e-f970-4a5d-9e7d-94f93c45e8da
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Gender
+		dataType: string
+		lineageTag: 27aac653-8cc1-4c85-82b1-685bf34815b5
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column '12 Grade'
+		dataType: int64
+		lineageTag: 80b1585c-3492-4422-b1ff-52cb5585aa4e
+		summarizeBy: sum
+		sourceColumn: 12 Grade
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Bagrut-Tech
+		dataType: int64
+		lineageTag: 669b2d03-38a7-4e1f-8e1b-edc86b106e91
+		summarizeBy: sum
+		sourceColumn: Bagrut-Tech
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Fact 08 Bargrut Tech' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = #"08 Bargrut Tech: Clean",
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Year", Int64.Type}, {"12 Grade", Int64.Type}, {"Bagrut-Tech", Int64.Type}}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Changed Type",{{"Gender", Text.Trim, type text}})
+				in
+				    #"Trimmed Text"
+
+	annotation PBI_ResultType = Table
+

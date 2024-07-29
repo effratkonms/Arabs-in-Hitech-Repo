@@ -1,0 +1,25 @@
+table Degree
+	lineageTag: 6551f672-2aac-42ee-a279-f5a32c3bdbc0
+
+	column Degree
+		dataType: string
+		lineageTag: 9899598b-b59b-4ee4-95e0-43f22be3e4fe
+		summarizeBy: none
+		sourceColumn: Degree
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Degree = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = #"Appended Higer Ed",
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"Degree"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Removed Blank Rows" = Table.SelectRows(#"Removed Duplicates", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null})))
+				in
+				    #"Removed Blank Rows"
+
+	annotation PBI_ResultType = Table
+

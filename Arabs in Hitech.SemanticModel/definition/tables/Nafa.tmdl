@@ -1,0 +1,26 @@
+table Nafa
+	lineageTag: e8c0a6ce-45df-4100-bd97-20719a506b4f
+
+	column נפה
+		dataType: string
+		lineageTag: 1f8b3e68-b4d0-458d-998b-e7d4d3b7d569
+		dataCategory: Place
+		summarizeBy: none
+		sourceColumn: נפה
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Nafa = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = #"Lamas City",
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"נפה"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Removed Blank Rows" = Table.SelectRows(#"Removed Duplicates", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null})))
+				in
+				    #"Removed Blank Rows"
+
+	annotation PBI_ResultType = Table
+

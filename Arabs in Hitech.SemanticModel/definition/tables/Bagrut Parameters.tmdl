@@ -1,0 +1,55 @@
+table 'Bagrut Parameters'
+	lineageTag: 30d4bccd-e45b-42ea-94f4-b7543c7ee388
+
+	column 'Bagrut Parameters'
+		dataType: string
+		lineageTag: fd85d636-e911-4325-b7ff-20ec38f49f9d
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Bagrut Parameters Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Bagrut Parameters Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Bagrut Parameters Fields'
+		dataType: string
+		isHidden
+		lineageTag: 8932123b-4daa-4d88-a82c-3c3e6c3bab52
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Bagrut Parameters Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Bagrut Parameters Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c2052846-48e0-4b9d-8c82-754f36a443e8
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Bagrut Parameters' = calculated
+		mode: import
+		source =
+				{
+				    ("אזור", NAMEOF('Nafa'[נפה]), 0),
+				    ("רשות", NAMEOF('Fact Bagrut Denom'[שם רשות]), 1),
+				    ("מוסד לימודים", NAMEOF('Fact Bagrut Denom'[שם מוסד]), 2)
+				}
+
+	annotation PBI_Id = 4e5295aa47214e38ac207f4b49aafa53
+

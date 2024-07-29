@@ -1,0 +1,80 @@
+table 'Fact 07 Students by Nafa'
+	lineageTag: 163d1e3f-349a-44a6-8bcc-5057e8903660
+
+	measure 'SUM Training Students By Nafa, All Population' = SUM('Fact 07 Students by Nafa'[All Population Students])
+		formatString: #,0
+		lineageTag: 420ec4da-e807-44ee-a118-02943eb85f5d
+
+	measure 'SUM Training Students By Nafa, Arab Population' = SUM('Fact 07 Students by Nafa'[Arab Population Students])
+		formatString: #,0
+		lineageTag: a8aa38ad-04c6-4be3-8198-82ee895c795b
+
+	measure 'Training Students by Nafa' =
+			
+			SWITCH(
+			    SELECTEDVALUE('Manual Selected Population'[Population]),
+			    "החברה הערבית", [SUM Training Students By Nafa, Arab Population],
+			    "כלל האוכלוסיה", [SUM Training Students By Nafa, All Population]
+			)
+		lineageTag: c17139d8-503f-4d44-b621-808263ab7071
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Students By Nafa, Arab Population' = DIVIDE([SUM Training Students By Nafa, Arab Population], [SUM Training Students By Nafa, All Population])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: da4ac2c7-2d9a-4b31-be32-a871d5f9a417
+
+	column 'Training Subject'
+		dataType: string
+		lineageTag: d3ac5bbf-3d2c-4c1c-a6a9-72192830290f
+		summarizeBy: none
+		sourceColumn: Training Subject
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nafa
+		dataType: string
+		lineageTag: 4f1d780c-de8d-4c26-a741-a904adf474a4
+		summarizeBy: none
+		sourceColumn: Nafa
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 7dda9391-0cf9-4904-9d94-d15421a08d39
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'All Population Students'
+		dataType: int64
+		formatString: 0
+		lineageTag: f41b7dce-85d0-481b-8f8f-6aecdce7b8e6
+		summarizeBy: sum
+		sourceColumn: All Population Students
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Arab Population Students'
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b5ee51c-e595-43d6-8ee8-dd611e8e58cf
+		summarizeBy: sum
+		sourceColumn: Arab Population Students
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact 07 Students by Nafa' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = #"07 Students by Nafa Clean"
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

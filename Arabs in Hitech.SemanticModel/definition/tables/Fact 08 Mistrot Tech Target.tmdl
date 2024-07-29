@@ -1,0 +1,63 @@
+table 'Fact 08 Mistrot Tech Target'
+	lineageTag: c48abec2-05b1-4ecb-af6a-44559eaf005d
+
+	measure 'SUM Misrot Tech Target' = SUM('Fact 08 Mistrot Tech Target'[Target])
+		formatString: #,0
+		lineageTag: 0ed9534b-0fcf-4412-8070-9ef6f289389f
+
+	measure 'SUM Misrot Tech Target in any Year' =
+			
+			CALCULATE(
+			    [SUM Misrot Tech Target],
+			    'Calendar'[Year] = 2035
+			)
+		formatString: #,0
+		lineageTag: 731a029a-30e6-42bf-bf71-3b8438b4cf06
+
+	column Target
+		dataType: int64
+		formatString: 0
+		lineageTag: cba756fa-feb4-4fa6-ac3f-60fc202ffd57
+		summarizeBy: sum
+		sourceColumn: Target
+
+		annotation SummarizationSetBy = Automatic
+
+	column מגזר
+		dataType: string
+		lineageTag: a695dee4-4c6a-4db2-86ed-c5a184b3d9b6
+		summarizeBy: none
+		sourceColumn: מגזר
+
+		annotation SummarizationSetBy = Automatic
+
+	column מגדר
+		dataType: string
+		lineageTag: a758ea49-e268-4b32-b1c6-e874f34c7410
+		summarizeBy: none
+		sourceColumn: מגדר
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: a5a76c17-3066-4135-8389-7fed6fb9e300
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact 08 Mistrot Tech Target' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = #"08 Misrot Tech Target: Source"
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

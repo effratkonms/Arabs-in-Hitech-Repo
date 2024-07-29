@@ -1,0 +1,72 @@
+table Calendar
+	lineageTag: 5e5ddc37-8235-414b-8441-8ffee450b81e
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 6d141c9b-c94c-41fb-9980-7ea655ed5e16
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Text'
+		dataType: string
+		lineageTag: 5f1bc523-98a7-460b-b5ac-b8f9c1af0045
+		summarizeBy: none
+		sourceColumn: Year Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column Years
+		dataType: string
+		lineageTag: ad428fdf-8185-4fc9-a63a-bed59a7c99f4
+		summarizeBy: none
+		sourceColumn: Years
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Offset'
+		dataType: int64
+		formatString: 0
+		lineageTag: 9731c34c-7b12-4a38-ae94-deab3fe52d59
+		summarizeBy: sum
+		sourceColumn: Year Offset
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendar = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = Years,
+				    min = 2000,
+				    max = 2035,
+				    years = {min..max},
+				    #"Converted to Table" = Table.FromList(years, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Renamed Columns" = Table.RenameColumns(#"Converted to Table",{{"Column1", "Year"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Year", Int64.Type}}),
+				    #"Duplicated Column" = Table.DuplicateColumn(#"Changed Type", "Year", "Year - Copy"),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Duplicated Column",{{"Year - Copy", type text}}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Changed Type1",{{"Year - Copy", "Year Text"}}),
+				    #"Added Custom" = Table.AddColumn(#"Renamed Columns1", "Custom", each #"Years"),
+				    #"Expanded Custom" = Table.ExpandTableColumn(#"Added Custom", "Custom", {"Years"}, {"Years"}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Expanded Custom",{{"Years", type text}}),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Changed Type2",{{"Years", "Years o"}}),
+				    #"Added Custom1" = Table.AddColumn(#"Renamed Columns2", "Years", each if Text.Contains([Years o], [Year Text]) then [Years o] else null, type text),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom1",{"Years o"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Columns1"),
+				    #"Sorted Rows" = Table.Buffer(Table.Sort(#"Removed Duplicates",{{"Year", Order.Ascending}, {"Years", Order.Descending}})),
+				    #"Removed Duplicates1" = Table.Distinct(#"Sorted Rows", {"Year"}),
+				    #"Added Custom2" = Table.AddColumn(#"Removed Duplicates1", "Custom", each Date.Year(DateTime.LocalNow())),
+				    #"Added Custom3" = Table.AddColumn(#"Added Custom2", "Year Offset", each [Year] - [Custom]),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Added Custom3",{{"Year Offset", Int64.Type}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type3",{"Custom"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
+

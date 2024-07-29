@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.0.0/schema.json",
+  "name": "ReportSectiondba1dc5d0a7037d59a37",
+  "displayName": "תעסוקה - מרץ 2024",
+  "displayOption": "FitToWidth",
+  "height": 2551,
+  "width": 1920,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 0,
+                    "Percent": -0.1
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "b532bbddb50d5a535502",
+      "target": "bcd6917832a042cecc03",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b532bbddb50d5a535502",
+      "target": "e8398cb96d12cc4bdb6b",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b532bbddb50d5a535502",
+      "target": "325f874846b9b8ecccd3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b532bbddb50d5a535502",
+      "target": "39e910901366baadb021",
+      "type": "NoFilter"
+    }
+  ]
+}

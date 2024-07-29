@@ -1,0 +1,25 @@
+table 'Institution Type'
+	lineageTag: 41acb339-be02-44b5-b931-29b6850282ea
+
+	column 'Institution Type'
+		dataType: string
+		lineageTag: 3b3d06db-f1f3-4ef9-ae45-f9a34aefe1f5
+		summarizeBy: none
+		sourceColumn: Institution Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Institution Type' = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = #"Appended Higer Ed",
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"Institution Type"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Duplicates", each ([Institution Type] <> null))
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_ResultType = Table
+

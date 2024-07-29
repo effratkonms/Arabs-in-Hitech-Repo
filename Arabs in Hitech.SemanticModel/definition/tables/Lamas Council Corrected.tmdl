@@ -1,0 +1,59 @@
+table 'Lamas Council Corrected'
+	lineageTag: 982e2cd5-45d0-4b04-aca8-6cca8fae21c8
+
+	column מחוז
+		dataType: string
+		lineageTag: 6179e924-fde5-4c27-9e80-e6666273650e
+		summarizeBy: none
+		sourceColumn: מחוז
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'אזור טבעי'
+		dataType: string
+		lineageTag: 334c52e5-85a6-4ca7-8c72-162800762bdf
+		summarizeBy: none
+		sourceColumn: אזור טבעי
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'אשכול רשויות מקומיות'
+		dataType: string
+		lineageTag: 069842fb-382a-4a4c-a27a-a29ce881a334
+		summarizeBy: none
+		sourceColumn: אשכול רשויות מקומיות
+
+		annotation SummarizationSetBy = Automatic
+
+	column נפה
+		dataType: string
+		lineageTag: 67d12491-1c26-429b-9167-36e171ecbe6a
+		summarizeBy: none
+		sourceColumn: נפה
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Rashut Corrected'
+		dataType: string
+		lineageTag: e7717db5-e0a9-494a-94c4-92788a06c54a
+		summarizeBy: none
+		sourceColumn: Rashut Corrected
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Lamas Council Corrected' = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = #"Lamas City",
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"סמל היישוב", "שם יישוב", "צורת יישוב", "רשות"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Columns", each ([Rashut Corrected] <> null)),
+				    #"Removed Duplicates" = Table.Distinct(#"Filtered Rows", {"Rashut Corrected"})
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

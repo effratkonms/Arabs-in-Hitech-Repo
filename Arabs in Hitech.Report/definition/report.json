@@ -1,0 +1,110 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/1.0.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY18SU07",
+      "reportVersionAtImport": "3.15",
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "Custom4915494256951092.json",
+      "reportVersionAtImport": "5.52",
+      "type": "RegisteredResources"
+    }
+  },
+  "layoutOptimization": "None",
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "resourcePackages": [
+    {
+      "id": 27060052,
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY18SU07",
+          "path": "BaseThemes/CY18SU07.json",
+          "type": "BaseTheme",
+          "id": 130420515
+        }
+      ]
+    },
+    {
+      "id": 27295912,
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "Custom4915494256951092.json",
+          "path": "Custom4915494256951092.json",
+          "type": "Image",
+          "id": 132682889
+        },
+        {
+          "name": "logo_color24059694032649825.png",
+          "path": "logo_color24059694032649825.png",
+          "type": "Image",
+          "id": 132682890
+        },
+        {
+          "name": "________________21491934276739144.png",
+          "path": "________________21491934276739144.png",
+          "type": "Image",
+          "id": 132682891
+        },
+        {
+          "name": "_________________07391648225136849.png",
+          "path": "_________________07391648225136849.png",
+          "type": "Image",
+          "id": 132682892
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "defaultFilterActionIsDataFilter": true,
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true,
+    "customMemoryLimit": "1048576",
+    "customTimeoutLimit": "225"
+  },
+  "slowDataSourceSettings": {
+    "isCrossHighlightingDisabled": false,
+    "isSlicerSelectionsButtonEnabled": false,
+    "isFilterSelectionsButtonEnabled": false,
+    "isFieldWellButtonEnabled": false,
+    "isApplyAllButtonEnabled": false
+  },
+  "publicCustomVisuals": [
+    "iconMapV34089C0EB522B416294AA926F71B4FDBB"
+  ]
+}

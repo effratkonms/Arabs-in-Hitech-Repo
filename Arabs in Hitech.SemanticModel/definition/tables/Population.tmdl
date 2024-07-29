@@ -1,0 +1,24 @@
+table Population
+	lineageTag: bbc55e28-6e1b-4eed-a922-efbe0f6a3ac2
+
+	column Population
+		dataType: string
+		lineageTag: f1267b32-1689-4fea-b1d6-3598c995ca86
+		summarizeBy: none
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Population = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = #"Appended Higer Ed",
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"Population"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_ResultType = Table
+

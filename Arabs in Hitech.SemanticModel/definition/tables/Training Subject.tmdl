@@ -1,0 +1,34 @@
+table 'Training Subject'
+	lineageTag: e42c21af-974b-48ad-a20e-43f04cea6cbd
+
+	column 'Training Subject'
+		dataType: string
+		lineageTag: 3a81a0e6-d94c-4e41-bb43-247c779d06bd
+		summarizeBy: none
+		sourceColumn: Training Subject
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'תחום הכשרה'
+		dataType: string
+		lineageTag: ef64b923-f937-4b7e-8f5e-a744e3413739
+		summarizeBy: none
+		sourceColumn: תחום הכשרה
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Training Subject' = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = Table.Combine({#"07 Students by Nafa Clean", #"07 Graduates by Nafa Clean", #"07 Students by Gender Clean"}),
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"Training Subject"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Inserted Text After Delimiter" = Table.AddColumn(#"Removed Duplicates", "Training Subject Clean", each Text.AfterDelimiter([Training Subject], " "), type text),
+				    #"Renamed Columns" = Table.RenameColumns(#"Inserted Text After Delimiter",{{"Training Subject Clean", "תחום הכשרה"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

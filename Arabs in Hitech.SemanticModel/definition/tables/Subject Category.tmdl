@@ -1,0 +1,24 @@
+table 'Subject Category'
+	lineageTag: a17c721e-e29d-4b0f-b481-97bcddfa47cb
+
+	column תחום
+		dataType: string
+		lineageTag: 75374f5e-ef43-4f9c-8760-8171b71a4d20
+		summarizeBy: none
+		sourceColumn: תחום
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Subject Category' = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = Subject,
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"תחום"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_ResultType = Table
+

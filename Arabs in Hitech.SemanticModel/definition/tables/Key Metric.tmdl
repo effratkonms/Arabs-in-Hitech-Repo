@@ -1,0 +1,212 @@
+table 'Key Metric'
+	lineageTag: 46542970-c3a1-44f9-b20d-b59dbffd7778
+
+	measure 'Key Metric' = ```
+			VAR RESULT = 
+			SWITCH(
+			    SELECTEDVALUE('Key Metric'[Metric]),
+			    "SUM Higher Ed", [SUM Higher Ed],
+			    "SUM Students by Institution", [SUM Students by Institution],
+			    "SUM Students by Gender", [SUM Students by Gender],
+			    "SUM Graduates by Nafa", [SUM Graduates by Nafa]
+			)
+			RETURN
+			ROUNDUP(result,0)
+			```
+		formatString: #,0
+		lineageTag: 65f2d9b9-3c6c-4834-a944-f2ddea284848
+
+	measure 'Selected Heb Key Metric' = SELECTEDVALUE('Key Metric'[Heb Metric])
+		lineageTag: d1c9af55-5362-45be-a59e-5aaecc4564f8
+
+	measure 'Key Metric, All Populations' = CALCULATE([Key Metric], ALL(Population))
+		formatString: #,0
+		lineageTag: af1b502a-533b-49c5-93ec-6ae6d6ea417a
+
+	measure 'Key Metric, Arab Population' = CALCULATE([Key Metric], FILTER(ALL(Population), Population[Population] = "Arab"))
+		formatString: #,0
+		lineageTag: 6349d9c5-5388-4f2f-874f-2024105cb7e0
+
+	measure 'Key Metric, % Arab of All Population' = DIVIDE([Key Metric, Arab Population], [Key Metric, All Populations])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: fee7fb37-f31b-47c8-afc8-e0c6027f6fb1
+
+	measure 'Key Metric, All Subjects' = CALCULATE([Key Metric], ALL(Subject))
+		formatString: #,0
+		lineageTag: 4cf6f1d7-6639-4556-9277-9c8a479a6f2f
+
+	measure 'Key Metric, Arab Population, All Subjects' = CALCULATE([Key Metric, Arab Population], ALL(Subject))
+		formatString: #,0
+		lineageTag: e3522ead-609e-4e76-9ca4-ecca34587f3c
+
+	measure 'Key Metric, Arab Population, All Technological Subjects' =
+			
+			CALCULATE(
+			    [Key Metric, Arab Population],
+			    FILTER(
+			        ALL(Subject),
+			        Subject[תחום] <> "לא הייטק"
+			    )
+			)
+		formatString: #,0
+		lineageTag: cd36011c-d2bb-40f8-9bef-c8b0dbff836e
+
+	measure 'Key Metric, Arab % Technological Subjects of All Subjects' = DIVIDE([Key Metric, Arab Population, All Technological Subjects], [Key Metric, Arab Population, All Subjects])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: a32fe00d-53c2-4084-a691-56061448321e
+
+	measure 'Key Metric, Selected Years' =
+			// CALCULATE([Key Metric], FILTER(ALL(Years), Years[Years] = [MAX Years]))
+			[Key Metric]
+		formatString: #,0
+		lineageTag: 1b1bd47a-2526-49d2-8a81-7389adb444c3
+
+	measure 'Key Metric, , Arab Population, Last Years' = CALCULATE([Key Metric, Arab Population], FILTER(ALL(Years), Years[Years] = [MAX Years]))
+		lineageTag: d11f4df4-0fe0-45ce-8079-edb5cde58fbc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Key Metric, All Genders' = CALCULATE([Key Metric], ALL(Gender))
+		formatString: #,0
+		lineageTag: 0fe1873e-0f30-40ae-96c1-ddf95aad7e99
+
+	measure 'Key Metric, % of All Genders' = DIVIDE([Key Metric], [Key Metric, All Genders])
+		formatString: 0%;-0%;0%
+		lineageTag: 1092a4f4-d93a-4b35-99c1-aa56637f29db
+
+	measure 'Key Metric, Selected Years, Women' =
+			
+			CALCULATE(
+			    [Key Metric, Selected Years],
+			    Gender[Gender] = "נשים"
+			)
+		formatString: #,0
+		lineageTag: 03f55ae3-915a-45a1-bb84-8e59bfcf0f48
+
+	measure 'Key Metric, Selected Years, Men' =
+			
+			CALCULATE(
+			    [Key Metric, Selected Years],
+			    Gender[Gender] = "גברים"
+			)
+		formatString: #,0
+		lineageTag: 4c4afc21-ad7e-4fc1-b42f-e6c911e66d53
+
+	measure 'Key Metric, Selected Years, All Genders' =
+			
+			CALCULATE(
+			    [Key Metric, Selected Years],
+			    ALL(Gender)
+			)
+		formatString: #,0
+		lineageTag: 7da539cb-fc86-4908-bee7-72b8e482a416
+
+	measure 'Key Metric, % Female' = DIVIDE([Key Metric, Female], [Key Metric, All Genders])
+		formatString: 0%;-0%;0%
+		lineageTag: e7360a80-4ee8-41c1-9e24-c030ab421ba8
+
+	measure 'Key Metric, Female' = CALCULATE([Key Metric], Gender[Gender] = "נשים")
+		lineageTag: c5d1bec6-f948-4a88-8551-4be45fbb4b45
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Key Metric, All Populations, All Technological Subjects' =
+			
+			CALCULATE(
+			    [Key Metric, All Populations],
+			    FILTER(
+			        ALL(Subject),
+			        Subject[תחום] <> "לא הייטק"
+			    )
+			)
+		lineageTag: 36ea3019-42a8-4fac-9eb6-5923303c14d8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Key Metric, All Populations, All Subjects' = CALCULATE([Key Metric, All Populations], ALL(Subject))
+		lineageTag: 519177c9-4f11-47a6-80e0-33494e7d1b36
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Key Metric, All Populations % Technological Subjects of All Subjects' = DIVIDE([Key Metric, All Populations, All Technological Subjects], [Key Metric, All Populations, All Subjects])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 8c29cb98-2dce-4a2a-8001-0616501f01dc
+
+	measure 'Key Metric, Arab or All Population' =
+			
+			VAR selectedSociety = SELECTEDVALUE(Societies[חברה])
+			RETURN
+			SWITCH(
+			    selectedSociety,
+			    "החברה הערבית",
+			    CALCULATE(
+			        [Key Metric],
+			        FILTER(
+			            ALL(Population),
+			            Population[Population] = "Arab"
+			        )
+			    ),
+			    [Key Metric, All Populations]
+			)
+		formatString: #,0
+		lineageTag: fa0265da-3918-465e-9e8d-176eee6861f7
+
+	measure 'Key Metric Arab or All Population, All Subjects' = CALCULATE([Key Metric, Arab or All Population], ALL(Subject))
+		formatString: #,0
+		lineageTag: acf9aacb-f6fc-4ed4-a6eb-2a7a3499fa6b
+
+	measure 'Key Metric, Arab or All Population, All Technological Subjects' =
+			
+			CALCULATE(
+			    [Key Metric, Arab or All Population],
+			    FILTER(
+			        ALL(Subject),
+			        Subject[תחום] <> "לא הייטק"
+			    )
+			)
+		formatString: #,0
+		lineageTag: ec710282-6f54-4238-b417-1c347ade60d2
+
+	measure 'Key Metric, Arab or All Population % Technological Subjects of All Subjects' = DIVIDE([Key Metric, Arab or All Population, All Technological Subjects], [Key Metric Arab or All Population, All Subjects])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: c79e5880-a52c-4a61-b63f-6b6e8f2ba54f
+
+	column Metric
+		dataType: string
+		lineageTag: 54c689a7-d7ce-43bf-91bd-55f46174bfb9
+		summarizeBy: none
+		sourceColumn: Metric
+		sortByColumn: Order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		formatString: 0
+		lineageTag: 5f13c1c9-2324-48f5-9a55-79ac293d95b4
+		summarizeBy: sum
+		sourceColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Heb Metric'
+		dataType: string
+		lineageTag: 47d66df0-e3c6-4fcc-8bb4-010c1aaa476b
+		summarizeBy: none
+		sourceColumn: Heb Metric
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Key Metric' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("hY7PCoJAGMRfZdmzUGk9QliHIpBO4mFjt1qINXT30FuUGiT9QaGDb/S9Tp9pERR0GmaG3zC+T6GEExwhhQI1h2sHDmgTqGpDLerNJ2QkV2sRkSFH36OB9U0RuMAdcgI3TEtIW9DThgulY7LYkbGKtdRGy1Bha/+bSTCtfsy4QnERYeE0Cx9v33SBkrWsGzFumBZPeMqWDPN+g+4RPSNTP84hI3bXdlpqFm7NhtVfX+mABsED", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Heb Metric" = _t, Metric = _t, Order = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Metric", type text}, {"Order", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

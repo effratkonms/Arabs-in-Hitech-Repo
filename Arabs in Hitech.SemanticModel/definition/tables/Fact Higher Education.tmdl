@@ -1,0 +1,88 @@
+table 'Fact Higher Education'
+	lineageTag: 320e3da7-6c91-4086-8b6c-860e7693b296
+
+	measure 'Higher Ed SUM All Arabs / Non-Arabs' =
+			
+			CALCULATE(
+			    [Higher Ed SUM],
+			    ALL('Higher Education'[Arabs / Non-Arabs])
+			)
+		formatString: #,0
+		lineageTag: faefbb48-2d7a-4259-98dc-5d33d304693c
+
+	measure 'Higher Ed SUM All Subjects' =
+			
+			CALCULATE(
+			    [SUM Higher Ed],
+			    ALL(Subject)
+			)
+		lineageTag: 1fc02628-dc6d-44b3-a7d0-7d4b267ea350
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Higher Ed SUM % Arabs of All Arabs / Non-Arabs' = DIVIDE([Higher Ed SUM Arabs], [Higher Ed SUM All Arabs / Non-Arabs])
+		formatString: 0%;-0%;0%
+		lineageTag: ece0c2ed-2564-4996-ab1c-d6a332643b23
+
+	measure 'Higher Ed SUM Arabs' =
+			
+			CALCULATE(
+			    [Higher Ed SUM],
+			   'Higher Education'[Arabs / Non-Arabs] = "ערבים"
+			)
+		formatString: #,0
+		lineageTag: 9e313444-df87-4d72-a439-b9e2c482d831
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 9052f9b6-a8d1-4f24-98b1-fc1e3f53c7f0
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = User
+
+	column Subject
+		dataType: string
+		lineageTag: 52df341e-92d4-44b2-93ce-b76613b03640
+		summarizeBy: none
+		sourceColumn: Subject
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		formatString: 0
+		lineageTag: 286fea18-566c-46a7-a104-eca0d92bf63c
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column Population
+		dataType: string
+		lineageTag: 8fdfe068-b61f-4aa0-be3f-606921197608
+		summarizeBy: none
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Population Subsection'
+		dataType: string
+		lineageTag: 87675bed-7a13-4935-9f8f-2f2650dbf8c2
+		summarizeBy: none
+		sourceColumn: Population Subsection
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact Higher Education' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = Table.Combine({#"Higher Education Hitech", #"Higher Education Non-Hitech"})
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

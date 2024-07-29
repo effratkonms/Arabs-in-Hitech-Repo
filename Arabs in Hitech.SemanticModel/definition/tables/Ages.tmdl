@@ -1,0 +1,99 @@
+table Ages
+	lineageTag: 687d2d8b-d8d4-44ba-a208-79afd32062f5
+
+	column Age
+		dataType: string
+		lineageTag: d8734cbb-6df8-4c90-ac9e-35ee315d4018
+		summarizeBy: none
+		sourceColumn: Age
+		sortByColumn: 'Age Order'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Age Order'
+		dataType: int64
+		formatString: 0
+		lineageTag: cdef2937-6eeb-4bce-9b7b-6ed79b5bb680
+		summarizeBy: sum
+		sourceColumn: Age Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column '12th Garde'
+		dataType: string
+		lineageTag: ef0aa8a0-7f1e-4c0c-994b-64fd99dbe77f
+		summarizeBy: none
+		sourceColumn: 12th Garde
+
+		annotation SummarizationSetBy = Automatic
+
+	column Employment
+		dataType: string
+		lineageTag: 35fcaaa1-af94-4086-b51d-49fe388fb74d
+		summarizeBy: none
+		sourceColumn: Employment
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Age 2000-2019'
+		dataType: string
+		lineageTag: faea8588-7321-466f-81db-477fdf2daecd
+		summarizeBy: none
+		sourceColumn: Age 2000-2019
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Age After 2019'
+		dataType: string
+		lineageTag: e2f68db6-7448-4e26-8c89-fbf1be29e05b
+		summarizeBy: none
+		sourceColumn: Age After 2019
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Higher Ed Students'
+		dataType: string
+		lineageTag: 826d2ae7-87fd-48c3-8136-a67d3d0fb344
+		summarizeBy: none
+		sourceColumn: Higher Ed Students
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Higher Ed Graduates'
+		dataType: string
+		lineageTag: 20d28483-27fc-4c0e-abf8-764c890fb589
+		summarizeBy: none
+		sourceColumn: Higher Ed Graduates
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Training Students'
+		dataType: string
+		lineageTag: 0eddf061-9d6d-44ce-ab90-b92e57ce7d33
+		summarizeBy: none
+		sourceColumn: Training Students
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Training Graduates'
+		dataType: string
+		lineageTag: f71bf765-f1db-4d8c-9508-66bee66777cd
+		summarizeBy: none
+		sourceColumn: Training Graduates
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Ages = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = #"Ages LUT",
+				    #"Removed Duplicates" = Table.Distinct(Source, {"Age"})
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_ResultType = Table
+

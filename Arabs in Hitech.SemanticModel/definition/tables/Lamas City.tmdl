@@ -1,0 +1,97 @@
+table 'Lamas City'
+	lineageTag: 4e89f768-7eac-4073-94e4-990410360928
+
+	measure 'Count Rows Lamas City' = COUNTROWS('Lamas City')
+		lineageTag: 069e1488-3fc4-4daa-b991-55e93ded145d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'סמל היישוב'
+		dataType: double
+		lineageTag: 0354d96b-bd2f-48fe-a893-1c34f7badcea
+		summarizeBy: sum
+		sourceColumn: סמל היישוב
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'שם יישוב'
+		dataType: string
+		lineageTag: cdc880d5-b14b-4272-9d2a-a129b93147b2
+		summarizeBy: none
+		sourceColumn: שם יישוב
+
+		annotation SummarizationSetBy = Automatic
+
+	column מחוז
+		dataType: string
+		lineageTag: c2a34bea-dbd3-4c83-ab8c-4147790baac9
+		summarizeBy: none
+		sourceColumn: מחוז
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'צורת יישוב'
+		dataType: string
+		lineageTag: 7fc89faf-a718-4040-a7da-378fbd3ff0a3
+		summarizeBy: none
+		sourceColumn: צורת יישוב
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'אזור טבעי'
+		dataType: string
+		lineageTag: db7e5c35-3eb3-4cb2-aa97-39ba48bc75b1
+		summarizeBy: none
+		sourceColumn: אזור טבעי
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'אשכול רשויות מקומיות'
+		dataType: string
+		lineageTag: fe5f7a2b-1828-44ad-a3a4-57ff56f182ab
+		summarizeBy: none
+		sourceColumn: אשכול רשויות מקומיות
+
+		annotation SummarizationSetBy = Automatic
+
+	column נפה
+		dataType: string
+		lineageTag: 0472734a-87d7-43f7-9688-de4adf55da63
+		summarizeBy: none
+		sourceColumn: נפה
+
+		annotation SummarizationSetBy = Automatic
+
+	column רשות
+		dataType: string
+		lineageTag: ea62aa78-14a3-42db-a80a-bc65cee915b2
+		summarizeBy: none
+		sourceColumn: רשות
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Rashut Corrected'
+		dataType: string
+		lineageTag: e28b0153-acb8-489f-84d1-bcaf56541f91
+		summarizeBy: none
+		sourceColumn: Rashut Corrected
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Lamas City' = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = #"Lamas Cities 2023 LUT",
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"סמל היישוב", "שם יישוב", "מחוז", "צורת יישוב", "רשות", "אזור טבעי", "אשכול רשויות מקומיות", "נפה"}),
+				    #"Added Custom" = Table.AddColumn(#"Removed Other Columns", "Rashut Corrected", each if [רשות] = null or [רשות] = "מועצה מקומית" or [רשות] = "עירייה" then [שם יישוב] else [רשות], type text)
+				in
+				    #"Added Custom"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

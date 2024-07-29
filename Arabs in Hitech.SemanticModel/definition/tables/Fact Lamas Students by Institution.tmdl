@@ -1,0 +1,130 @@
+table 'Fact Lamas Students by Institution'
+	lineageTag: d76f9131-4f04-4957-9efd-ed2dbc3e570b
+
+	column Years
+		dataType: string
+		lineageTag: 04e7fd3e-5058-4706-b06d-bbb27a7a2f8e
+		summarizeBy: none
+		sourceColumn: Years
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 96269615-09b0-4b29-8cc4-4035f4e23e98
+		summarizeBy: sum
+		sourceColumn: First Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Second Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: d6a8254b-3c65-48fc-94ba-47c275fa984a
+		summarizeBy: sum
+		sourceColumn: Second Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Population
+		dataType: string
+		lineageTag: 19962afe-b9d1-431c-855b-13fcb328253b
+		summarizeBy: none
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	column Degree
+		dataType: string
+		lineageTag: 06626dd8-a026-4a76-bc23-067b1c73dfe9
+		summarizeBy: none
+		sourceColumn: Degree
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'New / Existing'
+		dataType: string
+		lineageTag: 2c6597d2-d05b-4aac-8c61-c3caedebb6fa
+		summarizeBy: none
+		sourceColumn: New / Existing
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		lineageTag: f4245f78-b350-4c1a-ae54-2a8ae951a3b9
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Population Subsection'
+		dataType: string
+		lineageTag: 047f4814-c7e3-4094-adea-e09d6ab33bd3
+		summarizeBy: none
+		sourceColumn: Population Subsection
+
+		annotation SummarizationSetBy = Automatic
+
+	column Institution
+		dataType: string
+		lineageTag: 8f004625-1877-4f7a-8bd0-71a8fc401c45
+		summarizeBy: none
+		sourceColumn: Institution
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subject
+		dataType: string
+		lineageTag: 290df6bc-2f82-44c0-a4f7-d1c271c54269
+		summarizeBy: none
+		sourceColumn: Subject
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact Lamas Students by Institution' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = #"Higer Education Lamas Source",
+				    #"סטודנטים - מוסד_Sheet" = Source{[Item="סטודנטים - מוסד",Kind="Sheet"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(#"סטודנטים - מוסד_Sheet",{"Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}),
+				    #"Removed Top Rows" = Table.Skip(#"Removed Other Columns",6),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"מקצוע", "Subject"}, {"מוסד", "Institution"}, {"שנים", "Years"}, {"כלל האוכלוסיה: תואר ראשון", "All: 1st: Total"}, {"כלל האוכלוסיה: חדשים ראשון", "All: 1st: New"}, {"כלל האוכלוסיה: שני ושלישי", "All: 2nd + 3rd"}, {"ערבים: תואר ראשון", "Arab: 1st: Total"}, {"ערבים: חדשים ראשון", "Arab: 1st: New"}, {"ערבים: שני ושלישי", "Arab: 2nd + 3rd"}}),
+				    #"Filled Down" = Table.FillDown(#"Renamed Columns",{"Subject", "Institution"}),
+				    #"Invoke Fn" = Function.Invoke(#"Handle Lamas Higher Ed", {#"Filled Down", p02ReplaceLowNumberWith}),
+				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Invoke Fn", {"Subject", "Institution", "Years", "First Year", "Second Year"}, "Attribute", "Value"),
+				    #"Split Column by Delimiter1" = Table.SplitColumn(#"Unpivoted Columns", "Attribute", Splitter.SplitTextByDelimiter(": ", QuoteStyle.Csv), {"Population", "Degree", "New / Existing"}),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Split Column by Delimiter1",{{"First Year", Int64.Type}, {"Second Year", Int64.Type}, {"Population", type text}, {"Degree", type text}, {"New / Existing", type text}, {"Value", type number}}),
+				    #"Extracted Text After Delimiter" = Table.TransformColumns(#"Changed Type3", {{"Subject", each Text.AfterDelimiter(_, "="), type text}}),
+				    #"Added Custom" = Table.AddColumn(#"Extracted Text After Delimiter", "Population Subsection", each "סטודנטים", type text),
+				    #"Replaced Value" = Table.ReplaceValue(#"Added Custom","Existing","ותיקים",Replacer.ReplaceText,{"New / Existing"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","New","חדשים",Replacer.ReplaceText,{"New / Existing"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","1st","ראשון",Replacer.ReplaceText,{"Degree"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","2nd + 3rd","שני + שלישי",Replacer.ReplaceText,{"Degree"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3",",","+",Replacer.ReplaceText,{"Years"}),
+				    #"Replaced Value5" = Table.ReplaceValue(#"Replaced Value4","חדשים","'שנה א",Replacer.ReplaceText,{"New / Existing"}),
+				    #"Replaced Value6" = Table.ReplaceValue(#"Replaced Value5","ותיקים","שנה ב' ומעלה",Replacer.ReplaceText,{"New / Existing"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Replaced Value6",{{"Institution", "Institution o"}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns1", {"Institution o"}, #"Override Institution Name", {"שם מוסד במסדי הנתונים"}, "Override Institution Name", JoinKind.LeftOuter),
+				    #"Expanded Override Institution Name" = Table.ExpandTableColumn(#"Merged Queries", "Override Institution Name", {"לאחד בדשבורד עם"}, {"Override Institution"}),
+				    #"Added Custom1" = Table.AddColumn(#"Expanded Override Institution Name", "Institution", each if [Override Institution] <> null then [Override Institution] else [Institution o], type text),
+				    #"Removed Columns" = Table.RemoveColumns(#"Added Custom1",{"Override Institution", "Institution o"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Removed Columns", {"Subject"}, #"Subject Category Manual Override", {"מקור (במסדי הנתונים וטבלאות העזר)"}, "Subject Category Manual Override", JoinKind.LeftOuter),
+				    #"Expanded Subject Category Manual Override" = Table.ExpandTableColumn(#"Merged Queries1", "Subject Category Manual Override", {"השם המתוקן לדשבורד"}, {"השם המתוקן לדשבורד"}),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Expanded Subject Category Manual Override",{{"Subject", "Subject o"}}),
+				    #"Added Custom2" = Table.AddColumn(#"Renamed Columns2", "Subject", each if [השם המתוקן לדשבורד] <> null then [השם המתוקן לדשבורד] else [Subject o], type text),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom2",{"Subject o", "השם המתוקן לדשבורד"}),
+				    #"Replaced Value7" = Table.ReplaceValue(#"Removed Columns1",null,"",Replacer.ReplaceValue,{"New / Existing"})
+				in
+				    #"Replaced Value7"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

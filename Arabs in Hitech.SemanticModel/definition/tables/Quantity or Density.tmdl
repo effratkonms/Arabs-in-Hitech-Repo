@@ -1,0 +1,105 @@
+table 'Quantity or Density'
+	lineageTag: e76d4d29-777e-4395-afac-e3f94be8be6c
+
+	measure 'Selected Students Measure' = SELECTEDVALUE('Quantity or Density'[Students])
+		lineageTag: 6e456af8-57fb-48b7-9bc6-c3b481a65ce0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Selected Graduates Measure' = SELECTEDVALUE('Quantity or Density'[Graduates])
+		lineageTag: 900b5abc-c0b2-4737-acaa-40ca7be65b96
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Map Measure Zero if Blank' =
+			
+			VAR result = [Map Measure]
+			RETURN
+			IF(ISBLANK(result), 0, result)
+		lineageTag: fab03fc2-a4ac-4761-b207-05bceef94ccd
+
+		formatStringDefinition =
+				VAR selectedMapMeasure = SELECTEDVALUE('Quantity or Density'[Metric])
+				RETURN
+				SWITCH(
+				    selectedMapMeasure,
+				    "Density", "0.0",
+				    "Quantity", "#,0"
+				)
+
+	measure 'Selected Graduates Measure Details' = SELECTEDVALUE('Quantity or Density'[Graduates Details])
+		lineageTag: 990c9cb9-9de4-408a-8435-f2ea36754f1d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Selected Students Measure Details' = SELECTEDVALUE('Quantity or Density'[Studetns Details])
+		lineageTag: 79bcd498-9c06-4940-83d4-79cb1dc88b7a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Metric Heb'
+		dataType: string
+		lineageTag: 4aa690e2-c993-4178-9478-dc3c3b7b12e3
+		summarizeBy: none
+		sourceColumn: Metric Heb
+
+		annotation SummarizationSetBy = Automatic
+
+	column Metric
+		dataType: string
+		lineageTag: 8c54d6b2-1bf7-4f23-a268-db0cec3fc035
+		summarizeBy: none
+		sourceColumn: Metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Metric Heb Full'
+		dataType: string
+		lineageTag: 517af324-3642-4d41-95bf-c7c1f64764e9
+		summarizeBy: none
+		sourceColumn: Metric Heb Full
+
+		annotation SummarizationSetBy = Automatic
+
+	column Students
+		dataType: string
+		lineageTag: eb5f7484-b336-4ab4-bca0-9d1c1c12620a
+		summarizeBy: none
+		sourceColumn: Students
+
+		annotation SummarizationSetBy = Automatic
+
+	column Graduates
+		dataType: string
+		lineageTag: 78ab5bdc-34ce-469d-ad3a-6d618993f3cb
+		summarizeBy: none
+		sourceColumn: Graduates
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Studetns Details'
+		dataType: string
+		lineageTag: 6f5ad728-9e11-44a5-a26d-e37381ed1f20
+		summarizeBy: none
+		sourceColumn: Studetns Details
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Graduates Details'
+		dataType: string
+		lineageTag: 2bcf2ce6-18fb-44d9-ad95-89c22134bb2e
+		summarizeBy: none
+		sourceColumn: Graduates Details
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Quantity or Density' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45Wur7s+pLrM4F46vVVSjpKLql5xZkllUAWsoSOwvUJ1ydfn6twfY6uoYHC9eXX58UoXV+BpgoLd+H1GUDm5OsLgPRMrPonAuUnXV+BTTZWB+i82dfnQQ0LLE3MK4G6DSGKbgWamUSoiI0FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Metric Heb" = _t, Metric = _t, #"Metric Heb Full" = _t, Students = _t, Graduates = _t, #"Studetns Details" = _t, #"Graduates Details" = _t])
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

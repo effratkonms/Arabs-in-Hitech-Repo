@@ -1,0 +1,97 @@
+table 'Ages LUT'
+	lineageTag: ea06da05-9b98-4aaf-8f65-7ce6a4ea3c94
+
+	column Age
+		dataType: string
+		lineageTag: 9f0bd1f4-70b4-457d-a531-f651b33750b0
+		summarizeBy: none
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Age 2000-2019'
+		dataType: string
+		lineageTag: ecd56cc8-4a19-450a-af95-fa901ab4e960
+		summarizeBy: none
+		sourceColumn: Age 2000-2019
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Age After 2019'
+		dataType: string
+		lineageTag: 293a7d17-6423-43cd-b2f5-79794111f534
+		summarizeBy: none
+		sourceColumn: Age After 2019
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Age Order'
+		dataType: int64
+		formatString: 0
+		lineageTag: e8582829-e2a0-46b6-b512-4c6923b5c57b
+		summarizeBy: sum
+		sourceColumn: Age Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column '12th Garde'
+		dataType: string
+		lineageTag: 0e1f45c4-d197-4313-8265-b8998b65aa31
+		summarizeBy: none
+		sourceColumn: 12th Garde
+
+		annotation SummarizationSetBy = Automatic
+
+	column Employment
+		dataType: string
+		lineageTag: 1920bcb7-d056-4ec2-a538-95e04310b279
+		summarizeBy: none
+		sourceColumn: Employment
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Higher Ed Students'
+		dataType: string
+		lineageTag: 20d5fc8b-6be7-471b-bdce-5f69e11fa5d1
+		summarizeBy: none
+		sourceColumn: Higher Ed Students
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Higher Ed Graduates'
+		dataType: string
+		lineageTag: 56adef37-2986-4131-b8cc-e8691dba0848
+		summarizeBy: none
+		sourceColumn: Higher Ed Graduates
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Training Students'
+		dataType: string
+		lineageTag: 0d0cd8f4-3a58-44b1-b7c4-64edaed1ed67
+		summarizeBy: none
+		sourceColumn: Training Students
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Training Graduates'
+		dataType: string
+		lineageTag: bbcb0fd8-de8b-45ed-a454-e4750e6d8bbb
+		summarizeBy: none
+		sourceColumn: Training Graduates
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Ages LUT' = m
+		mode: import
+		queryGroup: Source\Definitions
+		source =
+				let
+				    Source = LUTs,
+				    Ages_Table = Source{[Item="Ages",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Ages_Table,{{"Age", type text}, {"Age Order", Int64.Type}, {"Age 2000-2019", type text}, {"Age After 2019", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,247 @@
+table 'LinkedIn Main'
+	lineageTag: 675b1f47-2146-406f-a78c-2d6ffd513f3c
+
+	measure 'Count Rows LinkedIn Main' = COUNTROWS('LinkedIn Main')
+		formatString: #,0
+		lineageTag: 55b4fa6c-0a79-40e8-83a9-c5a854b4cf5e
+
+	measure 'LinkedIn Female Employees' =
+			
+			CALCULATE(
+			    [Count Rows LinkedIn Main],
+			    FILTER(
+			        ALL(Gender),
+			        Gender[Gender] = "נשים"
+			    )
+			)
+		formatString: 0
+		lineageTag: 056c8b45-aa12-4b23-8cd8-b20337affc26
+
+	measure 'LinkedIn Employees All Genders' =
+			
+			CALCULATE(
+			    [Count Rows LinkedIn Main],
+			    ALL(Gender)
+			)
+		formatString: #,0
+		lineageTag: b5f52261-765d-4c88-870f-3de4dc4151b9
+
+	measure 'LinkedIn Female Employees % of All Employees' = DIVIDE([LinkedIn Female Employees], [LinkedIn Employees All Genders])
+		formatString: 0%;-0%;0%
+		lineageTag: ccfd5034-345a-4e11-a1f1-aeaf9ced4af6
+
+	measure 'LinkedIn KPI: All Employees' =
+			
+			CALCULATE(
+			    [Count Rows LinkedIn Main],
+			    ALL('LinkedIn Positions'[Is Hitech])
+			)
+		lineageTag: dc378c97-a15d-4436-b185-3f892190b8c9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'LinkedIn KPI: Employees in Hitech' =
+			
+			CALCULATE(
+			    [Count Rows LinkedIn Main],
+			    FILTER(
+			        ALL('LinkedIn Positions'[Is Hitech]),
+			        'LinkedIn Positions'[Is Hitech] = "היי-טק"
+			    )
+			)
+		lineageTag: 28fed15c-abfd-4471-8e9d-617bce606ac9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'LinkedIn KPI: Employees not in Hitech' =
+			
+			CALCULATE(
+			    [Count Rows LinkedIn Main],
+			    FILTER(
+			        ALL('LinkedIn Positions'[Is Hitech]),
+			        'LinkedIn Positions'[Is Hitech] = "לא במשרות הייטק"
+			    )
+			)
+		formatString: #,0
+		lineageTag: 9f45b2e4-6a34-4f4c-a8ea-75e312e4473b
+
+	measure 'LinkedIn KPI: Employees w/ Blank in Hitech or not in Hitech' =
+			
+			CALCULATE(
+			    [Count Rows LinkedIn Main],
+			    FILTER(
+			        ALL('LinkedIn Positions'[Is Hitech]),
+			        ISBLANK('LinkedIn Positions'[Is Hitech])
+			    )
+			)
+		lineageTag: d5973982-716d-40bd-9170-55c82e8f7e29
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Source.Name'
+		dataType: string
+		lineageTag: 72ef86bb-e4de-4348-8624-e60c5842ed8f
+		summarizeBy: none
+		sourceColumn: Source.Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Name'
+		dataType: string
+		lineageTag: 996d2a61-6431-4017-af89-5b9bdb3561e5
+		summarizeBy: none
+		sourceColumn: First Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Name'
+		dataType: string
+		lineageTag: e75c292e-a871-4686-9399-a91dd4ce7f2f
+		summarizeBy: none
+		sourceColumn: Last Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Headline
+		dataType: string
+		lineageTag: 07afae10-4b20-403f-9a00-eaa01bf6f926
+		summarizeBy: none
+		sourceColumn: Headline
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		dataType: string
+		lineageTag: 798048d0-c3b2-40f6-9ef1-407a990c85e4
+		summarizeBy: none
+		sourceColumn: Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Current Title'
+		dataType: string
+		lineageTag: 76fee6c7-f8e4-4d0c-9576-f796c473886c
+		summarizeBy: none
+		sourceColumn: Current Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Current Company'
+		dataType: string
+		lineageTag: 8229abc7-6ce7-418e-b7fb-5f5f7ba951ee
+		summarizeBy: none
+		sourceColumn: Current Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email Address'
+		dataType: string
+		lineageTag: 46e4d8ce-0a03-4a09-851c-57109301b025
+		summarizeBy: none
+		sourceColumn: Email Address
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Phone Number'
+		dataType: string
+		lineageTag: 01b14163-1f8e-4578-baa6-94a8aca181b3
+		summarizeBy: none
+		sourceColumn: Phone Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Profile URL'
+		dataType: string
+		lineageTag: 0e88144d-a21c-4741-93ee-fcfdae6c0ebd
+		summarizeBy: none
+		sourceColumn: Profile URL
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Active Project'
+		dataType: string
+		lineageTag: b68821bf-9291-4149-ae2f-d06c97a2dd39
+		summarizeBy: none
+		sourceColumn: Active Project
+
+		annotation SummarizationSetBy = Automatic
+
+	column Notes
+		dataType: string
+		lineageTag: c766fe06-becd-4bc0-80f8-8e006cef7c80
+		summarizeBy: none
+		sourceColumn: Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Feedback
+		dataType: string
+		lineageTag: b0800a68-4dd6-41cd-b4c4-30a284d71770
+		summarizeBy: none
+		sourceColumn: Feedback
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: 88d641cc-dcba-42fa-903b-abceb35d08ba
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column מגדר
+		dataType: string
+		lineageTag: f256af09-a27b-43b7-85cd-b97f73eba5a8
+		summarizeBy: none
+		sourceColumn: מגדר
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tenure
+		dataType: string
+		lineageTag: 8950e445-839d-411c-b152-ca7b359549ac
+		summarizeBy: none
+		sourceColumn: Tenure
+		sortByColumn: 'Tenure Order'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tenure Order'
+		dataType: int64
+		formatString: 0
+		lineageTag: 33c1d603-5fae-49ab-9edb-4e8506b16e0a
+		summarizeBy: sum
+		sourceColumn: Tenure Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'אזור - להצגה בדשבורד'
+		dataType: string
+		lineageTag: d29ffd5c-0e65-49da-8da6-2fe8fbc0f38b
+		summarizeBy: none
+		sourceColumn: אזור - להצגה בדשבורד
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'LinkedIn Main' = m
+		mode: import
+		queryGroup: 'Data Model\Control'
+		source =
+				let
+				    Source = #"06 Main Source",
+				    #"Replaced Value" = Table.ReplaceValue(Source,null,"null",Replacer.ReplaceValue,{"Current Company"}),
+				    #"Merged Queries" = Table.NestedJoin(#"Replaced Value", {"Profile URL"}, #"06 Gender Source", {"Profile URL"}, "06 Gender Source", JoinKind.LeftOuter),
+				    #"Expanded 06 Gender Source" = Table.ExpandTableColumn(#"Merged Queries", "06 Gender Source", {"gender"}, {"gender"}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Expanded 06 Gender Source", "מגדר", each if [gender] = "female" then "נשים" else if [gender] = "male" then "גברים" else null, type text),
+				    #"Merged Queries1" = Table.NestedJoin(#"Added Conditional Column", {"Profile URL"}, #"Tenure Rows CSV Data", {"Profile URL"}, "Tenure Rows CSV Data", JoinKind.LeftOuter),
+				    #"Expanded Tenure Rows CSV Data" = Table.ExpandTableColumn(#"Merged Queries1", "Tenure Rows CSV Data", {"Tenure", "Tenure Order"}, {"Tenure", "Tenure Order"}),
+				    #"Merged Queries2" = Table.NestedJoin(#"Expanded Tenure Rows CSV Data", {"Location"}, #"06 Location to District LUT", {"Location"}, "06 Location to Sstrict LUT", JoinKind.LeftOuter),
+				    #"Expanded 06 Location to Sstrict LUT" = Table.ExpandTableColumn(#"Merged Queries2", "06 Location to Sstrict LUT", {"אזור - להצגה בדשבורד"}, {"אזור - להצגה בדשבורד"})
+				in
+				    #"Expanded 06 Location to Sstrict LUT"
+
+	annotation PBI_ResultType = Table
+

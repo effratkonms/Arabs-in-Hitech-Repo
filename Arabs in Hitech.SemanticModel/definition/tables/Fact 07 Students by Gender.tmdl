@@ -1,0 +1,115 @@
+table 'Fact 07 Students by Gender'
+	lineageTag: d78bc4a0-1e5e-4147-aa79-bfa3c5bdb23e
+
+	measure 'SUM Training Students By Gender, Arab Population' = SUM('Fact 07 Students by Gender'[Arab Population Students])
+		formatString: #,0
+		lineageTag: bb5ff758-c2b9-44fc-834c-19b0c6eeb0ff
+
+	measure 'SUM Training Students By Gender, All Population' = SUM('Fact 07 Students by Gender'[All Population Students])
+		formatString: #,0
+		lineageTag: 3fc367ca-1175-4545-acf3-ca7f667f696f
+
+	measure 'Training Students by Gender' =
+			
+			SWITCH(
+			    SELECTEDVALUE('Manual Selected Population'[Population]),
+			    "החברה הערבית", [SUM Training Students By Gender, Arab Population],
+			    "כלל האוכלוסיה", [SUM Training Students By Gender, All Population]
+			)
+		formatString: #,0
+		lineageTag: ae0c3713-9c5d-4cf8-9247-0a60a9e1242c
+
+	measure 'Training Students by Gender, Women' =
+			
+			CALCULATE(
+			    [Training Students by Gender],
+			    Gender[Gender] = "נשים"
+			)
+		formatString: #,0
+		lineageTag: 04c63583-e0d6-4a3a-9221-3f12cd9ace88
+
+	measure 'Training Students by Gender, All Genders' =
+			
+			CALCULATE(
+			    [Training Students by Gender],
+			    ALL(Gender)
+			)
+		formatString: #,0
+		lineageTag: 3b9af040-c3a8-4f46-a13b-83aa740d8e4e
+
+	measure 'Training Students by Gender, % Women' = DIVIDE([Training Students by Gender, Women], [Training Students by Gender, All Genders])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 291a1e4e-b1fb-4d5d-a17c-33a61b17df45
+
+	measure 'Training Students by Gender, Men' =
+			
+			CALCULATE(
+			    [Training Students by Gender],
+			    Gender[Gender] = "גברים"
+			)
+		formatString: #,0
+		lineageTag: a0579e5c-fc4e-418f-8ce7-03bab0cc7745
+
+	measure 'Training Students by Gender, % Men' = DIVIDE([Training Students by Gender, Men], [Training Students by Gender, All Genders])
+		lineageTag: 6c4abeb0-2b49-46f5-97ba-1f35dafb241f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Training Students by Gender, % of All Genders' = DIVIDE([Training Students by Gender], [Training Students by Gender, All Genders])
+		formatString: 0%;-0%;0%
+		lineageTag: 4332e573-6b88-411e-a1d7-2076652f4b4d
+
+	column 'Training Subject'
+		dataType: string
+		lineageTag: 579cb3e2-88a2-4d45-b45e-5e37cbddd387
+		summarizeBy: none
+		sourceColumn: Training Subject
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: f7409b44-d391-4872-8d3e-f2eb6e5a86db
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: c590e73c-6895-464f-93cf-22607e20b6fd
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'All Population Students'
+		dataType: int64
+		formatString: 0
+		lineageTag: 128da5d9-1839-4fbc-869d-30c1c530880f
+		summarizeBy: sum
+		sourceColumn: All Population Students
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Arab Population Students'
+		dataType: int64
+		formatString: 0
+		lineageTag: c409a417-8ebd-4549-8c76-c8c87c0bf240
+		summarizeBy: sum
+		sourceColumn: Arab Population Students
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact 07 Students by Gender' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = #"07 Students by Gender Clean"
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

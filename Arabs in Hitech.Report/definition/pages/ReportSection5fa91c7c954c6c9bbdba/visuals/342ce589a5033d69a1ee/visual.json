@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "342ce589a5033d69a1ee",
+  "position": {
+    "x": 1055.5387783115991,
+    "y": 197.66643788606726,
+    "z": 32000,
+    "width": 683.92587508579265,
+    "height": 42.168840082361015,
+    "tabOrder": 32000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "בכל המקומות בדשבורד - לתקן למילה אוכלוסייה (עם שני י)",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt",
+                      "color": "#ea0c0c"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "right",
+                "listType": "bullet"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

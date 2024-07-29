@@ -1,0 +1,25 @@
+table 'New / Existing'
+	lineageTag: 05efe05e-61fe-4163-9451-c7ec2f2bae74
+
+	column 'New / Existing'
+		dataType: string
+		lineageTag: 12095116-9ae1-4dea-a305-a5b46022998d
+		summarizeBy: none
+		sourceColumn: New / Existing
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New / Existing' = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = #"Appended Higer Ed",
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"New / Existing"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Removed Blank Rows" = Table.SelectRows(#"Removed Duplicates", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null})))
+				in
+				    #"Removed Blank Rows"
+
+	annotation PBI_ResultType = Table
+

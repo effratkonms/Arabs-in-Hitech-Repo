@@ -1,0 +1,33 @@
+table Gender
+	lineageTag: 3565790a-229e-4cd8-b122-752307eec5ca
+
+	column Gender
+		dataType: string
+		lineageTag: 8bf07432-3ef0-4cba-99ed-815de7a0e305
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bagrut
+		dataType: string
+		lineageTag: 7695ec29-1198-47f8-a952-c17d23699f20
+		summarizeBy: none
+		sourceColumn: Bagrut
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Gender = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = #"Fact Lamas Students by Gender",
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"Gender"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Added Conditional Column" = Table.AddColumn(#"Removed Duplicates", "Bagrut", each if [Gender] = "גברים" then "בנים" else if [Gender] = "נשים" then "בנות" else null, type text)
+				in
+				    #"Added Conditional Column"
+
+	annotation PBI_ResultType = Table
+

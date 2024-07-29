@@ -1,0 +1,28 @@
+table 'Manual Selected Population'
+	lineageTag: 69f63667-0c23-4a1b-a27e-5a0c9c6ddda2
+
+	measure 'Selected Manual Population' = SELECTEDVALUE('Manual Selected Population'[Population])
+		lineageTag: 1e32a6d8-a3ef-4014-9388-1046da5a7f7c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Population
+		dataType: string
+		lineageTag: 973211e2-60f3-4c05-8af9-507a6bda59d3
+		summarizeBy: none
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Manual Selected Population' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45Wuj7l+vTrE6+vuD5FAchcBGRMvD7z+iqlWB2g3Ozrc67PAYlPuD4VzJl6fSFQdopSbCwA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Population = _t])
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

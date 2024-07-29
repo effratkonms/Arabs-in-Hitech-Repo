@@ -1,0 +1,82 @@
+table 'LinkedIn Positions'
+	lineageTag: 498dfb42-0b93-46eb-acf6-25a69ef15b93
+
+	measure 'Count Rows LinkedIn Positions' = COUNTROWS('LinkedIn Positions')
+		lineageTag: 5c0c6353-d01e-4e70-bc41-d2c07c5ab0c2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Current Title'
+		dataType: string
+		lineageTag: ef3dce14-535a-4684-be6a-f9a63ae7a616
+		summarizeBy: none
+		sourceColumn: Current Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column תפקיד
+		dataType: string
+		lineageTag: 60d25a9d-3c72-445c-b88c-6c278a2fead2
+		summarizeBy: none
+		sourceColumn: תפקיד
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'תחום עיסוק'
+		dataType: string
+		lineageTag: 287ad9f4-772f-4dff-b2ce-16b3028e6970
+		summarizeBy: none
+		sourceColumn: תחום עיסוק
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'תפקיד - ניהול -Management'
+		dataType: string
+		lineageTag: 04dbe74e-8293-428d-9466-a703dac91fc8
+		summarizeBy: none
+		sourceColumn: תפקיד - ניהול -Management
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'תחום עיסוק - ניהול'
+		dataType: string
+		lineageTag: 89ff9aea-9d2b-4d0e-84e5-5454a00dae1a
+		summarizeBy: none
+		sourceColumn: תחום עיסוק - ניהול
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'תחום עיסוק.1'
+		dataType: string
+		lineageTag: 70a68dee-cf53-43e3-aa93-e1881cb6bbc1
+		summarizeBy: none
+		sourceColumn: תחום עיסוק.1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Hitech'
+		dataType: string
+		lineageTag: a0d44f3a-ae01-4dba-8e48-b111a3660b63
+		summarizeBy: none
+		sourceColumn: Is Hitech
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'LinkedIn Positions' = m
+		mode: import
+		queryGroup: 'Data Model\Control'
+		source =
+				let
+				    Source = #"06 Positions Source",
+				    #"Merged Queries" = Table.NestedJoin(Source, {"תפקיד"}, #"06 Posistion Categories Source", {"תפקיד"}, "06 Posistion Categories Source", JoinKind.LeftOuter),
+				    #"Expanded 06 Posistion Categories Source" = Table.ExpandTableColumn(#"Merged Queries", "06 Posistion Categories Source", {"תחום עיסוק", "Is Hitech"}, {"תחום עיסוק.1", "Is Hitech"}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Expanded 06 Posistion Categories Source",{{"Current Title", Text.Trim, type text}}),
+				    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text",{{"Current Title", Text.Clean, type text}}),
+				    #"Inserted Lowercased Text" = Table.AddColumn(#"Cleaned Text", "lowercase", each Text.Lower([Current Title]), type text),
+				    #"Removed Duplicates" = Table.Distinct(#"Inserted Lowercased Text", {"lowercase"}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Removed Duplicates",{"lowercase"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

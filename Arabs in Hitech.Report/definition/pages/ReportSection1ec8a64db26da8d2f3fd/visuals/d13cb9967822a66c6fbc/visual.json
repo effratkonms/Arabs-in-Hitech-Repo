@@ -1,0 +1,1387 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "d13cb9967822a66c6fbc",
+  "position": {
+    "x": 16,
+    "y": 272,
+    "z": 10000,
+    "width": 752,
+    "height": 448,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendar"
+                    }
+                  },
+                  "Property": "Year"
+                }
+              },
+              "queryRef": "Calendar.Year",
+              "nativeQueryRef": "Year",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact 07 Students by Nafa"
+                    }
+                  },
+                  "Property": "SUM Training Students By Nafa, All Population"
+                }
+              },
+              "queryRef": "Fact 07 Students by Nafa.SUM Students By Nafa, All Population",
+              "nativeQueryRef": "לפי נפה",
+              "displayName": "לפי נפה"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact 07 Students by Gender"
+                    }
+                  },
+                  "Property": "SUM Training Students By Gender, All Population"
+                }
+              },
+              "queryRef": "Fact 07 Students by Gender.SUM Students By Gender, All Population",
+              "nativeQueryRef": "לפי מגדר",
+              "displayName": "לפי מגדר"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Training Measures"
+                    }
+                  },
+                  "Property": "DIFF SUMs Training Students, All Population"
+                }
+              },
+              "queryRef": "Training Measures.DIFF SUMs Training Students, All Population",
+              "nativeQueryRef": "פער",
+              "displayName": "פער"
+            }
+          ]
+        }
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "Calendar.Year"
+            ],
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "objects": {
+      "grid": [
+        {
+          "properties": {
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0.6
+                    }
+                  }
+                }
+              }
+            },
+            "gridHorizontalColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "gridHorizontalWeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "2D"
+                }
+              }
+            },
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "16D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "autoSizeColumnWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Right'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "FillRule": {
+                      "Input": {
+                        "Measure": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Key Metric"
+                            }
+                          },
+                          "Property": "Key Metric"
+                        }
+                      },
+                      "FillRule": {
+                        "linearGradient2": {
+                          "min": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'#FFFFFF'"
+                              }
+                            }
+                          },
+                          "max": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'#b9e4e5'"
+                              }
+                            }
+                          },
+                          "nullColoringStrategy": {
+                            "strategy": {
+                              "Literal": {
+                                "Value": "'asZero'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "Key Metric.Key Metric"
+          }
+        },
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "FillRule": {
+                      "Input": {
+                        "Measure": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Key Metric"
+                            }
+                          },
+                          "Property": "Key Metric, Arab or All Population % Technological Subjects of All Subjects"
+                        }
+                      },
+                      "FillRule": {
+                        "linearGradient2": {
+                          "min": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'#FFFFFF'"
+                              }
+                            }
+                          },
+                          "max": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'#b9d0e4'"
+                              }
+                            }
+                          },
+                          "nullColoringStrategy": {
+                            "strategy": {
+                              "Literal": {
+                                "Value": "'asZero'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "Key Metric.Key Metric, Arab or All Population % Technological Subjects of All Subjects"
+          }
+        },
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "16D"
+                }
+              }
+            },
+            "backColorSecondary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnFormatting": [
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LinkedIn Main.Location"
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {},
+          "selector": {
+            "metadata": "Calendar.Year"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "103.24648449834373D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Key Metric.Key Metric Arab or All Population, All Subjects"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "109.79873209702671D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Key Metric.Key Metric, Arab or All Population, All Technological Subjects"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "109.76884294073349D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Key Metric.Key Metric, Arab or All Population % Technological Subjects of All Subjects"
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "metadata": "Fact 07 Students by Gender.SUM Students By Gender, All Population"
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "metadata": "Fact 07 Students by Nafa.SUM Students By Nafa, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "199.03670106801178D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'אלקטרוניקה ואוטומציה'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Nafa.SUM Students By Nafa, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "358D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'אלקטרוניקה ואוטומציה'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Gender.SUM Students By Gender, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "347D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'ביוכימיה'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Nafa.SUM Students By Nafa, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "358D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'ביוכימיה'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Gender.SUM Students By Gender, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "347D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'הנדסה כימית ותהליכים'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Nafa.SUM Students By Nafa, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "358D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'הנדסה כימית ותהליכים'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Gender.SUM Students By Gender, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "347D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'חשמל ואנרגייה'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Nafa.SUM Students By Nafa, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "358D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'חשמל ואנרגייה'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Gender.SUM Students By Gender, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "347D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'טכנולוגיות אבחון וטיפול'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Nafa.SUM Students By Nafa, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "358D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'טכנולוגיות אבחון וטיפול'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Gender.SUM Students By Gender, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "347D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'מכונות ומתכת'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Nafa.SUM Students By Nafa, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "358D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'מכונות ומתכת'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Gender.SUM Students By Gender, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "347D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'מקצועות ההנדסה לנמא'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Nafa.SUM Students By Nafa, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "358D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'מקצועות ההנדסה לנמא'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Gender.SUM Students By Gender, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "347D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'פיתוח וניתוח של תוכנה ויישומים'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Nafa.SUM Students By Nafa, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "358D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'פיתוח וניתוח של תוכנה ויישומים'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Gender.SUM Students By Gender, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "347D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'תכנון וניהול של בסיסי נתונים ורשתות'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Nafa.SUM Students By Nafa, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "358D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Training Subject"
+                          }
+                        },
+                        "Property": "תחום הכשרה"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'תכנון וניהול של בסיסי נתונים ורשתות'"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "metadata": "Fact 07 Students by Gender.SUM Students By Gender, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "347D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "total": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Training Subject"
+                        }
+                      },
+                      "Property": "תחום הכשרה"
+                    }
+                  }
+                ]
+              }
+            ],
+            "metadata": "Fact 07 Students by Nafa.SUM Students By Nafa, All Population"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "358D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "total": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Training Subject"
+                        }
+                      },
+                      "Property": "תחום הכשרה"
+                    }
+                  }
+                ]
+              }
+            ],
+            "metadata": "Fact 07 Students by Gender.SUM Students By Gender, All Population"
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "metadata": "Training Measures.DIFF SUMs Training Students, All Population"
+          }
+        }
+      ],
+      "rowHeaders": [
+        {
+          "properties": {
+            "showExpandCollapseButtons": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'right'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "16D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'סטודנטים מכלל האוכלוסיה'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'right'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "7D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "Filter59cd0ab6e2430aebda07",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LinkedIn Positions"
+              }
+            },
+            "Property": "Is Hitech"
+          }
+        },
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "l",
+              "Entity": "LinkedIn Positions",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "l"
+                              }
+                            },
+                            "Property": "Is Hitech"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'לא היי-טק'"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  }
+}

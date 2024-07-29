@@ -1,0 +1,114 @@
+table 'Manual Totals Source'
+	isHidden
+	lineageTag: 170310c3-c313-4f3e-912b-7224ecfff8fe
+
+	column Year
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3e14a817-d5b6-47f6-b524-ba8a6495a1d9
+		summarizeBy: none
+		sourceColumn: Year
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column סטודנטים/בוגרים
+		dataType: string
+		isHidden
+		lineageTag: 26d09f92-a00b-4f39-902b-738da0d72ad6
+		summarizeBy: none
+		sourceColumn: סטודנטים/בוגרים
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column אוניברסיטאות/מכללות
+		dataType: string
+		isHidden
+		lineageTag: fc30361c-97d2-46cb-9681-a4ce5d25b776
+		summarizeBy: none
+		sourceColumn: אוניברסיטאות/מכללות
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column הערות
+		dataType: string
+		isHidden
+		lineageTag: ae5c2638-f23d-4c05-96a9-85f70627db7d
+		summarizeBy: none
+		sourceColumn: הערות
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 364c8df7-dce8-4240-bf28-1f2b4b1edfc2
+		summarizeBy: sum
+		sourceColumn: Total
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Arabs
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 8cb44fac-3c10-4849-b6b0-57c647892d39
+		summarizeBy: sum
+		sourceColumn: Arabs
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'שנה עברית - מלא'
+		dataType: string
+		isHidden
+		lineageTag: 8ddc738f-ca18-46de-9077-7abb0156a504
+		summarizeBy: none
+		sourceColumn: שנה עברית - מלא
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Manual Totals Source' = m
+		mode: import
+		queryGroup: 'Data Model\Control'
+		source =
+				let
+				    Source = #"01 Higher Education",
+				    #"Removed Other Columns1" = Table.SelectColumns(Source,{"Content", "Name"}),
+				    #"Filtered Rows1" = Table.SelectRows(#"Removed Other Columns1", each ([Name] = "סהכ סטודנטים ובוגרים במוסדות להשכלה גבוהה.xlsx")),
+				    Content = #"Filtered Rows1"{0}[Content],
+				    #"Imported Excel Workbook" = Excel.Workbook(Content),
+				    #"Filtered Rows" = Table.SelectRows(#"Imported Excel Workbook", each ([Kind] = "Table")),
+				    TotalStudentsInHighEd_Table = #"Filtered Rows"{[Item="TotalStudentsInHighEd",Kind="Table"]}[Data],
+				    #"Divided Column" = Table.TransformColumns(TotalStudentsInHighEd_Table, {{"אחוז ערבים ראשון", each _ / 100, type number}}),
+				    #"Divided Column1" = Table.TransformColumns(#"Divided Column", {{"אחוז ערבים שני", each _ / 100, type number}}),
+				    #"Added Custom" = Table.AddColumn(#"Divided Column1", "Total", each if [הערות] = "מבוסס על לוח 2.7" or [הערות] = "מבוסס על לוח 3.7" or [הערות] = "התקבלו נתוני סה""כ ישירות מהלמס - הנתון כבר ללא תעודה" then [#"סה""כ ראשון + שני + שלישי"] - [תעודות כלל החברה] else if [הערות] = "התקבלו נתוני סה""כ ישירות מהלמס" then [#"סה""כ ראשון + שני"] else if [הערות] = "מבוסס על לוח 2.24" or [הערות] = "מבוסס על לוח 3.22" then [#"סה""כ שני"] + [#"סה""כ ראשון"] else null),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"Total", Int64.Type}}),
+				    #"Added Custom1" = Table.AddColumn(#"Changed Type", "Arabs", each if [הערות] = "מבוסס על לוח 2.7" or [הערות] = "מבוסס על לוח 3.7" or [הערות] = "התקבלו נתוני סה""כ ישירות מהלמס - הנתון כבר ללא תעודה" then [#"כמות ערבים ראשון + שני + שלישי"] - [תעודות חברה ערבית] else if [הערות] = "התקבלו נתוני סה""כ ישירות מהלמס" then [#"ערבים ראשון + שני "] else if [הערות] = "מבוסס על לוח 2.24" or [הערות] = "מבוסס על לוח 3.22" then [#"סה""כ שני"] * [אחוז ערבים שני] + [#"סה""כ ראשון"] * [אחוז ערבים ראשון] else null),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom1",{{"Arabs", Int64.Type}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Changed Type1", {"שנה עברית - מלא"}, #"Education Years LUT", {"שנה עברית - מלא"}, "Education Years LUT", JoinKind.LeftOuter),
+				    #"Expanded Education Years LUT" = Table.ExpandTableColumn(#"Merged Queries", "Education Years LUT", {"שנה לועזית - סטודנטים", "שנה לועזית - בוגרים"}, {"שנה לועזית - סטודנטים", "שנה לועזית - בוגרים"}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Expanded Education Years LUT", "Year", each if [#"סטודנטים/בוגרים"] = "סטודנטים" then [#"שנה לועזית - סטודנטים"] else if [#"סטודנטים/בוגרים"] = "בוגרים" then [#"שנה לועזית - בוגרים"] else null),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Added Conditional Column",{{"Year", Int64.Type}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type2",{"Year", "שנה עברית - מלא", "סטודנטים/בוגרים", "אוניברסיטאות/מכללות", "הערות", "Total", "Arabs"})
+				in
+				    #"Removed Other Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

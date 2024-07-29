@@ -1,0 +1,17 @@
+table 'Map Legend'
+	lineageTag: c7e4d1f5-c0c5-4565-b9d8-81b93ca014f9
+
+	measure 'Map Legend Value 0' = ""
+		lineageTag: 37d143b0-7ed7-4a2d-baeb-9b354dd04664
+
+	partition 'Map Legend' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

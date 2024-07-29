@@ -1,0 +1,199 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.0.0/schema.json",
+  "name": "ReportSection538fa906e8bb572b58a8",
+  "displayName": "השכלה גבוהה - סטודנטים לפי אזור",
+  "displayOption": "FitToWidth",
+  "height": 1760,
+  "width": 1920,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "Filter8b1b0a2c46a17ac716a7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Key Metric"
+              }
+            },
+            "Property": "Heb Metric"
+          }
+        },
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "k",
+              "Entity": "Key Metric",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "k"
+                          }
+                        },
+                        "Property": "Heb Metric"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'סטודנטים לפי מוסד'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  },
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 0,
+                    "Percent": -0.1
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "ab082f139931c80140db",
+      "target": "fdc757f29280645607ee",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ab082f139931c80140db",
+      "target": "b30701413bd0810b6a72",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a492d93688eb99a1c403",
+      "target": "9653b98bc98e07d22e53",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "fdc757f29280645607ee",
+      "target": "a492d93688eb99a1c403",
+      "type": "NoFilter"
+    },
+    {
+      "source": "fdc757f29280645607ee",
+      "target": "9653b98bc98e07d22e53",
+      "type": "NoFilter"
+    },
+    {
+      "source": "fdc757f29280645607ee",
+      "target": "c09553c12592272e4686",
+      "type": "NoFilter"
+    },
+    {
+      "source": "fdc757f29280645607ee",
+      "target": "2181d1e6d084de50c8e0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "fdc757f29280645607ee",
+      "target": "847483f1127a1e1a1e21",
+      "type": "NoFilter"
+    },
+    {
+      "source": "fdc757f29280645607ee",
+      "target": "7ec1b57bce4ab6080334",
+      "type": "NoFilter"
+    },
+    {
+      "source": "fdc757f29280645607ee",
+      "target": "702d2eaa0cc001d5de7d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b30701413bd0810b6a72",
+      "target": "702d2eaa0cc001d5de7d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b30701413bd0810b6a72",
+      "target": "7ec1b57bce4ab6080334",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b30701413bd0810b6a72",
+      "target": "847483f1127a1e1a1e21",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b30701413bd0810b6a72",
+      "target": "c09553c12592272e4686",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b30701413bd0810b6a72",
+      "target": "2181d1e6d084de50c8e0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b30701413bd0810b6a72",
+      "target": "298284aa865d8d2cbdd8",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b30701413bd0810b6a72",
+      "target": "a492d93688eb99a1c403",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b30701413bd0810b6a72",
+      "target": "9653b98bc98e07d22e53",
+      "type": "NoFilter"
+    },
+    {
+      "source": "fdc757f29280645607ee",
+      "target": "298284aa865d8d2cbdd8",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b30701413bd0810b6a72",
+      "target": "fdc757f29280645607ee",
+      "type": "NoFilter"
+    },
+    {
+      "source": "fdc757f29280645607ee",
+      "target": "b30701413bd0810b6a72",
+      "type": "NoFilter"
+    }
+  ]
+}

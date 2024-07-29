@@ -1,0 +1,59 @@
+table 'Core Measures'
+	lineageTag: 6164c193-ed45-46e4-8a23-8a1f8d2771f9
+
+	measure 'SUM Higher Ed' = SUM('Fact Higher Education'[Value])
+		formatString: #,0
+		lineageTag: 73381d13-bc5f-40cc-8e98-24b36596af81
+
+	measure 'SUM Students by Gender' = SUM('Fact Lamas Students by Gender'[Value])
+		lineageTag: 54e7526b-c1ee-48a9-bbbe-c1d85e788746
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SUM Students by Institution' = SUM('Fact Lamas Students by Institution'[Value])
+		lineageTag: e23d973e-3725-423d-9f5c-7e4175cba9bb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SUM Graduates by Nafa' = SUM('Fact Lamas Graduates by Nafa'[Value])
+		lineageTag: 79c8b445-601d-4e31-a1bd-0bbdcc55518c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MAX Years' =
+			
+			CALCULATE(
+			    MAX(Years[Years]),
+			    FILTER(
+			        ALL(Years),
+			        NOT(ISBLANK([Key Metric]))
+			    )
+			)
+		lineageTag: 813573e5-4066-43d9-bda1-ccd4c685c441
+
+	measure 'Is Years Max Years' = IF(MAX(Years) = [MAX Years], "Y", "N")
+		lineageTag: 6b489c64-8d5d-4728-b73f-28ea65d2c91d
+
+	measure 'MAX Years Title' =
+			
+			[MAX Years]
+			&
+			": "
+			&
+			[Key Metric, Selected Years]
+			&
+			" סה""כ"
+		lineageTag: de5451e4-8ec2-4c6f-b55e-c9b8bc516816
+
+	partition 'Core Measures' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

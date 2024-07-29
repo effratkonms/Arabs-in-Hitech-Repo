@@ -1,0 +1,22 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmarksMetadata/1.0.0/schema.json",
+  "items": [
+    {
+      "name": "Bookmark571f923bd9a67b558560"
+    },
+    {
+      "name": "Bookmarkf291797fa74f427415da"
+    },
+    {
+      "name": "Bookmarka2bde7bedfe91e42dd8f"
+    },
+    {
+      "name": "Bookmark34410b7fec4531de44c4",
+      "displayName": "צפיפות/כמות",
+      "children": [
+        "Bookmark8c74ed5c3257d8a55ed2",
+        "Bookmark0f690ee21461ae1c8dec"
+      ]
+    }
+  ]
+}

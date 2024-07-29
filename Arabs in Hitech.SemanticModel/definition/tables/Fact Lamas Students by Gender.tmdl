@@ -1,0 +1,132 @@
+table 'Fact Lamas Students by Gender'
+	lineageTag: 3d859806-8443-4770-87c9-5453a399d96c
+
+	column 'Institution Type'
+		dataType: string
+		lineageTag: 0f259b90-97bc-4157-b1f3-21622fa64d73
+		summarizeBy: none
+		sourceColumn: Institution Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: d86759de-98fd-46e3-becf-8989ca3630a2
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Years
+		dataType: string
+		lineageTag: 255991c5-0bbe-4c06-9437-cdbcf3edfe07
+		summarizeBy: none
+		sourceColumn: Years
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 605128fd-276d-4ddb-8149-851bf8886e0e
+		summarizeBy: sum
+		sourceColumn: First Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Second Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e3b4076-539a-4dae-8316-4513fe388399
+		summarizeBy: sum
+		sourceColumn: Second Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Population
+		dataType: string
+		lineageTag: bee3828d-27cb-4215-8685-dfd9d6cb0eba
+		summarizeBy: none
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	column Degree
+		dataType: string
+		lineageTag: 81f076ab-dcd0-4326-8241-5ce2c28b835f
+		summarizeBy: none
+		sourceColumn: Degree
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'New / Existing'
+		dataType: string
+		lineageTag: 0bfc264a-cd79-442f-92b7-82ccdbaf7d7a
+		summarizeBy: none
+		sourceColumn: New / Existing
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		lineageTag: 6b2884ac-3b00-434e-b79c-57356c51a767
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Population Subsection'
+		dataType: string
+		lineageTag: 3fa1dded-c814-4913-a628-906ce6adad4b
+		summarizeBy: none
+		sourceColumn: Population Subsection
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subject
+		dataType: string
+		lineageTag: 28bacdf5-2d04-4d37-b604-b87caa74bf9f
+		summarizeBy: none
+		sourceColumn: Subject
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact Lamas Students by Gender' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = #"Higer Education Lamas Source",
+				    #"סטודנטים - מגדר_Sheet" = Source{[Item="סטודנטים - מגדר",Kind="Sheet"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(#"סטודנטים - מגדר_Sheet",{"Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9", "Column10"}),
+				    #"Removed Top Rows" = Table.Skip(#"Removed Other Columns",6),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"מקצוע", "Subject"}, {"סוג מוסד", "Institution Type"}, {"מגדר", "Gender"}, {"שנים", "Years"}, {"כלל האוכלוסיה: תואר ראשון", "All: 1st: Total"}, {"כלל האוכלוסיה: חדשים ראשון", "All: 1st: New"}, {"כלל האוכלוסיה: שני ושלישי", "All: 2nd + 3rd"}, {"ערבים: תואר ראשון", "Arab: 1st: Total"}, {"ערבים: חדשים ראשון", "Arab: 1st: New"}, {"ערבים: שני ושלישי", "Arab: 2nd + 3rd"}}),
+				    #"Filled Down" = Table.FillDown(#"Renamed Columns",{"Subject", "Institution Type", "Gender"}),
+				    #"Invoke Fn" = Function.Invoke(#"Handle Lamas Higher Ed", {#"Filled Down", p02ReplaceLowNumberWith}),
+				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Invoke Fn", {"Subject", "Institution Type", "Gender", "Years", "First Year", "Second Year"}, "Attribute", "Value"),
+				    #"Split Column by Delimiter" = Table.SplitColumn(#"Unpivoted Columns", "Attribute", Splitter.SplitTextByDelimiter(": ", QuoteStyle.Csv), {"Population", "Degree", "New / Existing"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Split Column by Delimiter",{{"First Year", Int64.Type}, {"Second Year", Int64.Type}, {"Population", type text}, {"Degree", type text}, {"New / Existing", type text}, {"Value", type number}}),
+				    #"Extracted Text After Delimiter" = Table.TransformColumns(#"Changed Type", {{"Subject", each Text.AfterDelimiter(_, "="), type text}}),
+				    #"Added Custom" = Table.AddColumn(#"Extracted Text After Delimiter", "Population Subsection", each "סטודנטים", type text),
+				    #"Replaced Value" = Table.ReplaceValue(#"Added Custom","1st","ראשון",Replacer.ReplaceText,{"Degree"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","2nd + 3rd","שני + שלישי",Replacer.ReplaceText,{"Degree"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","New","חדשים",Replacer.ReplaceText,{"New / Existing"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","Existing","ותיקים",Replacer.ReplaceText,{"New / Existing"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3",",","+",Replacer.ReplaceText,{"Years"}),
+				    #"Replaced Value5" = Table.ReplaceValue(#"Replaced Value4","חדשים","'שנה א",Replacer.ReplaceText,{"New / Existing"}),
+				    #"Replaced Value6" = Table.ReplaceValue(#"Replaced Value5","ותיקים","שנה ב' ומעלה",Replacer.ReplaceText,{"New / Existing"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Replaced Value6",{{"Subject", "Subject o"}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns1", {"Subject o"}, #"Subject Category Manual Override", {"מקור (במסדי הנתונים וטבלאות העזר)"}, "Subject Category Manual Override", JoinKind.LeftOuter),
+				    #"Expanded Subject Category Manual Override" = Table.ExpandTableColumn(#"Merged Queries", "Subject Category Manual Override", {"השם המתוקן לדשבורד"}, {"השם המתוקן לדשבורד"}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Expanded Subject Category Manual Override", "Subject", each if [השם המתוקן לדשבורד] <> null then [השם המתוקן לדשבורד] else [Subject o], type text),
+				    #"Removed Columns" = Table.RemoveColumns(#"Added Conditional Column",{"Subject o", "השם המתוקן לדשבורד"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

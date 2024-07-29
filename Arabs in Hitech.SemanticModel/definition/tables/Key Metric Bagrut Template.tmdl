@@ -1,0 +1,320 @@
+table 'Key Metric Bagrut Template'
+	lineageTag: 4eb2d452-ee55-4c69-aab4-6189a4411673
+
+	measure 'Key Bagrut Metric #' = ```
+			
+					VAR metric = SELECTEDVALUE('Key Metric Bagrut Template'[Metric])
+					VAR selectedSubject = SELECTEDVALUE('Key Metric Bagrut Template'[Subject])
+					RETURN
+						SWITCH(
+							metric,
+							"12th Grade Students", [Total 12th Grade Students],
+							"Eligible w/ Honors", [Total Bagrut w Honors],
+							"Eligible for 5 Units", CALCULATE(
+								[Total Special Bagrut],
+								KEEPFILTERS('Fact Bagrut Qualifiers'[Attribute] = selectedSubject)
+							)
+						)
+			```
+		formatString: #,0
+		lineageTag: 3709c34c-7001-45c7-abe5-1443ce5a62b3
+
+	measure 'Key Bagrut Metric %' =
+			VAR numeratorId = MAX('Key Metric Bagrut Template'[Numerator])
+			VAR denominatorId = MAX('Key Metric Bagrut Template'[Denominator])
+			VAR numerator = CALCULATE([Key Bagrut Metric #], FILTER(ALL('Key Metric Bagrut Template'), 'Key Metric Bagrut Template'[Id] = numeratorId))
+			VAR denominator = CALCULATE([Key Bagrut Metric #], FILTER(ALL('Key Metric Bagrut Template'), 'Key Metric Bagrut Template'[Id] = denominatorId))
+			RETURN
+			DIVIDE(
+			    SUMX(
+			        'Key Metric Bagrut Template',
+			        VAR numeratorId = MAX('Key Metric Bagrut Template'[Numerator])
+			        RETURN
+			        CALCULATE(
+			            [Key Bagrut Metric #],
+			            FILTER(
+			                ALL('Key Metric Bagrut Template'),
+			                'Key Metric Bagrut Template'[Id] = numeratorId
+			            )
+			        )
+			    ),
+			    SUMX(
+			        'Key Metric Bagrut Template',
+			        VAR denominatorId = MAX('Key Metric Bagrut Template'[Denominator])
+			        RETURN
+			        CALCULATE(
+			            [Key Bagrut Metric #],
+			            FILTER(
+			                ALL('Key Metric Bagrut Template'),
+			                'Key Metric Bagrut Template'[Id] = denominatorId
+			            )
+			        )
+			    )
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: f6a12558-140d-4ae6-9621-c6168844c665
+
+	measure 'Key Bagrut Metric' = ```
+			
+				VAR metricType = MAX('Key Metric Bagrut Template'[Metric Type])
+				RETURN
+					SWITCH(
+						metricType,
+						"#", [Key Bagrut Metric #],
+						"%", [Key Bagrut Metric %]				
+					)
+			```
+		lineageTag: 9711db0c-5165-4fda-8717-4d9708f98ce1
+
+		formatStringDefinition =
+				VAR metricType = MAX('Key Metric Bagrut Template'[Metric Type])
+				RETURN
+				SWITCH(
+				    metricType,
+				    "#", "#,#",
+				    "%", "0.0%"
+				)
+
+	measure 'Selected Subject from Bagrut Key Metric Template' = SELECTEDVALUE('Key Metric Bagrut Template'[Subject])
+		lineageTag: 152b8e49-f13f-44a5-9ba8-415dbf71faf1
+
+	measure 'Selected Metric Title' =
+			
+			VAR selectedSubject = SELECTEDVALUE('Key Metric Bagrut Template'[Heb Metric Full])
+			RETURN
+			// SELECTEDVALUE('Key Metric Bagrut Template'[Heb Metric])
+			// &
+			// IF(selectedSubject = "ללא מקצוע", "", selectedSubject)
+			"מדד נבחר: "
+			&
+			selectedSubject
+		lineageTag: f47bbeae-4427-4cab-a52b-fa92c1846638
+
+	measure 'Selected Bagrut Heb Metric' = SELECTEDVALUE('Key Metric'[Heb Metric])
+		lineageTag: 11742efe-2095-41d0-bde4-7170fb4fa7d8
+
+	measure 'Key Bagrut Metric, All Nafot, All Rashuyot, All Institutions' =
+			
+			CALCULATE(
+			    [Key Bagrut Metric],
+			    ALL(Nafa),
+			    ALL('Fact Bagrut Denom'[שם רשות]),
+			    ALL('Fact Bagrut Denom'[שם מוסד])
+			)
+		lineageTag: a814b89c-a54d-44fc-9fad-bc21b168eff4
+
+		formatStringDefinition =
+				VAR metricType = MAX('Key Metric Bagrut Template'[Metric Type])
+				RETURN
+				SWITCH(
+				    metricType,
+				    "#", "#,#",
+				    "%", "0.0%"
+				)
+
+	measure 'Selected Bagrut Metric' = SELECTEDVALUE('Key Metric Bagrut Template'[Metric])
+		lineageTag: 75d2e89b-abc5-4562-a534-8377c3591e82
+
+	measure 'Selected Bagrut Subject' = SELECTEDVALUE('Key Metric Bagrut Template'[Subject])
+		lineageTag: fd56c9d9-2d60-4b02-b4c1-53d80982f4a3
+
+	measure 'Selected Bagrut Metric Type' = MAX('Key Metric Bagrut Template'[Metric Type])
+		lineageTag: bfd069a3-83dd-4af1-93b8-c03b545da668
+
+	measure 'Selected Bagrut Heb Metric Full' =
+			
+			SELECTEDVALUE('Key Metric Bagrut Template'[Heb Metric Full])
+			&
+			" - חברה ערבית"
+		lineageTag: 3a2234d6-6176-4e04-a516-66c6dca5b497
+
+	measure '// Selected Bagrut Subject' = SELECTEDVALUE('Fact Bagrut Qualifiers'[Attribute])
+		lineageTag: 06a30938-1959-45ab-89aa-1fe081d1cd18
+
+	measure 'Selected Bagrut Heb Metric Full Compared to Entire Population' =
+			
+			SELECTEDVALUE('Key Metric Bagrut Template'[Heb Metric Full])
+			&
+			" - השוואה לכלל החברה"
+		lineageTag: 3d59460f-7352-44b5-9cc9-abb928ca495d
+
+	measure 'Key Bagrut Metric, All Populations' =
+			
+			CALCULATE(
+			    [Key Bagrut Metric],
+			    ALL(Population)
+			)
+		lineageTag: 3716a598-db20-4f91-b34f-8267faf51313
+
+		formatStringDefinition =
+				VAR metricType = MAX('Key Metric Bagrut Template'[Metric Type])
+				RETURN
+				SWITCH(
+				    metricType,
+				    "#", "#,#",
+				    "%", "0.0%"
+				)
+
+	measure 'Key Bagrut Metric, Arab Population' =
+			
+			CALCULATE(
+			    [Key Bagrut Metric],
+			    FILTER(
+			        ALL(Population),
+			        Population[Population] = "Arab"
+			    )
+			)
+		lineageTag: 2e14eb37-fee5-48f3-aa4f-1325340ede1e
+
+		formatStringDefinition =
+				VAR metricType = MAX('Key Metric Bagrut Template'[Metric Type])
+				RETURN
+				SWITCH(
+				    metricType,
+				    "#", "#,#",
+				    "%", "0.0%"
+				)
+
+	measure 'Key Bagrut Metric Zero if Blank' =
+			
+			VAR result = [Key Bagrut Metric]
+			VAR metricType = MAX('Key Metric Bagrut Template'[Metric Type])
+			VAR r = IF(ISBLANK(result), 0, result)
+			RETURN
+			SWITCH(
+			    metricType,
+			    "#", r,
+			    "%", r * 100
+			)
+		formatString: 0.0
+		lineageTag: 1dcde306-7b8c-4200-aa78-2f6fc478150e
+
+	measure '// Selected Bagrut Metric Typefd' = MAX('Key Metric Bagrut Template'[Metric Type])
+		lineageTag: 3f1b26c7-3c4d-4aad-bdbe-bf825916cee6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Id
+		dataType: int64
+		formatString: 0
+		lineageTag: 3cb8d4b7-5ec1-40bd-ba54-b8f82478084f
+		summarizeBy: count
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Metric Type'
+		dataType: string
+		lineageTag: 627480fa-a1fa-4f67-a247-f5b99871b162
+		summarizeBy: none
+		sourceColumn: Metric Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Metric
+		dataType: string
+		lineageTag: e207c9fe-229e-4eef-b558-78e95819629a
+		summarizeBy: none
+		sourceColumn: Metric
+		sortByColumn: 'Metric Order'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Heb Metric'
+		dataType: string
+		lineageTag: 7b259886-25a9-4e97-9f9e-7a5b0f8ba324
+		summarizeBy: none
+		sourceColumn: Heb Metric
+		sortByColumn: 'Metric Order'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subject
+		dataType: string
+		lineageTag: f7ec3ea4-8cdc-4ad5-86f3-91ff9c134c23
+		summarizeBy: none
+		sourceColumn: Subject
+		sortByColumn: 'Subject Order'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Subject Eng'
+		dataType: string
+		lineageTag: a454e2d8-53ea-43a6-8853-f1a8d4e0d790
+		summarizeBy: none
+		sourceColumn: Subject Eng
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Metric Order'
+		dataType: int64
+		lineageTag: 56c30dc2-8bb7-4870-b762-77bec0f0a6d3
+		summarizeBy: sum
+		sourceColumn: Metric Order
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Subject Order'
+		dataType: int64
+		lineageTag: 9060301f-8d9d-46a1-a3d6-9215593cff8b
+		summarizeBy: sum
+		sourceColumn: Subject Order
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Numerator
+		dataType: int64
+		lineageTag: c1334246-63e6-4ea5-bb26-c27f31a31b24
+		summarizeBy: sum
+		sourceColumn: Numerator
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Denominator
+		dataType: int64
+		lineageTag: 0ffc27b3-00c2-4236-a279-f07ced8e78f5
+		summarizeBy: sum
+		sourceColumn: Denominator
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Heb Metric Full'
+		dataType: string
+		lineageTag: 0e32c590-3639-40a0-b6a3-86fa24400b7e
+		summarizeBy: none
+		sourceColumn: Heb Metric Full
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Key Metric Bagrut Template' = m
+		mode: import
+		queryGroup: Source\Definitions
+		source =
+				let
+				    Source = #"Key Metrics",
+				    BagrutKeyMetrics_Table = Source{[Item="BagrutKeyMetrics",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(BagrutKeyMetrics_Table,{{"Id", Int64.Type}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Changed Type",null,"ללא מקצוע",Replacer.ReplaceValue,{"Subject"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value",null,"ללא מקצוע",Replacer.ReplaceValue,{"Subject Eng"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1",null,0,Replacer.ReplaceValue,{"Numerator"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2",null,0,Replacer.ReplaceValue,{"Denominator"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Replaced Value3",{{"Metric Order", Int64.Type}, {"Subject Order", Int64.Type}, {"Numerator", Int64.Type}, {"Denominator", Int64.Type}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_ResultType = Table
+

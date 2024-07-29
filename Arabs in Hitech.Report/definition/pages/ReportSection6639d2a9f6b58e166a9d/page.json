@@ -1,0 +1,174 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.0.0/schema.json",
+  "name": "ReportSection6639d2a9f6b58e166a9d",
+  "displayName": "השכלה גבוהה - בוגרים לפי אזור",
+  "displayOption": "FitToWidth",
+  "height": 1760,
+  "width": 1920,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "Filter8b1b0a2c46a17ac716a7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Key Metric"
+              }
+            },
+            "Property": "Heb Metric"
+          }
+        },
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "k",
+              "Entity": "Key Metric",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "k"
+                          }
+                        },
+                        "Property": "Heb Metric"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'בוגרים לפי נפה'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  },
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 0,
+                    "Percent": -0.1
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "31cbf686d31c8117aea8",
+      "target": "dcd7e63a9ecca1576185",
+      "type": "NoFilter"
+    },
+    {
+      "source": "31cbf686d31c8117aea8",
+      "target": "8faf470c57a7c1373e20",
+      "type": "NoFilter"
+    },
+    {
+      "source": "31cbf686d31c8117aea8",
+      "target": "cc33119c6cbf5fbc09c4",
+      "type": "DataFilter"
+    },
+    {
+      "source": "cc33119c6cbf5fbc09c4",
+      "target": "94d3acaa962d94325ed0",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "dcd7e63a9ecca1576185",
+      "target": "cc33119c6cbf5fbc09c4",
+      "type": "NoFilter"
+    },
+    {
+      "source": "dcd7e63a9ecca1576185",
+      "target": "f9c73cfa70c1c9bcb3d7",
+      "type": "NoFilter"
+    },
+    {
+      "source": "dcd7e63a9ecca1576185",
+      "target": "641ab760a38a6a14cd9b",
+      "type": "NoFilter"
+    },
+    {
+      "source": "dcd7e63a9ecca1576185",
+      "target": "fa09948d9b71f80907e0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "dcd7e63a9ecca1576185",
+      "target": "ec1abc1764ff5bf29c65",
+      "type": "NoFilter"
+    },
+    {
+      "source": "dcd7e63a9ecca1576185",
+      "target": "8faf470c57a7c1373e20",
+      "type": "NoFilter"
+    },
+    {
+      "source": "8faf470c57a7c1373e20",
+      "target": "dcd7e63a9ecca1576185",
+      "type": "NoFilter"
+    },
+    {
+      "source": "8faf470c57a7c1373e20",
+      "target": "cc33119c6cbf5fbc09c4",
+      "type": "NoFilter"
+    },
+    {
+      "source": "8faf470c57a7c1373e20",
+      "target": "f9c73cfa70c1c9bcb3d7",
+      "type": "NoFilter"
+    },
+    {
+      "source": "8faf470c57a7c1373e20",
+      "target": "641ab760a38a6a14cd9b",
+      "type": "NoFilter"
+    },
+    {
+      "source": "8faf470c57a7c1373e20",
+      "target": "fa09948d9b71f80907e0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "8faf470c57a7c1373e20",
+      "target": "ec1abc1764ff5bf29c65",
+      "type": "NoFilter"
+    }
+  ]
+}

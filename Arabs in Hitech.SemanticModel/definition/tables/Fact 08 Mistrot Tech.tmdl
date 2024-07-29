@@ -1,0 +1,172 @@
+table 'Fact 08 Mistrot Tech'
+	lineageTag: fbc172d9-49ae-4d81-b861-edb18610dc8a
+
+	measure 'MAX Misrot Tech' = MAX('Fact 08 Mistrot Tech'[Value])
+		formatString: #,0
+		lineageTag: 60578d1b-3d51-4057-bfcb-e0e9fb046719
+
+	measure 'MAX Misrot Tech PY' =
+			
+			VAR maxYear = MAX('Calendar'[Year])
+			RETURN
+			CALCULATE(
+			    [MAX Misrot Tech],
+			    FILTER(
+			        ALL('Calendar'),
+			        'Calendar'[Year] = maxYear - 1
+			    )
+			)
+		lineageTag: b9976b9f-508d-4704-aaba-47d2807d3f66
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MAX Misrot Tech YoY' =
+			
+			IF(
+			    NOT(ISBLANK([MAX Misrot Tech])) && NOT(ISBLANK([MAX Misrot Tech PY])),
+			    [MAX Misrot Tech] - [MAX Misrot Tech PY]
+			)
+		lineageTag: 3eebf271-50f2-445e-8ef9-255d8316969a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MAX Misrot Tech YoY %' = DIVIDE([MAX Misrot Tech YoY], [MAX Misrot Tech PY])
+		formatString: +0%;-0%;-
+		lineageTag: 15952558-2063-4f58-aeb3-3759d4769167
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Max Year' = MAX('Calendar'[Year])
+		lineageTag: 63d75f7e-11af-4e8b-a9e2-1890cf6d5831
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Max Year w/ Actual MAX Misrot' =
+			
+			// IF(
+			//     NOT(ISBLANK([MAX Misrot Tech YoY])),
+			    CALCULATE(
+			        [Max Year],
+			        FILTER(
+			            ALL('Calendar'),
+			            NOT(ISBLANK([MAX Misrot Tech YoY]))
+			        )
+			    )
+			// )
+		formatString: 0
+		lineageTag: 0defe7a7-a01d-42f6-84db-c62f6cf9bdc0
+
+	measure 'Years-to-Target Misrot-Tech Since Last Actual' = 2035 - [Max Year w/ Actual MAX Misrot]
+		formatString: 0
+		lineageTag: 006b5b6d-735f-40fc-bde7-eca5eab0d722
+
+	measure Years-to-Target = 1
+		lineageTag: 5db63dcc-0912-42f8-9353-84c5af3e11ed
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Years-to-Target Misrot-Tech' = 2035 - [Max Year]
+		formatString: 0
+		lineageTag: 395aa447-cb82-46d8-9280-44d8809e2524
+
+	measure 'Years Remaining to Target' =
+			
+			IF(
+			    [Max Year] >= [Max Year w/ Actual MAX Misrot] &&
+			    [Years-to-Target Misrot-Tech] >= 0,
+			    [Years-to-Target Misrot-Tech Since Last Actual] - [Years-to-Target Misrot-Tech]
+			)
+		formatString: 0
+		lineageTag: 734f4171-eef7-4386-bc33-6cacd40a8617
+
+	measure 'Last Actual MAX Misrot Tech' =
+			
+			VAR lastActualYear = [Max Year w/ Actual MAX Misrot]
+			RETURN
+			CALCULATE(
+			    [MAX Misrot Tech],
+			    'Calendar'[Year] = lastActualYear
+			)
+		formatString: #,0
+		lineageTag: eb223150-24d4-4cba-aa45-f3316185e01e
+
+	measure 'Total Latest Actual to Target Misrot-Tech' = [SUM Misrot Tech Target in any Year] - [Last Actual MAX Misrot Tech]
+		formatString: #,0
+		lineageTag: 909d052e-ed4d-4582-8a65-e1686d27e07d
+
+	measure 'Total Percent to Grow, Misrot Tech' =
+			
+			DIVIDE([SUM Misrot Tech Target in any Year], [Last Actual MAX Misrot Tech]) - 1
+		formatString: +0%;-0%;-
+		lineageTag: 0fe3a390-7ab0-420e-a2c1-39d31d7f0dc3
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Yearly Percent Growth to Reach Target, Misrot Tech' = ([Total Percent to Grow, Misrot Tech] + 1) ^ DIVIDE(1, [Years-to-Target Misrot-Tech Since Last Actual]) - 1
+		formatString: +0%;-0%;-
+		lineageTag: ffaf16e0-2802-4c7b-a16f-6d4638b15a83
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Target Cofficient, Misrot Tech' = ```
+			
+			IF(
+			    NOT(ISBLANK([Years Remaining to Target])),  
+			    ([Yearly Percent Growth to Reach Target, Misrot Tech] + 1) ^ [Years Remaining to Target]
+			)
+			```
+		formatString: 0.0000
+		lineageTag: d9074871-f0ab-45b2-b633-4f3c8c790656
+
+	measure 'Target Extrapolation, Misrot Tech' = [Last Actual MAX Misrot Tech] * [Target Cofficient, Misrot Tech]
+		formatString: #,0
+		lineageTag: 424d0efd-770b-4f5d-a159-9b8828c5a84d
+
+	column Year
+		dataType: double
+		lineageTag: 1ab1256b-ca67-4444-9732-b4e73efd7de1
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column מגזר
+		dataType: string
+		lineageTag: 37031309-99a8-4872-a705-45a374b0609a
+		summarizeBy: none
+		sourceColumn: מגזר
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sex
+		dataType: string
+		lineageTag: f35efe8a-a0d9-4243-8937-f0438cb4e4f2
+		summarizeBy: none
+		sourceColumn: Sex
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: int64
+		formatString: 0
+		lineageTag: 2762ea36-a368-4490-9f47-3a6caa527d8b
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact 08 Mistrot Tech' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = #"08 Misrot Tech: Source"
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,121 @@
+table 'Fact Lamas Graduates by Nafa'
+	lineageTag: 95c8bc31-abaa-46f8-a985-968818f25828
+
+	column 'Institution Type'
+		dataType: string
+		lineageTag: d1e61c42-a0e6-48b2-aceb-405146030870
+		summarizeBy: none
+		sourceColumn: Institution Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column נפה
+		dataType: string
+		lineageTag: cf299f02-ae91-4a1c-9b21-afb1db439aae
+		summarizeBy: none
+		sourceColumn: נפה
+
+		annotation SummarizationSetBy = Automatic
+
+	column Population
+		dataType: string
+		lineageTag: 6bd62590-3174-4ac4-8c08-e6478c0a10d9
+		summarizeBy: none
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		lineageTag: 56c2c2b5-229d-4418-9c28-b3f911b54ffd
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'First Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: e6291d16-3394-4801-ab95-df0706876357
+		summarizeBy: none
+		sourceColumn: First Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Second Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3fc9d01f-35e8-4f06-8f67-55aced801be7
+		summarizeBy: sum
+		sourceColumn: Second Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Population Subsection'
+		dataType: string
+		lineageTag: 7b247317-4dec-40a4-81d9-06ac57b6344f
+		summarizeBy: none
+		sourceColumn: Population Subsection
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subject
+		dataType: string
+		lineageTag: ddc389b2-2b71-496f-9248-df42f28d3a59
+		summarizeBy: none
+		sourceColumn: Subject
+
+		annotation SummarizationSetBy = Automatic
+
+	column Years
+		dataType: string
+		lineageTag: 91a50ebb-6089-4895-ad1b-b0fef1e60d8d
+		summarizeBy: none
+		sourceColumn: Years
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact Lamas Graduates by Nafa' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = #"Higer Education Lamas Source",
+				    #"מקבלי תארים - נפה וסוג מוסד_Sheet" = Source{[Item="מקבלי תארים - נפה וסוג מוסד",Kind="Sheet"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(#"מקבלי תארים - נפה וסוג מוסד_Sheet",{"Column1", "Column2", "Column3", "Column4", "Column5", "Column6"}),
+				    #"Removed Top Rows" = Table.Skip(#"Removed Other Columns",5),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"מקצוע", "Subject"}, {"סוג מוסד", "Institution Type"}, {"שנים", "Years"}, {"כלל האוכלוסיה", "All"}, {"ערבים", "Arab"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"All", type text}, {"Arab", type text}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","-","0",Replacer.ReplaceText,{"All", "Arab"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","..",p02ReplaceLowNumberWith,Replacer.ReplaceText,{"All", "Arab"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Replaced Value1",{{"All", type number}, {"Arab", type number}}),
+				    #"Filled Down" = Table.FillDown(#"Changed Type1",{"Subject", "Institution Type", "נפה"}),
+				    #"Added Custom" = Table.AddColumn(#"Filled Down", "Other", each [All] - [Arab], type number),
+				    #"Removed Columns" = Table.RemoveColumns(#"Added Custom",{"All"}),
+				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Removed Columns", {"Subject", "Institution Type", "נפה", "Years"}, "Population", "Value"),
+				    #"Duplicated Column" = Table.DuplicateColumn(#"Unpivoted Columns", "Years", "First Year"),
+				    #"Duplicated Column1" = Table.DuplicateColumn(#"Duplicated Column", "First Year", "Second Year"),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Duplicated Column1",{{"First Year", Int64.Type}, {"Second Year", Int64.Type}, {"Years", type text}}),
+				    #"Subtracted from Column" = Table.TransformColumns(#"Changed Type2", {{"First Year", each _ - 1, type number}}),
+				    #"Subtracted from Column1" = Table.TransformColumns(#"Subtracted from Column", {{"Second Year", each _ - 1, type number}}),
+				    #"Extracted Text After Delimiter" = Table.TransformColumns(#"Subtracted from Column1", {{"Subject", each Text.AfterDelimiter(_, "="), type text}}),
+				    #"Added Custom1" = Table.AddColumn(#"Extracted Text After Delimiter", "Population Subsection", each "בוגרים", type text),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Added Custom1","נפת ","",Replacer.ReplaceText,{"נפה"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","אזור ","",Replacer.ReplaceText,{"נפה"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3",", ","+",Replacer.ReplaceText,{"Years"}),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Replaced Value4",{{"Subject", "Subject o"}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns2", {"Subject o"}, #"Subject Category Manual Override", {"מקור (במסדי הנתונים וטבלאות העזר)"}, "Subject Category Manual Override", JoinKind.LeftOuter),
+				    #"Expanded Subject Category Manual Override" = Table.ExpandTableColumn(#"Merged Queries", "Subject Category Manual Override", {"השם המתוקן לדשבורד"}, {"השם המתוקן לדשבורד"}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Expanded Subject Category Manual Override", "Subject", each if [השם המתוקן לדשבורד] <> null then [השם המתוקן לדשבורד] else [Subject o], type text),
+				    #"Removed Columns2" = Table.RemoveColumns(#"Added Conditional Column",{"Subject o", "השם המתוקן לדשבורד"}),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Removed Columns2",{{"First Year", Int64.Type}, {"Second Year", Int64.Type}})
+				in
+				    #"Changed Type3"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

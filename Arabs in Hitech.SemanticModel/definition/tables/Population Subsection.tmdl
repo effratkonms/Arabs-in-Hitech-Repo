@@ -1,0 +1,33 @@
+table 'Population Subsection'
+	lineageTag: 0f91ff93-4e18-408c-b393-671e6ff16546
+
+	measure 'Selected Subsection' = SELECTEDVALUE('Population Subsection'[Population Subsection])
+		lineageTag: 03189636-3d0d-404a-9b53-2ac86a601d5f
+
+	measure 'Selected Society' = SELECTEDVALUE(Societies[חברה])
+		lineageTag: 5d839bdb-bdde-452e-9039-765e2877d2c0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Population Subsection'
+		dataType: string
+		lineageTag: e79455e2-bfe9-4e43-b4cd-45e6984adecb
+		summarizeBy: none
+		sourceColumn: Population Subsection
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Population Subsection' = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = #"Appended Higer Ed",
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"Population Subsection"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Removed Blank Rows" = Table.SelectRows(#"Removed Duplicates", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null})))
+				in
+				    #"Removed Blank Rows"
+
+	annotation PBI_ResultType = Table
+

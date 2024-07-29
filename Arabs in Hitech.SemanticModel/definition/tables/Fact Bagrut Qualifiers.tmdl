@@ -1,0 +1,168 @@
+table 'Fact Bagrut Qualifiers'
+	lineageTag: 4fcdaccd-638f-4401-bff5-c89fef515128
+
+	measure 'Total Special Bagrut' =
+			
+			// SUM('Fact Bagrut Qualifiers'[Value])
+			VAR selectedManualPopulation = [Selected Manual Population]
+			RETURN
+			SWITCH(
+			    selectedManualPopulation,
+			    "החברה הערבית",
+			    CALCULATE(
+			        SUM('Fact Bagrut Qualifiers'[Value]),
+			        FILTER(
+			            ALL(Population),
+			            Population[Population] = "Arab"
+			        )
+			    ),
+			    SUM('Fact Bagrut Qualifiers'[Value])
+			)
+		formatString: #,0
+		lineageTag: 3a20c851-004a-4284-990e-3e67126faa40
+
+	measure 'Total Chemistry' = CALCULATE([Total Special Bagrut], 'Fact Bagrut Qualifiers'[Attribute] = "כימיה")
+		formatString: #,0
+		lineageTag: a041a340-18c2-4cab-80b9-11a20d7c1c8d
+
+	measure 'Total Selected Bagrut' = CALCULATE([Total Special Bagrut], 'Fact Bagrut Qualifiers'[Attribute] = SELECTEDVALUE('Key Metric Bagrut Template'[Subject]))
+		formatString: #,0
+		lineageTag: 5da7e7b5-733d-4c6c-822b-7d212b3bffbb
+
+	measure 'Total Bagrut w Honors' = CALCULATE([Total Special Bagrut], 'Fact Bagrut Qualifiers'[Attribute] = "בגרות בהצטיינות")
+		formatString: #,0
+		lineageTag: d776d73b-dfd3-4d0d-9040-efc66806e518
+
+	measure 'Bagrut w Honors %' = DIVIDE([Total Bagrut w Honors], [Total 12th Grade Students])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 4acafbe5-59b2-4976-b6eb-a6cbf6ffc13f
+
+	measure 'Bagrut Selected 5 Units %' = DIVIDE([Total Selected Bagrut], [Total 12th Grade Students])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: a4281fcb-4119-4c65-bd83-4ec18657cae4
+
+	measure 'Bagrut w Honors % Total Poulation' = CALCULATE([Bagrut w Honors %], ALL(Population))
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 3349a67b-5c50-45f9-8175-705babdf3f7b
+
+	column שנה"ל
+		dataType: string
+		lineageTag: 351d0dd9-9b61-4806-9ebe-8f92a948558f
+		summarizeBy: none
+		sourceColumn: שנה"ל
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'סמל רשות'
+		dataType: string
+		lineageTag: 28a3db95-4fb0-4838-bd6a-a4df97907a00
+		summarizeBy: none
+		sourceColumn: סמל רשות
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'שם רשות'
+		dataType: string
+		lineageTag: 0b863b51-ab8a-4b6c-b673-83a885168849
+		summarizeBy: none
+		sourceColumn: שם רשות
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'סמל מוסד'
+		dataType: string
+		lineageTag: 0ce4c59b-8884-47e1-a922-2fc8626532c5
+		summarizeBy: none
+		sourceColumn: סמל מוסד
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'שם מוסד'
+		dataType: string
+		lineageTag: b32fe066-2dbc-463b-9043-872adcce1ea5
+		summarizeBy: none
+		sourceColumn: שם מוסד
+
+		annotation SummarizationSetBy = Automatic
+
+	column Population
+		dataType: string
+		lineageTag: 79d6a2df-a284-44e0-9ace-37a6e7a46812
+		summarizeBy: none
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Additional.מחזור סיום'
+		dataType: int64
+		formatString: 0
+		lineageTag: f4f82924-bf08-4780-a181-2a131818d055
+		summarizeBy: sum
+		sourceColumn: Additional.מחזור סיום
+
+		annotation SummarizationSetBy = Automatic
+
+	column Attribute
+		dataType: string
+		lineageTag: 588b5a9f-ec1b-49b6-9844-cd1598895d19
+		summarizeBy: none
+		sourceColumn: Attribute
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: int64
+		formatString: 0
+		lineageTag: 850e0afd-eec8-4117-9817-81ea40b10d03
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column נפה
+		dataType: string
+		lineageTag: b82fb23b-3756-4323-be28-25dff1ec7fdd
+		summarizeBy: none
+		sourceColumn: נפה
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'שם יישוב - למ"ס'
+		dataType: string
+		lineageTag: 72288117-1b5f-436d-8acd-2df05007422d
+		summarizeBy: none
+		sourceColumn: שם יישוב - למ"ס
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'שם ראשות - למ"ס'
+		dataType: string
+		lineageTag: 357f2706-68a5-44ad-917b-31731cf774cd
+		summarizeBy: none
+		sourceColumn: שם ראשות - למ"ס
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: 44c83a6a-3752-4446-9e80-c617c67aa8fe
+		summarizeBy: none
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact Bagrut Qualifiers' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = #"Bagrut Merged",
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"12th Grade Students", "12th Grade Students AD"}),
+				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Removed Columns", {"Index", "שנה""ל", "סמל רשות", "שם רשות", "שם יישוב - למ""ס", "שם ראשות - למ""ס", "נפה", "סמל מוסד", "שם מוסד", "Population", "Additional.מחזור סיום"}, "Attribute", "Value"),
+				    #"Filtered Rows" = Table.SelectRows(#"Unpivoted Columns", each ([Value] <> 0))
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_ResultType = Table
+

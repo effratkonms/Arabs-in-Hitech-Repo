@@ -1,0 +1,26 @@
+table '08 Population'
+	lineageTag: 298943a6-886b-48bb-886d-9cd349ea539e
+
+	column מגזר
+		dataType: string
+		lineageTag: 654067da-dea8-48f8-915c-b3cd728e0d14
+		summarizeBy: none
+		sourceColumn: מגזר
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '08 Population' = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = #"08 Misrot Tech: Source",
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"מגזר"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

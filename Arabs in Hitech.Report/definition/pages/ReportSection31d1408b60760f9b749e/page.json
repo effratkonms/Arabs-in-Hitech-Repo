@@ -1,0 +1,114 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.0.0/schema.json",
+  "name": "ReportSection31d1408b60760f9b749e",
+  "displayName": "השכלה גבוהה - סטודנטים לפי מגדר",
+  "displayOption": "FitToWidth",
+  "height": 1536,
+  "width": 1920,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "Filter8b1b0a2c46a17ac716a7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Key Metric"
+              }
+            },
+            "Property": "Heb Metric"
+          }
+        },
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "k",
+              "Entity": "Key Metric",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "k"
+                          }
+                        },
+                        "Property": "Heb Metric"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'סטודנטים לפי מגדר'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  },
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 0,
+                    "Percent": -0.1
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "7168e8564b0c5802476a",
+      "target": "d9fe98571f0cc76c8165",
+      "type": "NoFilter"
+    },
+    {
+      "source": "7168e8564b0c5802476a",
+      "target": "294d467db54fb0f979d6",
+      "type": "NoFilter"
+    },
+    {
+      "source": "7168e8564b0c5802476a",
+      "target": "a1caa3532ee7e12daddc",
+      "type": "NoFilter"
+    },
+    {
+      "source": "7168e8564b0c5802476a",
+      "target": "2d309f2eaefbf4452adb",
+      "type": "NoFilter"
+    }
+  ]
+}

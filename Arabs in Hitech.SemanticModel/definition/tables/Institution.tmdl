@@ -1,0 +1,51 @@
+table Institution
+	lineageTag: e5e95394-1257-4a64-bbe5-4947acdb79cd
+
+	column 'שם מוסד'
+		dataType: string
+		lineageTag: a2df5611-cf88-44a2-afcc-5aabb4be3ab8
+		summarizeBy: none
+		sourceColumn: שם מוסד
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'סוג מוסד'
+		dataType: string
+		lineageTag: 732d9f5b-4445-464a-8880-408e5b170ed5
+		summarizeBy: none
+		sourceColumn: סוג מוסד
+
+		annotation SummarizationSetBy = Automatic
+
+	column יישוב
+		dataType: string
+		lineageTag: fbaaa23b-9951-46ad-8306-3d47dcb43b95
+		summarizeBy: none
+		sourceColumn: יישוב
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Institution Type'
+		dataType: string
+		lineageTag: ec9d07a8-cd99-4012-89aa-91ce465ed338
+		summarizeBy: none
+		sourceColumn: Institution Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Institution = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = #"Lamas Institutions LUT",
+				    #"Added Custom" = Table.AddColumn(Source, "Institution Type", each if [סוג מוסד] <> null then
+				if [סוג מוסד] = "אוניברסיטה" then "אוניברסיטאות" else
+				if Text.Contains([סוג מוסד], "מכללות אקדמיות") then "מכללות אקדמיות" else "אחר" else null, type text),
+				    #"Removed Duplicates" = Table.Distinct(#"Added Custom", {"שם מוסד"}),
+				    #"Removed Blank Rows" = Table.SelectRows(#"Removed Duplicates", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null})))
+				in
+				    #"Removed Blank Rows"
+
+	annotation PBI_ResultType = Table
+

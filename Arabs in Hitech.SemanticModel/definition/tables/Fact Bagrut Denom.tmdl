@@ -1,0 +1,157 @@
+table 'Fact Bagrut Denom'
+	lineageTag: 7d66cf62-fb26-4b9a-bcb8-20ff1a5424b1
+
+	measure 'Total 12th Grade Students' =
+			
+			VAR selectedManualPopulation = [Selected Manual Population]
+			RETURN
+			SWITCH(
+			    selectedManualPopulation,
+			    "החברה הערבית",
+			    CALCULATE(
+			        SUM('Fact Bagrut Denom'[12th Grade Students]),
+			        FILTER(
+			            ALL(Population),
+			            Population[Population] = "Arab"
+			        )
+			    ),
+			    SUM('Fact Bagrut Denom'[12th Grade Students])
+			)
+		formatString: #,0
+		lineageTag: fd4b42cc-41b9-4778-8cd6-2b77290b6ac6
+
+	measure 'Total 12th Grade Students AD' = SUM('Fact Bagrut Denom'[12th Grade Students AD])
+		formatString: #,0
+		lineageTag: 14d47043-0163-448b-94bf-9f2a4f02b71c
+
+	measure 'Total 12th Grade Students Diff' = ABS([Total 12th Grade Students] - [Total 12th Grade Students AD])
+		formatString: 0
+		lineageTag: 013b2e28-d89a-4ac2-b2b9-fe090b82d7d3
+
+	measure 'LOG Total 12th Grade Students Diff' =
+			
+			VAR result = [Total 12th Grade Students Diff]
+			RETURN
+			IF(result > 0, LOG(result), 0)
+		lineageTag: e6ecaf21-49f8-4235-9d45-587e14d3783f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Count Distinct Councils Bagrut' = DISTINCTCOUNT('Fact Bagrut Denom'[שם רשות])
+		lineageTag: 4c99dfd5-e548-4501-9aea-60b46322b60e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column שנה"ל
+		dataType: string
+		lineageTag: a18891e6-5b22-4c80-94dd-9bf938b73d66
+		summarizeBy: none
+		sourceColumn: שנה"ל
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'סמל רשות'
+		dataType: string
+		lineageTag: ff572e3b-5ffa-433c-8ad0-e621f2ecab10
+		summarizeBy: none
+		sourceColumn: סמל רשות
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'שם רשות'
+		dataType: string
+		lineageTag: e7cf9252-5cc6-41aa-ba60-cf88fc34e8d9
+		summarizeBy: none
+		sourceColumn: שם רשות
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'סמל מוסד'
+		dataType: string
+		lineageTag: 548fd3f5-0efc-411d-869e-e10f0d5f66a7
+		summarizeBy: none
+		sourceColumn: סמל מוסד
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'שם מוסד'
+		dataType: string
+		lineageTag: 392c7cad-3398-42db-9e5c-7be10fe905e2
+		summarizeBy: none
+		sourceColumn: שם מוסד
+
+		annotation SummarizationSetBy = Automatic
+
+	column Population
+		dataType: string
+		lineageTag: 96d76f3f-6000-4c01-939c-d3fe212c485c
+		summarizeBy: none
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	column '12th Grade Students'
+		dataType: int64
+		formatString: 0
+		lineageTag: fc019ec3-964e-4b0f-9be4-b4749909fb39
+		summarizeBy: sum
+		sourceColumn: 12th Grade Students
+
+		annotation SummarizationSetBy = Automatic
+
+	column '12th Grade Students AD'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5ae5f572-c908-49d2-a3f7-3a68fa45f426
+		summarizeBy: sum
+		sourceColumn: 12th Grade Students AD
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Additional.מחזור סיום'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4ee6088d-d979-4d86-88f0-e0188b157be1
+		summarizeBy: none
+		sourceColumn: Additional.מחזור סיום
+
+		annotation SummarizationSetBy = Automatic
+
+	column נפה
+		dataType: string
+		lineageTag: b460b4eb-fbd1-4078-91c7-a02acf4e45a7
+		summarizeBy: none
+		sourceColumn: נפה
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: dc36adaa-11a4-4140-b1ab-88fb8d6a8b1f
+		summarizeBy: none
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact Bagrut Denom' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = #"Bagrut Merged",
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"שנה""ל", "סמל רשות", "שם רשות", "נפה", "סמל מוסד", "שם מוסד", "Population", "12th Grade Students", "12th Grade Students AD", "Additional.מחזור סיום", "Index"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Other Columns", each [12th Grade Students] <> 0),
+				    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each [12th Grade Students AD] <> 0),
+				    #"Renamed Columns" = Table.RenameColumns(#"Filtered Rows1",{{"שם רשות", "שם רשות o"}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns", {"שם רשות o"}, #"08 Rashut Bagrut-Tech to Rashut Corrected Lamas LUT", {"רשות בגרות-טק"}, "08 Rashut Bagrut-Tech to Rashut Corrected Lamas LUT", JoinKind.LeftOuter),
+				    #"Expanded 08 Rashut Bagrut-Tech to Rashut Corrected Lamas LUT" = Table.ExpandTableColumn(#"Merged Queries", "08 Rashut Bagrut-Tech to Rashut Corrected Lamas LUT", {"רשות מתוקנת למ""ס"}, {"רשות מתוקנת למ""ס"}),
+				    #"Added Custom" = Table.AddColumn(#"Expanded 08 Rashut Bagrut-Tech to Rashut Corrected Lamas LUT", "שם רשות", each if [#"רשות מתוקנת למ""ס"] <> null then [#"רשות מתוקנת למ""ס"] else [שם רשות o], type text),
+				    #"Removed Columns" = Table.RemoveColumns(#"Added Custom",{"שם רשות o", "רשות מתוקנת למ""ס"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

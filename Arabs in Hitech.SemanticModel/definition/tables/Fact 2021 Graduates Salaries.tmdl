@@ -1,0 +1,104 @@
+table 'Fact 2021 Graduates Salaries'
+	lineageTag: eaf4d4bf-d9c7-47b0-b0ae-21bae6173f9c
+
+	measure 'Avg. Salary 2021' =
+			
+			VAR selectedManualPopulation = SELECTEDVALUE('Manual Selected Population'[Population])
+			RETURN
+			SWITCH(
+			    selectedManualPopulation,
+			    "החברה הערבית",
+			    CALCULATE(
+			        [Avg. Salary 2021 Raw],
+			        FILTER(
+			            ALL(Population),
+			            Population[Population] = "Arab"
+			        )
+			    ),
+			    [Avg. Salary 2021 Raw]
+			)
+		formatString: #,0
+		lineageTag: 9040fe9c-08a2-4f8c-b1df-0e3fe320e25d
+
+	measure 'Total Graduates 2021' = SUM('Fact 2021 Graduates Salaries'[Graduates])
+		formatString: #,0
+		lineageTag: 6247efe2-f792-49c4-87da-1910ec665b50
+
+	measure 'Avg. Salary 2021 Raw' =
+			
+			DIVIDE(
+			    SUMX(
+			        'Fact 2021 Graduates Salaries',
+			        'Fact 2021 Graduates Salaries'[Average Salary] * 'Fact 2021 Graduates Salaries'[Graduates]
+			    ),
+			    SUM('Fact 2021 Graduates Salaries'[Graduates])
+			)
+		lineageTag: a8551fd8-b0d3-42d4-b945-fcf64933aca2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Population
+		dataType: string
+		lineageTag: 8b29bf6a-56ed-4ca8-89a8-4b6ba31d41f2
+		summarizeBy: none
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Graduation Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: af8a8076-c351-414b-b899-db9d172979d2
+		summarizeBy: sum
+		sourceColumn: Graduation Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Average Salary'
+		dataType: double
+		lineageTag: 005d15f1-fdd0-4694-ad9a-d34ac8bcabcb
+		summarizeBy: sum
+		sourceColumn: Average Salary
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Years Since Graduation'
+		dataType: int64
+		formatString: 0
+		lineageTag: e31196b2-ee2b-4576-898a-4c7c87aa698f
+		summarizeBy: sum
+		sourceColumn: Years Since Graduation
+
+		annotation SummarizationSetBy = Automatic
+
+	column תחום
+		dataType: string
+		lineageTag: f0855013-5609-457b-b761-2f2c3e1b6d8f
+		summarizeBy: none
+		sourceColumn: תחום
+
+		annotation SummarizationSetBy = Automatic
+
+	column Graduates
+		dataType: int64
+		formatString: 0
+		lineageTag: a56970fe-1fba-4c83-a9fc-ac70bac10ce0
+		summarizeBy: sum
+		sourceColumn: Graduates
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact 2021 Graduates Salaries' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = Table.NestedJoin(#"Salaries 2021", {"Population", "Graduation Year", "תחום"}, #"Graduates 2021", {"Population", "Graduation Year", "תחום"}, "Graduates 2021", JoinKind.LeftOuter),
+				    #"Expanded Graduates 2021" = Table.ExpandTableColumn(Source, "Graduates 2021", {"Value"}, {"Graduates"})
+				in
+				    #"Expanded Graduates 2021"
+
+	annotation PBI_ResultType = Table
+

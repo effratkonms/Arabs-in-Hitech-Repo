@@ -1,0 +1,76 @@
+table Subject
+	lineageTag: 4661982e-9fa2-4a35-870e-87e569705619
+
+	column 'קוד מקצוע למ"ס'
+		dataType: double
+		lineageTag: 471044ad-8f5c-4c76-96ac-a3cf36959527
+		summarizeBy: none
+		sourceColumn: קוד מקצוע למ"ס
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'מקצוע למ"ס'
+		dataType: string
+		lineageTag: 681b3114-2867-41fb-a6d9-1b58381e6a78
+		summarizeBy: none
+		sourceColumn: מקצוע למ"ס
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'תחום - הלמ"ס'
+		dataType: string
+		lineageTag: 57bb7d47-1951-4c52-a58c-e546bbca76d6
+		summarizeBy: none
+		sourceColumn: תחום - הלמ"ס
+
+		annotation SummarizationSetBy = Automatic
+
+	column תחום
+		dataType: string
+		lineageTag: f7c27642-e988-450c-882a-4eb91b6d3a94
+		summarizeBy: none
+		sourceColumn: תחום
+
+		annotation SummarizationSetBy = Automatic
+
+	column היי-טק/ביו-טק/ביו-מד
+		dataType: string
+		lineageTag: e1fb4a26-ecbe-47a2-b9c4-abf3c6bf76d7
+		summarizeBy: none
+		sourceColumn: היי-טק/ביו-טק/ביו-מד
+
+		annotation SummarizationSetBy = Automatic
+
+	column הערות
+		dataType: string
+		lineageTag: b9209b38-aba5-4c3c-bd15-38eb62adc8a5
+		summarizeBy: none
+		sourceColumn: הערות
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'מספר תחום'
+		dataType: double
+		lineageTag: 0b188195-bdeb-4106-abe9-be123ee51f85
+		summarizeBy: sum
+		sourceColumn: מספר תחום
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Subject = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = #"Subjects And Occupations LUT",
+				    #"Removed Duplicates" = Table.Distinct(Source, {"מקצוע למ""ס"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Duplicates",{{"קטגוריות - עבור הדשבורד", "תחום"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

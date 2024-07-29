@@ -1,0 +1,46 @@
+table Years
+	lineageTag: 87233c7d-68dc-447d-92ff-bceb2723d6f8
+
+	column Years
+		dataType: string
+		lineageTag: 242a1a91-0d41-40d1-b01d-86d02302a48a
+		summarizeBy: none
+		sourceColumn: Years
+		sortByColumn: 'First Year'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 36c0d0f9-886b-40bf-8730-30b35319ab0a
+		summarizeBy: sum
+		sourceColumn: First Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Second Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6f7ed529-e7ea-4b8f-aaca-774d6963d1e5
+		summarizeBy: sum
+		sourceColumn: Second Year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Years = m
+		mode: import
+		queryGroup: 'Data Model\Dimensions'
+		source =
+				let
+				    Source = #"Appended Higer Ed",
+				    #"Removed Duplicates" = Table.Distinct(Source, {"Years"}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Removed Duplicates",{"Years", "First Year", "Second Year"}),
+				    #"Removed Blank Rows" = Table.SelectRows(#"Removed Other Columns", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null})))
+				in
+				    #"Removed Blank Rows"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,97 @@
+DEFINE
+	MEASURE 'Fact Bagrut Denom'[Total 12th Grade Students] = VAR selectedManualPopulation = SELECTEDVALUE('Manual Selected Population'[Population])
+		RETURN
+			SWITCH(
+				selectedManualPopulation,
+				"החברה הערבית", CALCULATE(
+					SUM('Fact Bagrut Denom'[12th Grade Students]),
+					Population[Population] = "Arab"
+				),
+				SUM('Fact Bagrut Denom'[12th Grade Students])
+			)
+	MEASURE 'Fact Bagrut Qualifiers'[Total Special Bagrut] = VAR selectedManualPopulation = SELECTEDVALUE('Manual Selected Population'[Population])
+		RETURN
+			SWITCH(
+				selectedManualPopulation,
+				"החברה הערבית", CALCULATE(
+					SUM('Fact Bagrut Qualifiers'[Value]),
+					Population[Population] = "Arab"
+				),
+				SUM('Fact Bagrut Denom'[12th Grade Students])
+			)
+	MEASURE 'Fact Bagrut Qualifiers'[Total Bagrut w Honors] = CALCULATE(
+			[Total Special Bagrut],
+			'Fact Bagrut Qualifiers'[Attribute] = "בגרות בהצטיינות"
+		)
+	MEASURE 'Key Metric Bagrut Template'[Key Bagrut Metric #] = VAR metric = SELECTEDVALUE('Key Metric Bagrut Template'[Metric])
+		VAR selectedSubject = SELECTEDVALUE('Key Metric Bagrut Template'[Subject])
+		RETURN
+			SWITCH(
+				metric,
+				"12th Grade Students", [Total 12th Grade Students],
+				"Eligible w/ Honors", [Total Bagrut w Honors],
+				"Eligible for 5 Units", CALCULATE(
+					SUM('Fact Bagrut Qualifiers'[Value]),
+					KEEPFILTERS('Fact Bagrut Qualifiers'[Attribute] = selectedSubject)
+				)
+			)
+	MEASURE 'Key Metric Bagrut Template'[Key Bagrut Metric %] = VAR numeratorId = MAX('Key Metric Bagrut Template'[Numerator])
+		VAR denominatorId = MAX('Key Metric Bagrut Template'[Denominator])
+		VAR numerator = CALCULATE(
+			[Key Bagrut Metric #],
+			FILTER(
+				ALL('Key Metric Bagrut Template'),
+				'Key Metric Bagrut Template'[Id] = numeratorId
+			)
+		)
+		VAR denominator = CALCULATE(
+			[Key Bagrut Metric #],
+			FILTER(
+				ALL('Key Metric Bagrut Template'),
+				'Key Metric Bagrut Template'[Id] = denominatorId
+			)
+		)
+		RETURN
+			DIVIDE(
+				SUMX(
+					'Key Metric Bagrut Template',
+					VAR numeratorId = MAX('Key Metric Bagrut Template'[Numerator])
+					RETURN
+						CALCULATE(
+							[Key Bagrut Metric #],
+							FILTER(
+								ALL('Key Metric Bagrut Template'),
+								'Key Metric Bagrut Template'[Id] = numeratorId
+							)
+						)
+				),
+				SUMX(
+					'Key Metric Bagrut Template',
+					VAR denominatorId = MAX('Key Metric Bagrut Template'[Denominator])
+					RETURN
+						CALCULATE(
+							[Key Bagrut Metric #],
+							FILTER(
+								ALL('Key Metric Bagrut Template'),
+								'Key Metric Bagrut Template'[Id] = denominatorId
+							)
+						)
+				)
+			)
+	MEASURE 'Key Metric Bagrut Template'[Key Bagrut Metric] = VAR metricType = MAX('Key Metric Bagrut Template'[Metric Type])
+		RETURN
+			SWITCH(
+				metricType,
+				"#", [Key Bagrut Metric #],
+				"%", [Key Bagrut Metric %]
+			)
+
+EVALUATE
+	SUMMARIZECOLUMNS(
+		"Total 12th Grade Students", 'Fact Bagrut Denom'[Total 12th Grade Students],
+		"Total Special Bagrut", 'Fact Bagrut Qualifiers'[Total Special Bagrut],
+		"Total Bagrut w Honors", 'Fact Bagrut Qualifiers'[Total Bagrut w Honors],
+		"Key Bagrut Metric #", 'Key Metric Bagrut Template'[Key Bagrut Metric #],
+		"Key Bagrut Metric %", 'Key Metric Bagrut Template'[Key Bagrut Metric %],
+		"Key Bagrut Metric", 'Key Metric Bagrut Template'[Key Bagrut Metric]
+	)

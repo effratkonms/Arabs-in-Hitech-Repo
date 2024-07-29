@@ -1,0 +1,262 @@
+relationship bc857ce0-6aa1-4c0d-bbfa-91c481dd5273
+	fromColumn: 'Fact Higher Education'.Subject
+	toColumn: Subject.'מקצוע למ"ס'
+
+relationship c46415df-aee8-49ca-89bc-79e8de0901d4
+	fromColumn: 'Fact Higher Education'.Population
+	toColumn: Population.Population
+
+relationship 389c1336-d915-488c-bea5-0293c6571ba8
+	fromColumn: 'Fact Lamas Students by Institution'.Population
+	toColumn: Population.Population
+
+relationship 01b21179-578f-46b9-a9b4-53b76af4e909
+	fromColumn: 'Fact Lamas Students by Gender'.Population
+	toColumn: Population.Population
+
+relationship b45d473a-4b41-44d6-ac3d-c6892cb7ab6e
+	fromColumn: 'Fact Lamas Graduates by Nafa'.Population
+	toColumn: Population.Population
+
+relationship d811f844-2557-46e3-95f0-ba86208f07e3
+	fromColumn: 'Fact Lamas Students by Institution'.Years
+	toColumn: Years.Years
+
+relationship d9e8d908-8274-4ba2-8317-878cd8dc3da4
+	fromColumn: 'Fact Lamas Students by Gender'.Years
+	toColumn: Years.Years
+
+relationship 599a7c9c-0b00-4f9f-9018-fac6cc23a574
+	fromColumn: Calendar.Years
+	toColumn: Years.Years
+
+relationship 6d4a3df5-d739-4561-a614-1c67dc3a77bb
+	fromColumn: 'Fact Lamas Students by Institution'.Degree
+	toColumn: Degree.Degree
+
+relationship 502f53dc-b08b-48e5-88ab-8b12dadbaad8
+	fromColumn: 'Fact Lamas Students by Gender'.Degree
+	toColumn: Degree.Degree
+
+relationship ead79119-87fc-4900-ba39-fc04f0d2281e
+	fromColumn: 'Fact Lamas Students by Institution'.'New / Existing'
+	toColumn: 'New / Existing'.'New / Existing'
+
+relationship 43508a79-6067-40b7-8cd5-59800dd420d5
+	fromColumn: 'Fact Lamas Students by Gender'.'New / Existing'
+	toColumn: 'New / Existing'.'New / Existing'
+
+relationship 5f068ced-b007-4e66-8530-a60c3f9d5c75
+	fromColumn: 'Fact Lamas Students by Gender'.'Institution Type'
+	toColumn: 'Institution Type'.'Institution Type'
+
+relationship 0d561b1e-a2c9-4de7-b230-e255a46e4265
+	fromColumn: 'Fact Lamas Graduates by Nafa'.'Institution Type'
+	toColumn: 'Institution Type'.'Institution Type'
+
+relationship c7fa4f65-ea21-4289-ba59-c9354c7eb29e
+	fromColumn: 'Fact Lamas Students by Gender'.Gender
+	toColumn: Gender.Gender
+
+relationship 65266d03-0caf-4fbe-aabd-ac7306aeed3f
+	fromColumn: 'Fact Lamas Graduates by Nafa'.נפה
+	toColumn: Nafa.נפה
+
+relationship d91f9880-485f-447e-acaf-ea5a29063e47
+	fromColumn: Institution.'Institution Type'
+	toColumn: 'Institution Type'.'Institution Type'
+
+relationship b5405dc6-6b6c-4264-a6d3-222203ce79f1
+	fromColumn: 'Lamas City'.נפה
+	toColumn: Nafa.נפה
+
+relationship e47955a1-9281-487a-be5d-78836f9b2739
+	fromColumn: Institution.יישוב
+	toColumn: 'Lamas City'.'שם יישוב'
+
+relationship e2b7931a-27e0-4f06-ae05-ae6e197ad8fc
+	fromColumn: 'Fact Higher Education'.Year
+	toColumn: Calendar.Year
+
+relationship 6ae34fe6-e53f-48be-84e5-25e8e1214402
+	fromColumn: 'Fact Higher Education'.'Population Subsection'
+	toColumn: 'Population Subsection'.'Population Subsection'
+
+relationship 5233f340-b61e-4193-8745-7a090f9b5ab4
+	fromColumn: 'Fact Lamas Students by Gender'.'Population Subsection'
+	toColumn: 'Population Subsection'.'Population Subsection'
+
+relationship 83f1755b-c1e4-45a9-be93-c5b251351fc2
+	fromColumn: 'Fact Lamas Graduates by Nafa'.'Population Subsection'
+	toColumn: 'Population Subsection'.'Population Subsection'
+
+relationship ffadfea0-000c-4409-9cc7-b67a94023f4c
+	fromColumn: 'Fact Lamas Students by Institution'.'Population Subsection'
+	toColumn: 'Population Subsection'.'Population Subsection'
+
+relationship b1c71090-94e2-46f7-bf7e-23526577b0e1
+	fromColumn: Subject.תחום
+	toColumn: 'Subject Category'.תחום
+
+relationship e5be24de-8f58-4cd5-8e85-144c9e7999bf
+	fromColumn: 'Fact Bagrut Qualifiers'.Index
+	toColumn: 'Fact Bagrut Denom'.Index
+
+relationship db0c1e23-1f77-46ee-818d-722b670da9a5
+	fromColumn: 'Fact Bagrut Denom'.'Additional.מחזור סיום'
+	toColumn: Calendar.Year
+
+relationship 3ef420d6-cd56-44c2-b375-1b401ebd6bb8
+	fromColumn: 'Fact Bagrut Denom'.Population
+	toColumn: Population.Population
+
+relationship 6ae372b1-ec15-48f5-b820-c1644a267b55
+	fromColumn: '2000 - 2019 for Control'.Age
+	toColumn: Ages.Age
+
+relationship 6fe83fa3-3f22-4010-8f6e-02c519aa6813
+	fromColumn: '2000 - 2019 for Control'.Year
+	toColumn: Calendar.Year
+
+relationship f60e4e30-c173-4e47-88a8-b56d93a3bc70
+	fromColumn: 'Fact Lamas Students by Institution'.Institution
+	toColumn: Institution.'שם מוסד'
+
+relationship 400fba84-e959-4dfa-b17d-d91f2c6a9b85
+	fromColumn: 'Fact Population for Reference'.Year
+	toColumn: Calendar.Year
+
+relationship da7ba52d-5300-402d-98c1-c1885732fc97
+	fromColumn: 'Fact Population for Reference'.Age
+	toColumn: Ages.Age
+
+relationship 323655d5-c2ab-41fb-ac8c-73a77520bd2d
+	fromColumn: 'Fact Population for Reference'.Gender
+	toColumn: Gender.Gender
+
+relationship 1a5c50c8-be05-4302-ae6d-d76ad97159f8
+	fromColumn: 'Fact Population for Reference'.Population
+	toColumn: Population.Population
+
+relationship 608c16ff-8732-472c-841c-689ffc0facdc
+	fromColumn: 'Fact Lamas Students by Institution'.Subject
+	toColumn: 'Subject Category'.תחום
+
+relationship a65c6987-49ef-4141-8807-724b5de56d4d
+	fromColumn: 'Fact Lamas Graduates by Nafa'.Subject
+	toColumn: 'Subject Category'.תחום
+
+relationship 4212b97a-9f79-45b8-bd1a-f24ffb6f5b37
+	fromColumn: 'Fact Lamas Students by Gender'.Subject
+	toColumn: 'Subject Category'.תחום
+
+relationship af2032a8-b3ed-4666-9e14-a55639aa49df
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Nafot WKT w YS'.Nafa
+	toColumn: Nafa.נפה
+
+relationship e4fb0ecb-b7d1-4bbe-9a5e-f6c692113b66
+	fromColumn: 'LinkedIn Main'.'Current Company'
+	toColumn: 'LinkedIn Companies'.'Current Company'
+
+relationship 1eb15d3f-24f6-4602-b920-d7c44571c986
+	fromColumn: 'LinkedIn Main'.'Current Title'
+	toColumn: 'LinkedIn Positions'.'Current Title'
+
+relationship b6f681e3-bf63-4dee-858a-d48e44190848
+	fromColumn: 'LinkedIn Main'.gender
+	toColumn: Gender.Gender
+
+relationship e8c1fe4d-0c07-413b-8780-df788f1cfd8a
+	fromColumn: 'Fact 2021 Graduates Salaries'.Population
+	toColumn: Population.Population
+
+relationship f8838790-8917-4c02-a37c-800f91ec8e7d
+	fromColumn: 'Fact 07 Students by Gender'.Year
+	toColumn: Calendar.Year
+
+relationship e6760be7-c2fe-4759-9ffa-d74d79d0bb27
+	fromColumn: 'Fact 07 Graduates by Nafa'.Year
+	toColumn: Calendar.Year
+
+relationship 2a7342cd-b98e-4cb2-aeea-0dd63a274edb
+	fromColumn: 'Fact 07 Students by Nafa'.Year
+	toColumn: Calendar.Year
+
+relationship 78989274-0dc2-445a-9354-342ae6851db1
+	fromColumn: 'Fact 07 Students by Gender'.'Training Subject'
+	toColumn: 'Training Subject'.'Training Subject'
+
+relationship 5d2cabbe-671a-4e0d-a5d9-da91712bf3f6
+	fromColumn: 'Fact 07 Graduates by Nafa'.'Training Subject'
+	toColumn: 'Training Subject'.'Training Subject'
+
+relationship fc70775a-00a3-4f0c-84ce-fa14efb1afcc
+	fromColumn: 'Fact 07 Students by Nafa'.'Training Subject'
+	toColumn: 'Training Subject'.'Training Subject'
+
+relationship ad541f3c-ed32-4a27-af3a-1a36bcb54f1c
+	fromColumn: 'Fact 07 Graduates by Nafa'.Nafa
+	toColumn: Nafa.נפה
+
+relationship a7ae09c1-a026-411a-897c-545ba28eeb4b
+	fromColumn: 'Fact 07 Students by Nafa'.Nafa
+	toColumn: Nafa.נפה
+
+relationship 0f2a362e-1eb9-446d-b493-0f26b442c90a
+	fromColumn: 'Fact 07 Students by Gender'.Gender
+	toColumn: Gender.Gender
+
+relationship 5d2340fa-d259-d4e7-5dec-ae6ce5c5c101
+	fromColumn: 'Fact Lamas Graduates by Nafa'.'First Year'
+	toColumn: Calendar.Year
+
+relationship 20155412-b301-9a11-a04d-5fd641a743c9
+	fromColumn: 'Fact 08 Bargrut Tech Target'.Year
+	toColumn: Calendar.Year
+
+relationship 6994faf5-c993-8997-109c-712fadd864ba
+	fromColumn: 'Fact 08 Bargrut Tech'.Year
+	toColumn: Calendar.Year
+
+relationship 7367ddab-c967-a2ec-8868-3cb3b1f08866
+	fromColumn: 'Fact 08 Bargrut Tech'.Gender
+	toColumn: Gender.Bagrut
+
+relationship 5162bbde-906a-a30d-fbc0-60ae0052631c
+	fromColumn: 'Fact 08 Mistrot Tech'.Year
+	toColumn: Calendar.Year
+
+relationship fd703f67-5a8d-1f65-8d80-ed301822e633
+	fromColumn: 'Fact 08 Mistrot Tech Target'.Year
+	toColumn: Calendar.Year
+
+relationship 6814442a-b968-20fb-6e83-d597150eb8ac
+	fromColumn: 'Fact 08 Mistrot Tech'.Sex
+	toColumn: Gender.Gender
+
+relationship ee2e4bdd-9cb4-b6f9-7743-ddcd4209a2bd
+	fromColumn: 'Fact 08 Mistrot Tech Target'.מגדר
+	toColumn: Gender.Gender
+
+relationship e2584d70-688d-5011-eed0-a378f4cf1c80
+	fromColumn: 'Fact 08 Mistrot Tech Target'.מגזר
+	toColumn: '08 Population'.מגזר
+
+relationship 39831477-2d36-14a3-f675-e0b2340e2ad3
+	fromColumn: 'Fact 08 Mistrot Tech'.מגזר
+	toColumn: '08 Population'.מגזר
+
+relationship 13fde0c0-ae37-da18-53fc-4976cdb86b4a
+	fromColumn: 'Lamas Council Corrected'.נפה
+	toColumn: Nafa.נפה
+
+relationship 6cc9b3c3-7436-3de8-234c-90f7999b9d06
+	fromColumn: 'Fact 08 Bargrut Tech'.'שם רשות מקומית'
+	toColumn: 'Lamas Council Corrected'.'Rashut Corrected'
+
+relationship c6631f0e-963f-4d23-ec4c-cc913460876c
+	fromColumn: 'Fact Bagrut Denom'.'שם רשות'
+	toColumn: 'Lamas Council Corrected'.'Rashut Corrected'
+

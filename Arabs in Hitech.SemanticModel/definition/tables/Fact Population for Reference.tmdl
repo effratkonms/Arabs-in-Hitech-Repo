@@ -1,0 +1,207 @@
+table 'Fact Population for Reference'
+	lineageTag: 58267c5d-0098-4e01-94dc-da415196ea39
+
+	measure 'Population Reference' = SUM('Fact Population for Reference'[Value])
+		lineageTag: b47b2032-a7e2-4a37-9877-aabe35f6601c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Population Reference Cumulative by Age' =
+			
+			VAR selectedAgeOrder = SELECTEDVALUE(Ages[Age Order])
+			RETURN
+			CALCULATE(
+			    [Population Reference],
+			    ALL(Ages),
+			    Ages[Age Order] <= selectedAgeOrder
+			)
+		lineageTag: a179b2e0-c88b-4a44-b6aa-5d9473947981
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Population Reference Higher Ed Students Ages' =
+			
+			CALCULATE(
+			    [Population Reference],
+			    FILTER(
+			        ALL(Ages),
+			        Ages[Higher Ed Students] = "Yes"
+			    )
+			)
+		lineageTag: 2599a6e4-97e8-425b-a765-ba34f82c3c4d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Population Reference Ages All Population' =
+			
+			CALCULATE(
+			    [Population Reference Ages],
+			    ALL(Population)
+			)
+		lineageTag: c08f5270-0d78-421f-bb53-4bdfb43d5f6f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Population Reference Ages Arab Population' =
+			
+			CALCULATE(
+			    [Population Reference Ages],
+			    FILTER(
+			        ALL(Population),
+			        Population[Population] = "Arab"
+			    )
+			)
+		lineageTag: c60f9f25-c33b-401b-9b69-49b79b50d8bd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Arabs in Higher Ed Age Group (Reference)' =
+			
+			DIVIDE(
+			    [Population Reference Ages Arab Population],
+			    [Population Reference Ages All Population]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 5a8747b6-7a90-4e2e-8e0c-94a00ae91712
+
+	measure 'Population Reference Higher Ed Graduates Ages' =
+			
+			CALCULATE(
+			    [Population Reference],
+			    FILTER(
+			        ALL(Ages),
+			        Ages[Higher Ed Graduates] = "Yes"
+			    )
+			)
+		lineageTag: 8ba79117-377d-4a9b-9f8e-cec9c699fabb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Population Reference Ages' =
+			
+			SWITCH(
+			    SELECTEDVALUE('Age Category'[Age Category]),
+			    "Higher Ed",
+			    SWITCH(
+			        SELECTEDVALUE('Population Subsection'[Population Subsection]),
+			        "סטודנטים", [Population Reference Higher Ed Students Ages],
+			        "בוגרים", [Population Reference Higher Ed Graduates Ages]
+			    ),
+			    "Training",
+			    SWITCH(
+			        SELECTEDVALUE('Population Subsection'[Population Subsection]),
+			        "סטודנטים", [Population Reference Training Students Ages],
+			        "בוגרים", [Population Reference Training Graduates Ages]
+			    ),
+			    "12th Grade", [Population Reference 12th Garde Ages],
+			    "Employment", [Population Reference Employment Ages]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 584e96d6-ac3d-4624-8da7-8daae4b821e2
+
+	measure 'Population Reference Training Students Ages' =
+			
+			CALCULATE(
+			    [Population Reference],
+			    FILTER(
+			        ALL(Ages),
+			        Ages[Training Students] = "Yes"
+			    )
+			)
+		lineageTag: 387ea23a-f5a9-44de-ae1e-b3497a6dcbc9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Population Reference Training Graduates Ages' =
+			
+			CALCULATE(
+			    [Population Reference],
+			    FILTER(
+			        ALL(Ages),
+			        Ages[Training Graduates] = "Yes"
+			    )
+			)
+		lineageTag: 3d442cd8-9248-4769-be33-644c9b72ac8c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Population Reference 12th Garde Ages' =
+			
+			CALCULATE(
+			    [Population Reference],
+			    FILTER(
+			        ALL(Ages),
+			        Ages[12th Garde] = "Yes"
+			    )
+			)
+		lineageTag: 79fd3c9e-8b3c-45a2-b620-763700ca15ba
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Population Reference Employment Ages' =
+			
+			CALCULATE(
+			    [Population Reference],
+			    FILTER(
+			        ALL(Ages),
+			        Ages[Employment] = "Yes"
+			    )
+			)
+		lineageTag: 5238cb71-a050-49a1-9af8-813fa25e87a1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: df2d44b8-65e4-4885-bd5d-71caaf6bae56
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Population
+		dataType: string
+		lineageTag: 2cdb2dbe-9063-4f41-ad09-7b32320cc0ea
+		summarizeBy: none
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: 138621e3-3d12-4142-9040-354e8ff82179
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		lineageTag: 9f8e49d9-f468-4ac8-9477-943ed2fc1a58
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Age
+		dataType: string
+		lineageTag: 60d88c04-591b-4191-b3af-afb31f3ef79d
+		summarizeBy: none
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact Population for Reference' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = Table.Combine({#"Population 2000 - 2019 Before Append", #"Population After 2019 Before Append"})
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

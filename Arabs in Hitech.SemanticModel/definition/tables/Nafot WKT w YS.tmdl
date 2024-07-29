@@ -1,0 +1,210 @@
+table 'Nafot WKT w YS'
+	lineageTag: a42027cd-6e8e-4190-a200-f1e3faff5338
+
+	measure 'Area SQM' = SUM('Nafot WKT w YS'[Area_SQM])
+		lineageTag: 1db752fa-c083-4964-bc7d-95171e1f71c1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Map Metric, Noramlized by 10 Kilometers Squared' =
+			
+			VAR result = DIVIDE([Key Metric, Selected Years], [Area SQM]/10000000)
+			RETURN
+			IF(ISBLANK(result), 0, result)
+		formatString: 0.0
+		lineageTag: 2e90f66b-9a69-4e07-ad8e-4b99d96193cf
+
+	measure 'First WKT' = MAX('Nafot WKT w YS'[WKT])
+		lineageTag: 9c8f2f85-ab5e-4fa5-ba5c-b04c13b1992c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Normalized Intensity' =
+			
+			// VAR result = IF(
+			//     ISBLANK([Log of Metric]),
+			//     [Min Log Metric],
+			//     DIVIDE(([Log of Metric] - [Min Log Metric]), ([Max Log Metric] - [Min Log Metric]))
+			// )
+			VAR result = [Map Measure Zero if Blank]
+			RETURN
+			IF(ISBLANK(result), 0, result)
+		lineageTag: b6b07d8d-3555-4972-a920-31875b01eb21
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Log of Metric' = IF([Map Measure Zero if Blank] > 0, LOG10([Map Measure Zero if Blank]))
+		lineageTag: 7feec753-3018-4fb6-b6a8-31839fce46a5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Max Log Metric' =
+			MAXX(
+			    ALLSELECTED('Nafot WKT w YS'),
+			    [Log of Metric]
+			)
+		lineageTag: 7ce69499-aaa0-4e30-811b-a1f3e08c8679
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Min Log Metric' =
+			MINX(
+			    ALLSELECTED('Nafot WKT w YS'),
+			    [Log of Metric]
+			)
+		lineageTag: 200fc8da-1773-4c6c-9f11-3842f5757312
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Normalized Intensity Bagrut' =
+			
+			// IF(
+			//     ISBLANK([Log of Metric Bagrut]),
+			    // 0//,
+			    // DIVIDE(([Log of Metric Bagrut] - [Min Log Metric Bagrut]), ([Max Log Metric Bagrut] - [Min Log Metric Bagrut]))
+			// )
+			// ([Log of Metric Bagrut] - [Min Log Metric Bagrut]) //- ([Max Log Metric Bagrut] - [Min Log Metric Bagrut])
+			// DIVIDE(([Log of Metric Bagrut] - [Min Log Metric Bagrut]), ([Max Log Metric Bagrut] - [Min Log Metric Bagrut]))
+			VAR logOfMetric = [Metric Bagrut (extension to log)]
+			VAR minLogOfMetric = [Min Log Metric Bagrut]
+			VAR maxLogOfMetric = [Max Log Metric Bagrut]
+			var range = maxLogOfMetric - minLogOfMetric
+			RETURN
+			// // // DIVIDE(
+			//     IF(
+			//         ISBLANK(logOfMetric),
+			//         0,
+			// //         // logOfMetric - minLogOfMetric
+			//         range
+			//     )//,
+			// // //     [Max Log Metric Bagrut] - [Min Log Metric Bagrut]
+			// // // )
+			(logOfMetric - minLogOfMetric) / (range)
+		lineageTag: 31201df2-964c-47b3-b2df-8dc7b5221624
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Min Log Metric Bagrut' =
+			MINX(
+			    ALLSELECTED('Nafot WKT w YS'),
+			    [Metric Bagrut (extension to log)]
+			)
+		lineageTag: 2196480e-7b82-42d1-999e-a43996d31d64
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Max Log Metric Bagrut' =
+			MAXX(
+			    ALLSELECTED('Nafot WKT w YS'),
+			    [Metric Bagrut (extension to log)]
+			)
+		lineageTag: adfed473-90c8-4c6f-ac0a-f6e9d2510032
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Metric Bagrut (extension to log)' =
+			
+			// IF([Map Metric, Bagrut] > 0, LOG10([Map Metric, Bagrut]))
+			[Map Metric, Bagrut]
+		lineageTag: c751bfb5-77a9-4077-ba8e-529646849a74
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Map Metric, Bagrut' =
+			VAR result = [Key Bagrut Metric]
+			RETURN
+			IF(ISBLANK(result), 0, result)
+		lineageTag: 82e2f365-ce4c-4b59-b0ef-aef0d5c09813
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Map Measure' =
+			
+			VAR selectedMapMeasure = SELECTEDVALUE('Quantity or Density'[Metric])
+			RETURN
+			SWITCH(
+			    selectedMapMeasure,
+			    "Density", ROUND([Map Metric, Noramlized by 10 Kilometers Squared], 1),
+			    "Quantity", [Key Metric]
+			)
+		lineageTag: 1ccfb9d2-76fd-49e0-b7dd-63950739a59e
+
+		formatStringDefinition = ```
+				VAR selectedMapMeasure = SELECTEDVALUE('Quantity or Density'[Metric])
+				RETURN
+				SWITCH(
+				    selectedMapMeasure,
+				    "Density", "0.0",
+				    "Quantity", "#,0"
+				)
+				
+				```
+
+	column Id
+		dataType: string
+		lineageTag: 6610ee86-dd51-4ab6-b4d3-4b4159961f13
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nafa
+		dataType: string
+		lineageTag: 1d1b9d0a-40c3-4e7c-b024-f8eee04623cb
+		summarizeBy: none
+		sourceColumn: Nafa
+
+		annotation SummarizationSetBy = Automatic
+
+	column Area_SQM
+		dataType: double
+		lineageTag: a90dcd50-c9f2-490b-85fc-6853800a9b42
+		summarizeBy: sum
+		sourceColumn: Area_SQM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Area_dunam
+		dataType: double
+		lineageTag: 2279d339-ece8-460f-8066-d42e90376b6e
+		summarizeBy: sum
+		sourceColumn: Area_dunam
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WKT
+		dataType: string
+		lineageTag: fd5efc87-2d39-4fe6-bfa8-3a08b6259415
+		summarizeBy: none
+		sourceColumn: WKT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Nafot WKT w YS' = m
+		mode: import
+		queryGroup: Source\Definitions
+		source =
+				let
+				    Source = #"BI Definitions",
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "Nafot WKT w YS.csv")),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content"}),
+				    Content = #"Removed Other Columns"{0}[Content],
+				    #"Imported CSV" = Csv.Document(Content,[Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars=true]),
+				    #"Removed Columns" = Table.RemoveColumns(#"Promoted Headers",{"Area_SQM", "perimeter", "Area_dunam"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"area", "Area_SQM"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Area_SQM", type number}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "Area_dunam", each [Area_SQM] / 1000, type number),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom",{"fid"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Removed Columns1","תל אביב - יפו","תל אביב",Replacer.ReplaceText,{"Nafa"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","יהודה ושומרון","יהודה והשומרון",Replacer.ReplaceText,{"Nafa"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","רמת הגולן","גולן",Replacer.ReplaceText,{"Nafa"})
+				in
+				    #"Replaced Value2"
+
+	annotation PBI_ResultType = Table
+

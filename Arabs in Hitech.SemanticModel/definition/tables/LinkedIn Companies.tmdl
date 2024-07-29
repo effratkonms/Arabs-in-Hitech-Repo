@@ -1,0 +1,85 @@
+table 'LinkedIn Companies'
+	lineageTag: acb23abc-51d9-4b23-88c2-6bfe0a35b517
+
+	measure 'Count Rows LinkedIn Companies' = COUNTROWS('LinkedIn Companies')
+		formatString: #,0
+		lineageTag: 75b1110f-f715-45ac-a792-e74c5ec1a58f
+
+	column 'Current Company'
+		dataType: string
+		lineageTag: 48c796ca-6bee-4cbf-bb9b-1284565f5c34
+		summarizeBy: none
+		sourceColumn: Current Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'לאחר בדשבורד עם / לשנות ל'
+		dataType: string
+		lineageTag: fae1b20b-9b38-47a5-8a8d-5f481b0e317f
+		summarizeBy: none
+		sourceColumn: לאחר בדשבורד עם / לשנות ל
+
+		annotation SummarizationSetBy = Automatic
+
+	column תחום
+		dataType: string
+		lineageTag: e1ed85ee-1029-4cdd-a4d7-831b1ec330bc
+		summarizeBy: none
+		sourceColumn: תחום
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Comapny Size'
+		dataType: string
+		lineageTag: 8a96883e-5e9a-42e6-b7e3-32aa5efcc3b8
+		summarizeBy: none
+		sourceColumn: Comapny Size
+		sortByColumn: Order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sub Other'
+		dataType: string
+		lineageTag: ecb6dc86-2b96-446d-b1f8-9aa67518bff3
+		summarizeBy: none
+		sourceColumn: Sub Other
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company
+		dataType: string
+		lineageTag: 18ba6ce7-5809-4f99-9f84-e4b5d14d1248
+		summarizeBy: none
+		sourceColumn: Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: string
+		lineageTag: bbf30062-5f4a-4b70-bc51-47ef5556806c
+		summarizeBy: none
+		sourceColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'LinkedIn Companies' = m
+		mode: import
+		queryGroup: 'Data Model\Control'
+		source =
+				let
+				    Source = #"06 Companies Source",
+				    #"Renamed Columns" = Table.RenameColumns(Source,{{"גודל חברה: 1-5,  6-10 , 11-50, 51-200, 201-500 , 500+", "Comapny Size"}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns","500 +","500+",Replacer.ReplaceText,{"Comapny Size"}),
+				    #"Merged Queries" = Table.NestedJoin(#"Replaced Value", {"Comapny Size"}, #"Company Size Order LUT", {"Company Size"}, "Company Size Order LUT", JoinKind.LeftOuter),
+				    #"Expanded Company Size Order LUT" = Table.ExpandTableColumn(#"Merged Queries", "Company Size Order LUT", {"Order"}, {"Order"}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Expanded Company Size Order LUT",{{"Current Company", Text.Trim, type text}}),
+				    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text",{{"Current Company", Text.Clean, type text}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Cleaned Text", {"Current Company"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Removed Duplicates",null,"null",Replacer.ReplaceValue,{"Current Company"})
+				in
+				    #"Replaced Value1"
+
+	annotation PBI_ResultType = Table
+

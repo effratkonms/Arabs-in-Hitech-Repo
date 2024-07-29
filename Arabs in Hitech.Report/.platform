@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Arabs in Hitech"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "bdba33cf-0841-412b-8927-cfcf4c2b7a6f"
+  }
+}

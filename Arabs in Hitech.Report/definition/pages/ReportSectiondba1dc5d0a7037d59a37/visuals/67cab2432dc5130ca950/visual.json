@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "67cab2432dc5130ca950",
+  "position": {
+    "x": 1552.3404255319149,
+    "y": 213.47975291695263,
+    "z": 37000,
+    "width": 363.70624571036376,
+    "height": 131.77762525737816,
+    "tabOrder": 37000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "הוספתי שני מדדים, אשמח אם תבדקי אותי ואם תוכלי לסדר אותם מבחינה עיצובית. הם אמורים להיות בתחילת המסך, במקום הויזואלים שקיימים כרגע (הפאי וגרף השורות, אותם יש להסיר - אשמח אם תעבירי את גרף הפאי למסך בקרה, כדי שנוכל לבדוק שוב האם עדיין יש ריקים לאחר טיוב הנתונים)",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt",
+                      "color": "#ea0c0c"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "right"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

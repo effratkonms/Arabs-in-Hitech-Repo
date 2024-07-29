@@ -1,0 +1,1650 @@
+expression pSharepoint = "https://socialfinanceisrael.sharepoint.com/sites/ArabsinHitech" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: abd488a7-388e-4b7d-a2ea-b7ebd3501ac7
+	queryGroup: Source\Sharepoint
+
+	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'Sharepoint Folder' =
+		let
+		    Source = SharePoint.Files(pSharepoint, [ApiVersion = 15])
+		in
+		    Source
+	lineageTag: d649baf7-e530-45a3-8a58-62a163737ab1
+	queryGroup: Source\Sharepoint
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'BI Definitions' =
+		let
+		    Source = #"Sharepoint Folder",
+		    #"Filtered Rows" = Table.SelectRows(Source, each Text.Contains([Folder Path], "/BI Definitions/"))
+		in
+		    #"Filtered Rows"
+	lineageTag: 311bdcc9-ffd0-4ec4-874a-807fe82fd23d
+	queryGroup: Source\Sharepoint
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Source Data' =
+		let
+		    Source = #"Sharepoint Folder"
+		in
+		    Source
+	lineageTag: e81a1245-0555-4899-8e20-1fbf4d13e208
+	queryGroup: Source\Sharepoint
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression LUTs =
+		let
+		    Source = #"BI Definitions",
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"Content", "Name"}),
+		    #"Filtered Rows1" = Table.SelectRows(#"Removed Other Columns", each ([Name] = "טבלאות עזר והמרה.xlsx")),
+		    Content = #"Filtered Rows1"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    #"Filtered Rows" = Table.SelectRows(#"Imported Excel Workbook", each ([Kind] = "Table"))
+		in
+		    #"Filtered Rows"
+	lineageTag: 3dd19da1-2ef2-4af5-b2ff-32f1f64fe077
+	queryGroup: Source\Definitions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Subjects And Occupations LUT' =
+		let
+		    Source = LUTs,
+		    SubjectsAndOccupations_Table = Source{[Item="SubjectsAndOccupations",Kind="Table"]}[Data]
+		in
+		    SubjectsAndOccupations_Table
+	lineageTag: 4aa53149-06b9-48b0-a02e-c803f6df5637
+	queryGroup: Source\Definitions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Subject Names Errors 2_3 LUT' =
+		let
+		    Source = LUTs,
+		    #"SubjectNamesErrorsLUT2 3_Table" = Source{[Item="SubjectNamesErrorsLUT2.3",Kind="Table"]}[Data]
+		in
+		    #"SubjectNamesErrorsLUT2 3_Table"
+	lineageTag: 574352d6-1375-4343-b382-b40a154631b4
+	queryGroup: Source\Definitions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Education Years LUT' =
+		let
+		    Source = LUTs,
+		    EducationYears_Table = Source{[Item="EducationYears",Kind="Table"]}[Data]
+		in
+		    EducationYears_Table
+	lineageTag: 8df09a48-b22f-44f4-8c45-42d4abf255d8
+	queryGroup: Source\Definitions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '01 Higher Education' =
+		let
+		    Source = #"Source Data",
+		    #"Filtered Rows" = Table.SelectRows(Source, each Text.Contains([Folder Path], "/01 ")),
+		    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each not Text.Contains([Folder Path], "/Not in Use/"))
+		in
+		    #"Filtered Rows1"
+	lineageTag: 3f5826f4-6724-40bb-81b9-51b28594811b
+	queryGroup: 'Source\Source Data\01 Higher Education'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '2_3 Students Source' =
+		let
+		    Source = #"01 Higher Education",
+		    #"Removed Other Columns1" = Table.SelectColumns(Source,{"Content", "Name"}),
+		    #"Filtered Rows1" = Table.SelectRows(#"Removed Other Columns1", each ([Name] = "לוח 2.3 - סטודנטים.xlsx")),
+		    Content = #"Filtered Rows1"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    #"Filtered Rows" = Table.SelectRows(#"Imported Excel Workbook", each ([Hidden] <> true) and ([Kind] = "Sheet")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Name", "Data"}),
+		    #"Merged Queries" = Table.NestedJoin(#"Removed Other Columns", {"Name"}, #"Education Years LUT", {"שנה עברית מקוצר"}, "Education Years LUT", JoinKind.LeftOuter),
+		    #"Expanded Education Years LUT" = Table.ExpandTableColumn(#"Merged Queries", "Education Years LUT", {"שנה לועזית - סטודנטים"}, {"Year"}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Education Years LUT",{{"Year", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: 63cb20c8-b730-4a99-9caf-d81d5a00b1ce
+	queryGroup: 'Source\Source Data\01 Higher Education'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '3_3 Graduates Source' =
+		let
+		    Source = #"01 Higher Education",
+		    #"Filtered Rows1" = Table.SelectRows(Source, each ([Name] = "לוח 3.3 - בוגרים.xlsx")),
+		    #"Removed Other Columns1" = Table.SelectColumns(#"Filtered Rows1",{"Content", "Name"}),
+		    Content = #"Removed Other Columns1"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    #"Filtered Rows" = Table.SelectRows(#"Imported Excel Workbook", each ([Hidden] = false) and ([Kind] = "Sheet")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Name", "Data"}),
+		    #"Merged Queries" = Table.NestedJoin(#"Removed Other Columns", {"Name"}, #"Education Years LUT", {"שנה עברית מקוצר"}, "Education Years LUT", JoinKind.LeftOuter),
+		    #"Expanded Education Years LUT" = Table.ExpandTableColumn(#"Merged Queries", "Education Years LUT", {"שנה לועזית - בוגרים"}, {"Year"}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Education Years LUT",{{"Year", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: 532bd188-b370-4e6b-816b-cac3cdf7720d
+	queryGroup: 'Source\Source Data\01 Higher Education'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '2_3 Students' =
+		let
+		    Source = #"2_3 Students Source",
+		    #"Invoked Custom Function" = Table.AddColumn(Source, "Handle 2_3 Students Sheet", each #"Handle 2_3 Students Sheet"([Data], p01ReplaceLowNumberWith)),
+		    #"Removed Columns" = Table.RemoveColumns(#"Invoked Custom Function",{"Name", "Data"}),
+		    #"Expanded Handle 2_3 Students Sheet" = Table.ExpandTableColumn(#"Removed Columns", "Handle 2_3 Students Sheet", {"מקצוע לימוד", "סך הכל", "ערבים"}, {"מקצוע לימוד", "סך הכל", "ערבים"}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Handle 2_3 Students Sheet",{{"מקצוע לימוד", type text}, {"סך הכל", Int64.Type}, {"ערבים", Int64.Type}}),
+		    #"Added Custom" = Table.AddColumn(#"Changed Type", "סטודנטים/בוגרים", each "סטודנטים", type text),
+		    #"Renamed Columns" = Table.RenameColumns(#"Added Custom",{{"סך הכל", "Total"}, {"ערבים", "Arabs"}, {"מקצוע לימוד", "Subject"}, {"סטודנטים/בוגרים", "Population Subsection"}}),
+		    #"Added Custom1" = Table.AddColumn(#"Renamed Columns", "Data Source", each "2.3", type text)
+		in
+		    #"Added Custom1"
+	lineageTag: 90052f4c-c7a8-418d-8e08-8e9a9456733d
+	queryGroup: 'Source\Source Data\01 Higher Education'
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression '2_3 Students Sample Sheet' =
+		let
+		    Source = #"2_3 Students Source",
+		    Data = Source{5}[Data]
+		in
+		    Data
+	lineageTag: 269e7da5-09a2-4c87-a95d-d1259edf35bb
+	queryGroup: 'Functions\Handle 2_3 Students Sheet'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Handle 2_3 Students Sheet for Fn DISCONNECTED' =
+		let
+		    Source = #"2_3 Students Sample Sheet",
+		    #"Removed Top Rows" = Table.Skip(Source,1),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+		    #"Filtered Rows" = Table.SelectRows(#"Promoted Headers", each ([סך הכל] <> null)),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"מקצוע לימוד", "סך הכל", "ערבים"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Other Columns",{{"ערבים", type text}}),
+		    #"Replaced Value2" = Table.ReplaceValue(#"Changed Type1",null,"0",Replacer.ReplaceValue,{"ערבים"}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Replaced Value2","..",p01ReplaceLowNumberWith,Replacer.ReplaceText,{"ערבים"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","-","0",Replacer.ReplaceText,{"ערבים"}),
+		    #"Changed Type2" = Table.TransformColumnTypes(#"Replaced Value1",{{"ערבים", type number}}),
+		    #"Removed Errors" = Table.RemoveRowsWithErrors(#"Changed Type2", {"ערבים"})
+		in
+		    #"Removed Errors"
+	lineageTag: ac96e663-a95b-4828-bf44-2a9707618d9f
+	queryGroup: 'Functions\Handle 2_3 Students Sheet'
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression p01ReplaceLowNumberWith = "1.5" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 7b525bc1-e2f0-4d0b-98b7-10c02ef5b4f8
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'Handle 2_3 Students Sheet' =
+		let
+		    Source = (t as table, p01ReplaceLowNumberWith as text) => let
+		    Source = t,
+		    #"Removed Top Rows" = Table.Skip(Source,1),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+		    #"Filtered Rows" = Table.SelectRows(#"Promoted Headers", each ([סך הכל] <> null)),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"מקצוע לימוד", "סך הכל", "ערבים"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Other Columns",{{"ערבים", type text}}),
+		    #"Replaced Value2" = Table.ReplaceValue(#"Changed Type1",null,"0",Replacer.ReplaceValue,{"ערבים"}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Replaced Value2","..",p01ReplaceLowNumberWith,Replacer.ReplaceText,{"ערבים"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","-","0",Replacer.ReplaceText,{"ערבים"}),
+		    #"Changed Type2" = Table.TransformColumnTypes(#"Replaced Value1",{{"ערבים", type number}}),
+		    #"Removed Errors" = Table.RemoveRowsWithErrors(#"Changed Type2", {"ערבים"})
+		in
+		    #"Removed Errors"
+		in
+		    Source
+	lineageTag: fb10369f-b5bd-49b2-ab7e-eca96a571ac0
+	queryGroup: 'Functions\Handle 2_3 Students Sheet'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression '3_3 Graduates' =
+		let
+		    Source = #"3_3 Graduates Source",
+		    #"Invoked Custom Function" = Table.AddColumn(Source, "Handle 3_3 Graduates Sheet", each #"Handle 3_3 Graduates Sheet"([Data], p01ReplaceLowNumberWith)),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Invoked Custom Function",{"Year", "Handle 3_3 Graduates Sheet"}),
+		    #"Expanded Handle 3_3 Graduates Sheet" = Table.ExpandTableColumn(#"Removed Other Columns", "Handle 3_3 Graduates Sheet", {"מקצוע לימוד", "סך הכל", " ערבים"}, {"מקצוע לימוד", "סך הכל", " ערבים"}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Handle 3_3 Graduates Sheet",{{"מקצוע לימוד", type text}, {"סך הכל", Int64.Type}, {" ערבים", Int64.Type}}),
+		    #"Added Custom" = Table.AddColumn(#"Changed Type", "סטודנטים/בוגרים", each "בוגרים", type text),
+		    #"Renamed Columns" = Table.RenameColumns(#"Added Custom",{{"סך הכל", "Total"}, {" ערבים", "Arabs"}, {"מקצוע לימוד", "Subject"}, {"סטודנטים/בוגרים", "Population Subsection"}}),
+		    #"Added Custom1" = Table.AddColumn(#"Renamed Columns", "Data Source", each "3.3", type text)
+		in
+		    #"Added Custom1"
+	lineageTag: c7f88676-fb13-4323-bc1d-72ee7e146998
+	queryGroup: 'Source\Source Data\01 Higher Education'
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression '3_3 Graduates Sample Sheet' =
+		let
+		    Source = #"3_3 Graduates Source",
+		    Data = Source{1}[Data]
+		in
+		    Data
+	lineageTag: 7ef55e94-8fd8-4236-b820-4aef26b065ee
+	queryGroup: 'Functions\Handle 3_3 Graduates Sheet'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Handle 3_3 Graduates Sheet' =
+		let
+		    Source = (t as table, p01ReplaceLowNumberWith as text) => let
+		    Source = t,
+		    #"Removed Top Rows" = Table.Skip(Source,1),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"מקצוע לימוד", "סך הכל", " ערבים"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Removed Other Columns", each ([סך הכל] <> null)),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Filtered Rows",{{"סך הכל", Int64.Type}, {" ערבים", type text}}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","-","0",Replacer.ReplaceText,{" ערבים"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","..",p01ReplaceLowNumberWith,Replacer.ReplaceText,{" ערבים"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Replaced Value1",{{" ערבים", type number}})
+		in
+		    #"Changed Type1"
+		in
+		    Source
+	lineageTag: 69d06f6b-ab74-4f2b-b02d-7626a9b83f1f
+	queryGroup: 'Functions\Handle 3_3 Graduates Sheet'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression 'Manual Totals' =
+		let
+		    Source = #"Manual Totals Source",
+		    #"Grouped Rows" = Table.Group(Source, {"Year", "סטודנטים/בוגרים"}, {{"Total", each List.Sum([Total]), type nullable number}, {"Arabs", each List.Sum([Arabs]), type nullable number}}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Grouped Rows",{{"Total", type number}, {"Arabs", type number}}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"סטודנטים/בוגרים", "Population Subsection"}}),
+		    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "Subject", each "Total", type text),
+		    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Data Source", each "Manual", type text)
+		in
+		    #"Added Custom1"
+	lineageTag: 0011e54d-9a0c-4466-be33-fbf299fd41bc
+	queryGroup: 'Source\Source Data\01 Higher Education'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Handle 3_3 Graduates Sheet for Fn DISCONNECTED' =
+		let
+		    Source = #"3_3 Graduates Sample Sheet",
+		    #"Removed Top Rows" = Table.Skip(Source,1),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"מקצוע לימוד", "סך הכל", " ערבים"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Removed Other Columns", each ([סך הכל] <> null)),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Filtered Rows",{{"סך הכל", Int64.Type}, {" ערבים", type text}}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","-","0",Replacer.ReplaceText,{" ערבים"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","..",p01ReplaceLowNumberWith,Replacer.ReplaceText,{" ערבים"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Replaced Value1",{{" ערבים", type number}})
+		in
+		    #"Changed Type1"
+	lineageTag: c9bbe829-149f-42f1-b010-bf1b0a53703b
+	queryGroup: 'Functions\Handle 3_3 Graduates Sheet'
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'Higher Education Attributes' =
+		let
+		    Source = #"Higher Education Clean",
+		    #"Replaced Value" = Table.ReplaceValue(Source,null,0,Replacer.ReplaceValue,{"Arabs"}),
+		    #"Merged Queries" = Table.NestedJoin(#"Replaced Value", {"Subject"}, #"Subjects And Occupations LUT", {"מקצוע למ""ס"}, "Subjects And Occupations LUT", JoinKind.LeftOuter),
+		    #"Expanded Subjects And Occupations LUT" = Table.ExpandTableColumn(#"Merged Queries", "Subjects And Occupations LUT", {"מקצוע למ""ס"}, {"מקצוע למ""ס"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Expanded Subjects And Occupations LUT",{{"Subject", "Subject o"}}),
+		    #"Added Custom2" = Table.AddColumn(#"Renamed Columns", "Subject", each if [Subject o] = "Total" then "Total" else [#"מקצוע למ""ס"], type text),
+		    #"Filtered Rows1" = Table.SelectRows(#"Added Custom2", each ([Subject] <> null)),
+		    #"Removed Columns2" = Table.RemoveColumns(#"Filtered Rows1",{"Subject o", "מקצוע למ""ס"}),
+		    #"Added Custom" = Table.AddColumn(#"Removed Columns2", "Non-Arabs", each [Total] - [Arabs]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"Non-Arabs", Int64.Type}}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Total"}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns",{{"Arabs", "Arab"}, {"Non-Arabs", "Other"}}),
+		    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Renamed Columns1", {"Year", "Population Subsection", "Subject"}, "Population", "Value"),
+		    #"Added Custom1" = Table.AddColumn(#"Unpivoted Columns", "Hitech / Total", each if [Subject] = "Total" then "Total" else "Hitech", type text)
+		in
+		    #"Added Custom1"
+	lineageTag: 19a13db5-f84c-4ff0-89db-bb2cc5a5b37b
+	queryGroup: 'Source\Source Data\01 Higher Education'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Higher Education Clean' =
+		let
+		    Source = Table.Combine({#"Manual Totals", #"2_3 Students", #"3_3 Graduates"}),
+		    #"Merged Queries" = Table.NestedJoin(Source, {"Subject"}, #"Subject Names Errors 2_3 LUT", {"מקצוע למ""ס"}, "Subject Names Errors 2_3 LUT", JoinKind.LeftOuter),
+		    #"Expanded Subject Names Errors 2_3 LUT" = Table.ExpandTableColumn(#"Merged Queries", "Subject Names Errors 2_3 LUT", {"מקצוע לוח סטודנטים - 2.3 - תיקון טעויות שנת 2022"}, {"Corrected"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Expanded Subject Names Errors 2_3 LUT",{{"Subject", "Subject o"}}),
+		    #"Added Conditional Column" = Table.AddColumn(#"Renamed Columns", "Subject", each if [Corrected] <> null then [Corrected] else [Subject o], type text),
+		    #"Removed Columns" = Table.RemoveColumns(#"Added Conditional Column",{"Subject o", "Corrected", "Data Source"})
+		in
+		    #"Removed Columns"
+	lineageTag: eb01d8d3-b4c9-4fd1-afe0-a9b24d1ab39a
+	queryGroup: 'Source\Source Data\01 Higher Education'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Higher Education Hitech' =
+		let
+		    Source = #"Higher Education Attributes",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([#"Hitech / Total"] = "Hitech")),
+		    #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows",{"Hitech / Total"})
+		in
+		    #"Removed Columns"
+	lineageTag: c9bad340-5ecc-44a6-95b8-7280603fc999
+	queryGroup: 'Source\Source Data\01 Higher Education'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Higher Education Non-Hitech' =
+		let
+		    Source = #"Higher Education Attributes",
+		    #"Grouped Rows" = Table.Group(Source, {"Year", "Population Subsection", "Population", "Hitech / Total"}, {{"Count", each List.Sum([Value]), type number}}),
+		    #"Pivoted Column" = Table.Pivot(#"Grouped Rows", List.Distinct(#"Grouped Rows"[#"Hitech / Total"]), "Hitech / Total", "Count", List.Sum),
+		    #"Filtered Rows" = Table.SelectRows(#"Pivoted Column", each ([Hitech] <> null and [Total] <> null)),
+		    #"Added Custom" = Table.AddColumn(#"Filtered Rows", "Non-Hitech", each [Total] - [Hitech], type number),
+		    #"Removed Columns" = Table.RemoveColumns(#"Added Custom",{"Hitech", "Total"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Non-Hitech", "Value"}}),
+		    #"Added Custom1" = Table.AddColumn(#"Renamed Columns", "Subject", each "לא הייטק", type text)
+		in
+		    #"Added Custom1"
+	lineageTag: c259690a-c3ed-47f8-a181-ac5cd2f8ee28
+	queryGroup: 'Source\Source Data\01 Higher Education'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '02 Higer Education Lamas' =
+		let
+		    Source = #"Source Data",
+		    #"Filtered Rows" = Table.SelectRows(Source, each Text.Contains([Folder Path], "/02 ")),
+		    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each not Text.Contains([Folder Path], "/Not in Use/"))
+		in
+		    #"Filtered Rows1"
+	lineageTag: ca9bea56-48c9-4ea9-aa60-6cc4cdd05d2b
+	queryGroup: 'Source\Source Data\02 Higer Education Lamas'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Higer Education Lamas Source' =
+		let
+		    Source = #"02 Higer Education Lamas",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "תעשייה עתירת ידע - חברה ערבית - פלט.xlsx")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content)
+		in
+		    #"Imported Excel Workbook"
+	lineageTag: 2b13d0fd-32f7-4f56-9918-2b92bb651a51
+	queryGroup: 'Source\Source Data\02 Higer Education Lamas'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Sample table for Handle Lamas Higher Ed' =
+		let
+		    Source = #"Higer Education Lamas Source",
+		    #"סטודנטים - מוסד_Sheet" = Source{[Item="סטודנטים - מוסד",Kind="Sheet"]}[Data],
+		    #"Removed Other Columns" = Table.SelectColumns(#"סטודנטים - מוסד_Sheet",{"Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}),
+		    #"Removed Top Rows" = Table.Skip(#"Removed Other Columns",6),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+		    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"מקצוע", "Subject"}, {"מוסד", "Institution"}, {"שנים", "Years"}, {"כלל האוכלוסיה: תואר ראשון", "All: 1st: Total"}, {"כלל האוכלוסיה: חדשים ראשון", "All: 1st: New"}, {"כלל האוכלוסיה: שני ושלישי", "All: 2nd + 3rd"}, {"ערבים: תואר ראשון", "Arab: 1st: Total"}, {"ערבים: חדשים ראשון", "Arab: 1st: New"}, {"ערבים: שני ושלישי", "Arab: 2nd + 3rd"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: 7aae0cdb-22ed-4660-bf90-3c648eea7f13
+	queryGroup: 'Functions\Handle Lamas Higher Ed'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'LUTs Lamas' =
+		let
+		    Source = #"BI Definitions",
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"Content", "Name"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Removed Other Columns", each ([Name] = "טבלאות עזר והמרה - למס עיבוד מיוחד.xlsx")),
+		    Content = #"Filtered Rows"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content)
+		in
+		    #"Imported Excel Workbook"
+	lineageTag: 46262b1a-742a-4e3f-96fd-7ab6121be5c8
+	queryGroup: Source\Definitions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Lamas Cities 2023 LUT' =
+		let
+		    Source = #"LUTs Lamas",
+		    Cities_Districts_Nafot_Table = Source{[Item="Cities_Districts_Nafot",Kind="Table"]}[Data],
+		    #"Removed Duplicates" = Table.Distinct(Cities_Districts_Nafot_Table, {"שם יישוב"}),
+		    #"Trimmed Text" = Table.TransformColumns(#"Removed Duplicates",{{"שם יישוב", Text.Trim, type text}}),
+		    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text",{{"שם יישוב", Text.Clean, type text}})
+		in
+		    #"Cleaned Text"
+	lineageTag: 0bb56a86-e8bc-4c95-8d14-57dc331b93fc
+	queryGroup: Source\Definitions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Handle Lamas Higher Ed for Fn DISCONNECTED' =
+		let
+		    Source = #"Sample table for Handle Lamas Higher Ed",
+		    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Years", type text}}),
+		    #"Duplicated Column" = Table.DuplicateColumn(#"Changed Type", "Years", "First Year"),
+		    #"Duplicated Column1" = Table.DuplicateColumn(#"Duplicated Column", "First Year", "Second Year"),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Duplicated Column1",{{"All: 1st: Total", type text}, {"All: 1st: New", type text}, {"All: 2nd + 3rd", type text}, {"Arab: 1st: Total", type text}, {"Arab: 1st: New", type text}, {"Arab: 2nd + 3rd", type text}}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Changed Type1","-","0",Replacer.ReplaceText,{"All: 1st: Total", "All: 1st: New", "All: 2nd + 3rd", "Arab: 1st: Total", "Arab: 1st: New", "Arab: 2nd + 3rd"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","..",p02ReplaceLowNumberWith,Replacer.ReplaceText,{"All: 1st: Total", "All: 1st: New", "All: 2nd + 3rd", "Arab: 1st: Total", "Arab: 1st: New", "Arab: 2nd + 3rd"}),
+		    #"Changed Type2" = Table.TransformColumnTypes(#"Replaced Value1",{{"All: 1st: Total", type number}, {"All: 1st: New", type number}, {"All: 2nd + 3rd", type number}, {"Arab: 1st: Total", type number}, {"Arab: 1st: New", type number}, {"Arab: 2nd + 3rd", type number}}),
+		    #"Added Custom" = Table.AddColumn(#"Changed Type2", "All: 1st: Existing", each [#"All: 1st: Total"] - [#"All: 1st: New"], type number),
+		    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Arab: 1st: Existing", each [#"Arab: 1st: Total"] - [#"Arab: 1st: New"], type number),
+		    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "Other: 1st: New", each [#"All: 1st: New"] - [#"Arab: 1st: New"], type text),
+		    #"Added Custom3" = Table.AddColumn(#"Added Custom2", "Other: 1st: Existing", each [#"All: 1st: Existing"] - [#"Arab: 1st: Existing"], type number),
+		    #"Added Custom4" = Table.AddColumn(#"Added Custom3", "Other: 2nd + 3rd", each [#"All: 2nd + 3rd"] - [#"Arab: 2nd + 3rd"], type number),
+		    #"Removed Columns" = Table.RemoveColumns(#"Added Custom4",{"All: 1st: Total", "All: 1st: New", "All: 2nd + 3rd", "Arab: 1st: Total", "All: 1st: Existing"})
+		in
+		    #"Removed Columns"
+	lineageTag: fd62dab2-1779-4da1-b390-3129ceb933d3
+	queryGroup: 'Functions\Handle Lamas Higher Ed'
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'Handle Lamas Higher Ed' =
+		let
+		    Source = (t as table, p02ReplaceLowNumberWith as text) => let
+		        Source = t,
+		        #"Changed Type" = Table.TransformColumnTypes(Source,{{"Years", type text}}),
+		        #"Duplicated Column" = Table.DuplicateColumn(#"Changed Type", "Years", "First Year"),
+		        #"Duplicated Column1" = Table.DuplicateColumn(#"Duplicated Column", "First Year", "Second Year"),
+		        #"Changed Type1" = Table.TransformColumnTypes(#"Duplicated Column1",{{"All: 1st: Total", type text}, {"All: 1st: New", type text}, {"All: 2nd + 3rd", type text}, {"Arab: 1st: Total", type text}, {"Arab: 1st: New", type text}, {"Arab: 2nd + 3rd", type text}}),
+		        #"Replaced Value" = Table.ReplaceValue(#"Changed Type1","-","0",Replacer.ReplaceText,{"All: 1st: Total", "All: 1st: New", "All: 2nd + 3rd", "Arab: 1st: Total", "Arab: 1st: New", "Arab: 2nd + 3rd"}),
+		        #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","..",p02ReplaceLowNumberWith,Replacer.ReplaceText,{"All: 1st: Total", "All: 1st: New", "All: 2nd + 3rd", "Arab: 1st: Total", "Arab: 1st: New", "Arab: 2nd + 3rd"}),
+		        #"Changed Type2" = Table.TransformColumnTypes(#"Replaced Value1",{{"All: 1st: Total", type number}, {"All: 1st: New", type number}, {"All: 2nd + 3rd", type number}, {"Arab: 1st: Total", type number}, {"Arab: 1st: New", type number}, {"Arab: 2nd + 3rd", type number}}),
+		        #"Added Custom" = Table.AddColumn(#"Changed Type2", "All: 1st: Existing", each [#"All: 1st: Total"] - [#"All: 1st: New"], type number),
+		        #"Added Custom1" = Table.AddColumn(#"Added Custom", "Arab: 1st: Existing", each [#"Arab: 1st: Total"] - [#"Arab: 1st: New"], type number),
+		        #"Added Custom2" = Table.AddColumn(#"Added Custom1", "Other: 1st: New", each [#"All: 1st: New"] - [#"Arab: 1st: New"], type text),
+		        #"Added Custom3" = Table.AddColumn(#"Added Custom2", "Other: 1st: Existing", each [#"All: 1st: Existing"] - [#"Arab: 1st: Existing"], type number),
+		        #"Added Custom4" = Table.AddColumn(#"Added Custom3", "Other: 2nd + 3rd", each [#"All: 2nd + 3rd"] - [#"Arab: 2nd + 3rd"], type number),
+		        #"Removed Columns" = Table.RemoveColumns(#"Added Custom4",{"All: 1st: Total", "All: 1st: New", "All: 2nd + 3rd", "Arab: 1st: Total", "All: 1st: Existing"})
+		    in
+		        #"Removed Columns"
+		in
+		    Source
+	lineageTag: 2edde054-a445-46ec-8744-9f69c0138eb1
+	queryGroup: 'Functions\Handle Lamas Higher Ed'
+
+	annotation PBI_ResultType = Function
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'Lamas Institutions LUT' =
+		let
+		    Source = #"LUTs Lamas",
+		    Institutions_Cities_Table = Source{[Item="Institutions_Cities",Kind="Table"]}[Data]
+		in
+		    Institutions_Cities_Table
+	lineageTag: 9a30ba35-120b-4510-8f65-63c3adb072df
+	queryGroup: Source\Definitions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Institution Type #' =
+		let
+		    Source = Institution,
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"סוג מוסד"}),
+		    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+		in
+		    #"Removed Duplicates"
+	lineageTag: 7fefcde3-1340-419f-afdb-cbe5a16b713d
+	queryGroup: 'Data Model\Dimensions'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Appended Higer Ed' =
+		let
+		    Source = Table.Combine({#"Fact Lamas Graduates by Nafa", #"Fact Lamas Students by Institution", #"Fact Lamas Students by Gender", #"Fact Higher Education"})
+		in
+		    Source
+	lineageTag: c1d22c07-2fb8-4bbc-8fce-e422623f366e
+	queryGroup: 'Data Model\Dimensions'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '03 Bagrut' =
+		let
+		    Source = #"Source Data",
+		    #"Filtered Rows" = Table.SelectRows(Source, each Text.Contains([Folder Path], "/03 ")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content", "Name"})
+		in
+		    #"Removed Other Columns"
+	lineageTag: 6562e002-10d4-45b8-8000-c1ffd99b659b
+	queryGroup: 'Source\Source Data\03 Bagrut'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Bagrut - Transparency in Education Source' =
+		let
+		    Source = #"03 Bagrut",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "זכאות לבגרות - שקיפות בחינוך - 12-2023.xlsx")),
+		    Custom1 = #"Filtered Rows"[Content]{0},
+		    #"Imported Excel Workbook" = Excel.Workbook(Custom1),
+		    Sheet1_Sheet = #"Imported Excel Workbook"{[Item="Sheet1",Kind="Sheet"]}[Data],
+		    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"שנה""ל", "סמל רשות", "שם רשות", "סמל מוסד", "שם מוסד", "מגזר", "תלמידי י""ב במוסדות המגישים לבגרות", "אחוז זכאים לבגרות", "אחוז זכאות לבגרות  מצטיינת", "אחוז זכאות 5 יחידות אנגלית", "אחוז זכאות 5 יחידות מתמטיקה"}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Removed Other Columns","לא רלוונטי","0",Replacer.ReplaceValue,{"תלמידי י""ב במוסדות המגישים לבגרות", "אחוז זכאים לבגרות", "אחוז זכאות לבגרות  מצטיינת", "אחוז זכאות 5 יחידות אנגלית", "אחוז זכאות 5 יחידות מתמטיקה"}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value",{{"סמל מוסד", type text}, {"תלמידי י""ב במוסדות המגישים לבגרות", Int64.Type}, {"אחוז זכאים לבגרות", type number}, {"אחוז זכאות לבגרות  מצטיינת", type number}, {"אחוז זכאות 5 יחידות אנגלית", type number}, {"אחוז זכאות 5 יחידות מתמטיקה", type number}}),
+		    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"שנה""ל"}, #"Education Years LUT", {"שנה עברית ללא מרכאות"}, "Year", JoinKind.LeftOuter),
+		    #"Expanded Year" = Table.ExpandTableColumn(#"Merged Queries", "Year", {"שנה לועזית - סטודנטים"}, {"Year"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Expanded Year",{{"Year", Int64.Type}}),
+		    #"Divided Column" = Table.TransformColumns(#"Changed Type1", {{"אחוז זכאים לבגרות", each _ / 100, type number}}),
+		    #"Divided Column1" = Table.TransformColumns(#"Divided Column", {{"אחוז זכאות לבגרות  מצטיינת", each _ / 100, type number}}),
+		    #"Divided Column2" = Table.TransformColumns(#"Divided Column1", {{"אחוז זכאות 5 יחידות אנגלית", each _ / 100, type number}}),
+		    #"Divided Column3" = Table.TransformColumns(#"Divided Column2", {{"אחוז זכאות 5 יחידות מתמטיקה", each _ / 100, type number}})
+		in
+		    #"Divided Column3"
+	lineageTag: 4fe8621a-f434-4027-9409-41904ef041d3
+	queryGroup: 'Source\Source Data\03 Bagrut'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Bagrut - Additional Data Source' =
+		let
+		    Source = #"03 Bagrut",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "זכאות לבגרות - נתונים נוספים 2017-2022.xlsx")),
+		    Content = #"Filtered Rows"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    #"Filtered Rows1" = Table.SelectRows(#"Imported Excel Workbook", each ([Kind] = "Sheet")),
+		    Custom1 = #"Filtered Rows1"[Data]{0},
+		    #"Removed Top Rows" = Table.Skip(Custom1,14),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"מחזור סיום", "סמל מוסד", "לומדים בי""ב", "זכאים לבגרות שקיבלו ציון עובר בפיסיקה 5 יח""ל", "זכאים לבגרות שקיבלו ציון עובר בכימיה 5 יח""ל", "זכאים לבגרות שקיבלו ציון עובר בביולוגיה 5 יח""ל", "זכאים לבגרות שקיבלו ציון עובר במדעי המחשב 5 יח""ל", "זכאים לבגרות שקיבלו ציון עובר בתכנון ותכנות מערכות  5 יח""ל"}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Removed Other Columns",{{"מחזור סיום", Int64.Type}, {"סמל מוסד", type text}, {"לומדים בי""ב", Int64.Type}, {"זכאים לבגרות שקיבלו ציון עובר בפיסיקה 5 יח""ל", Int64.Type}, {"זכאים לבגרות שקיבלו ציון עובר בכימיה 5 יח""ל", Int64.Type}, {"זכאים לבגרות שקיבלו ציון עובר בביולוגיה 5 יח""ל", Int64.Type}, {"זכאים לבגרות שקיבלו ציון עובר במדעי המחשב 5 יח""ל", Int64.Type}, {"זכאים לבגרות שקיבלו ציון עובר בתכנון ותכנות מערכות  5 יח""ל", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: 5ff667ff-3e58-4917-9e89-15862c2ce1e8
+	queryGroup: 'Source\Source Data\03 Bagrut'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Bagrut Merged' =
+		let
+		    Source = #"Bagrut - Transparency in Education Source",
+		    #"Merged Queries" = Table.NestedJoin(Source, {"סמל מוסד", "Year"}, #"Bagrut - Additional Data Source", {"סמל מוסד", "מחזור סיום"}, "Additional", JoinKind.FullOuter),
+		    #"Expanded Additional" = Table.ExpandTableColumn(#"Merged Queries", "Additional", {"מחזור סיום", "סמל מוסד", "לומדים בי""ב", "זכאים לבגרות שקיבלו ציון עובר בפיסיקה 5 יח""ל", "זכאים לבגרות שקיבלו ציון עובר בכימיה 5 יח""ל", "זכאים לבגרות שקיבלו ציון עובר בביולוגיה 5 יח""ל", "זכאים לבגרות שקיבלו ציון עובר במדעי המחשב 5 יח""ל", "זכאים לבגרות שקיבלו ציון עובר בתכנון ותכנות מערכות  5 יח""ל"}, {"Additional.מחזור סיום", "Additional.סמל מוסד", "Additional.לומדים בי""ב", "Additional.זכאים לבגרות שקיבלו ציון עובר בפיסיקה 5 יח""ל", "Additional.זכאים לבגרות שקיבלו ציון עובר בכימיה 5 יח""ל", "Additional.זכאים לבגרות שקיבלו ציון עובר בביולוגיה 5 יח""ל", "Additional.זכאים לבגרות שקיבלו ציון עובר במדעי המחשב 5 יח""ל", "Additional.זכאים לבגרות שקיבלו ציון עובר בתכנון ותכנות מערכות  5 יח""ל"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Expanded Additional",{{"Additional.לומדים בי""ב", "12th Grade Students AD"}, {"Additional.זכאים לבגרות שקיבלו ציון עובר בפיסיקה 5 יח""ל", "פיסיקה"}, {"Additional.זכאים לבגרות שקיבלו ציון עובר בכימיה 5 יח""ל", "כימיה"}, {"Additional.זכאים לבגרות שקיבלו ציון עובר בביולוגיה 5 יח""ל", "ביולוגיה"}, {"Additional.זכאים לבגרות שקיבלו ציון עובר במדעי המחשב 5 יח""ל", "מדעי המחשב"}, {"Additional.זכאים לבגרות שקיבלו ציון עובר בתכנון ותכנות מערכות  5 יח""ל", "תכנון ותכנות מערכות"}, {"תלמידי י""ב במוסדות המגישים לבגרות", "12th Grade Students"}}),
+		    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "בגרות בהצטיינות", each [12th Grade Students] * [אחוז זכאות לבגרות  מצטיינת]),
+		    #"Added Custom1" = Table.AddColumn(#"Added Custom", "אנגלית", each [12th Grade Students] * [אחוז זכאות 5 יחידות אנגלית]),
+		    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "מתמטיקה", each [12th Grade Students] * [אחוז זכאות 5 יחידות מתמטיקה]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom2",{{"בגרות בהצטיינות", Int64.Type}, {"אנגלית", Int64.Type}, {"מתמטיקה", Int64.Type}}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"אחוז זכאים לבגרות", "אחוז זכאות לבגרות  מצטיינת", "אחוז זכאות 5 יחידות אנגלית", "אחוז זכאות 5 יחידות מתמטיקה", "Year"}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Removed Columns","בדואי","Arab",Replacer.ReplaceText,{"מגזר"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","דרוזי","Arab",Replacer.ReplaceText,{"מגזר"}),
+		    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","יהודי","Jewish",Replacer.ReplaceText,{"מגזר"}),
+		    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","ערבי","Arab",Replacer.ReplaceText,{"מגזר"}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Replaced Value3",{{"מגזר", "Population"}}),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Renamed Columns1",{"Additional.סמל מוסד"}),
+		    #"Merged Queries1" = Table.NestedJoin(#"Removed Columns1", {"שם רשות"}, #"Cities Councils Transparency LUT", {"שמות רשות / מועצה אזורית -  שקיפות בחינוך"}, "Cities Councils Transparency LUT", JoinKind.LeftOuter),
+		    #"Expanded Cities Councils Transparency LUT" = Table.ExpandTableColumn(#"Merged Queries1", "Cities Councils Transparency LUT", {"נפה", "שם יישוב - למ""ס", "שם ראשות - למ""ס"}, {"נפה", "שם יישוב - למ""ס", "שם ראשות - למ""ס"}),
+		    #"Added Index" = Table.AddIndexColumn(#"Expanded Cities Councils Transparency LUT", "Index", 0, 1, Int64.Type)
+		in
+		    #"Added Index"
+	lineageTag: 69de8436-6746-4809-a59f-24cc608bd568
+	queryGroup: 'Source\Source Data\03 Bagrut'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'LUTs Transparency' =
+		let
+		    Source = #"BI Definitions",
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"Content", "Name"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Removed Other Columns", each ([Name] = "קובץ עזר - יישובים מועצות ונפות.xlsx")),
+		    Content = #"Filtered Rows"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    Cities_Councels_Transparency_Table = #"Imported Excel Workbook"{[Item="Cities_Councels_Transparency",Kind="Table"]}[Data]
+		in
+		    Cities_Councels_Transparency_Table
+	lineageTag: b1b2a4fb-7f90-4f7f-bec2-17e6bc1d6377
+	queryGroup: Source\Definitions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Cities Councils Transparency LUT' =
+		let
+		    Source = #"LUTs Transparency"
+		in
+		    Source
+	lineageTag: 2b058506-0e35-403f-ac1c-9fb913848a10
+	queryGroup: Source\Definitions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Key Metrics' =
+		let
+		    Source = #"BI Definitions",
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"Content", "Name"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Removed Other Columns", each ([Name] = "Key Metrics.xlsx")),
+		    Content = #"Filtered Rows"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content)
+		in
+		    #"Imported Excel Workbook"
+	lineageTag: fb18f78f-ea1d-4cd5-8022-1ff4a23d12d2
+	queryGroup: Source\Definitions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '04 Population' =
+		let
+		    Source = #"Sharepoint Folder",
+		    #"Filtered Rows" = Table.SelectRows(Source, each Text.Contains([Folder Path], "/04 ")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content", "Name"})
+		in
+		    #"Removed Other Columns"
+	lineageTag: e23fe9cb-6fb8-4bc1-9088-dcfa0a0279f7
+	queryGroup: 'Source\Source Data\04 Population'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Population 2000 - 2019 Source' =
+		let
+		    Source = #"04 Population",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "אוכלוסייה 2019-2000.xlsx")),
+		    Content = #"Filtered Rows"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    #"Filtered Rows1" = Table.SelectRows(#"Imported Excel Workbook", each ([Name] <> "הגדרות והסברים")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows1",{"Name", "Data"})
+		in
+		    #"Removed Other Columns"
+	lineageTag: f102b8a5-1c81-4d25-81da-fe0beb643517
+	queryGroup: 'Source\Source Data\04 Population'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '2020 & Later Source' =
+		let
+		    Source = #"04 Population",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] <> "אוכלוסייה 2019-2000.xlsx"))
+		in
+		    #"Filtered Rows"
+	lineageTag: 88c0918c-6e0a-475f-809e-bfeaef0de2b4
+	queryGroup: 'Source\Source Data\04 Population'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '2000 - 2019 Sample Sheet' =
+		let
+		    Source = #"Population 2000 - 2019 Source",
+		    Data = Source{8}[Data]
+		in
+		    Data
+	lineageTag: 78772f45-5e3f-40a0-ba0b-22478f359d53
+	queryGroup: 'Source\Source Data\04 Population\Population 2000 - 2019'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Population 2000 - 2019' =
+		let
+		    Source = (p04ReplaceLowNumberWith as text, t as table) => let
+		    Source = t,
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Column5] <> null)),
+		    #"Filled Down1" = Table.FillDown(#"Filtered Rows",{"Column1", "Column2", "Column3", "Column4"}),
+		    #"Removed Top Rows" = Table.Skip(#"Filled Down1",1),
+		    #"Replaced Value3" = Table.ReplaceValue(#"Removed Top Rows","מחוז*","מחוז",Replacer.ReplaceText,{"Column2"}),
+		    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","נפה*","נפה",Replacer.ReplaceText,{"Column3"}),
+		    #"Promoted Headers1" = Table.PromoteHeaders(#"Replaced Value4", [PromoteAllScalars=true]),
+		    #"Replaced Value2" = Table.ReplaceValue(#"Promoted Headers1","נפה","סך הכל",Replacer.ReplaceText,{"נפה"}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Replaced Value2", {"קבוצת אוכלוסייה", "מחוז", "נפה", "מין"}, "Attribute", "Value"),
+		    #"Renamed Columns" = Table.RenameColumns(#"Unpivoted Other Columns",{{"Attribute", "Age"}, {"מין", "Sex"}, {"נפה", "Nafa"}, {"מחוז", "District"}, {"קבוצת אוכלוסייה", "Population"}}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Value", type text}}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","-","0",Replacer.ReplaceText,{"Value"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","..",p04ReplaceLowNumberWith,Replacer.ReplaceText,{"Value"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Replaced Value1",{{"Value", type number}}),
+		    #"Replaced Value5" = Table.ReplaceValue(#"Changed Type1","סך הכל","סה""כ",Replacer.ReplaceText,{"Population", "District", "Nafa", "Sex", "Age"})
+		in
+		    #"Replaced Value5"
+		in
+		    Source
+	lineageTag: 3f0cd6bc-e36b-4202-ad8b-555c90dce081
+	queryGroup: 'Source\Source Data\04 Population\Population 2000 - 2019'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression 'Population 2000 - 2019 Clean' =
+		let
+		    Source = #"Population 2000 - 2019 Source",
+		    #"Invoked Custom Function" = Table.AddColumn(Source, "Population 2000 - 2019", each #"Population 2000 - 2019"("1.5", [Data])),
+		    #"Removed Columns" = Table.RemoveColumns(#"Invoked Custom Function",{"Data"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Name", "Year"}}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Year", Int64.Type}}),
+		    #"Expanded Population 2000 - 2019" = Table.ExpandTableColumn(#"Changed Type", "Population 2000 - 2019", {"Population", "District", "Nafa", "Sex", "Age", "Value"}, {"Population", "District", "Nafa", "Sex", "Age", "Value"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Expanded Population 2000 - 2019",{{"Population", type text}, {"District", type text}, {"Nafa", type text}, {"Sex", type text}, {"Age", type text}, {"Value", type number}})
+		in
+		    #"Changed Type1"
+	lineageTag: 95c1c225-a4ca-4b10-9132-dcecfd2dfaab
+	queryGroup: 'Source\Source Data\04 Population'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Override Institution Name' =
+		let
+		    Source = #"BI Definitions",
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"Content", "Name"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Removed Other Columns", each ([Name] = "טבלאות עזר והמרה - למס עיבוד מיוחד.xlsx")),
+		    Content = #"Filtered Rows"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    #"Filtered Rows1" = Table.SelectRows(#"Imported Excel Workbook", each ([Name] = "איחוד - מוסדות")),
+		    #"Removed Other Columns1" = Table.SelectColumns(#"Filtered Rows1",{"Data"}),
+		    Data = #"Removed Other Columns1"{0}[Data],
+		    #"Promoted Headers" = Table.PromoteHeaders(Data, [PromoteAllScalars=true])
+		in
+		    #"Promoted Headers"
+	lineageTag: c3ac7826-19c6-4b02-ab19-f4ab1ffdc121
+	queryGroup: 'Source\Source Data\01 Higher Education\Manual Override'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Population 2000 - 2019 Before Append' =
+		let
+		    Source = #"Population 2000 - 2019 Clean",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Nafa] = "סה""כ") and ([District] = "סה""כ")),
+		    #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows",{"District", "Nafa"}),
+		    #"Filtered Rows1" = Table.SelectRows(#"Removed Columns", each ([Age] <> "סה""כ") and ([Sex] <> "סה""כ") and ([Population] <> "סה""כ")),
+		    #"Replaced Value" = Table.ReplaceValue(#"Filtered Rows1","יהודים ואחרים","Other",Replacer.ReplaceText,{"Population"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","ערבים","Arab",Replacer.ReplaceText,{"Population"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Replaced Value1",{{"Sex", "Gender"}}),
+		    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns", {"Age"}, #"Ages LUT", {"Age 2000-2019"}, "Ages", JoinKind.LeftOuter),
+		    #"Expanded Ages" = Table.ExpandTableColumn(#"Merged Queries", "Ages", {"Age"}, {"Age.1"}),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Expanded Ages",{"Age"}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns1",{{"Age.1", "Age"}})
+		in
+		    #"Renamed Columns1"
+	lineageTag: 1071958a-d463-4156-8e5e-b3028aaf1543
+	queryGroup: 'Source\Source Data\04 Population'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Population After 2019 Sample File' =
+		let
+		    Source = #"04 Population",
+		    Content = Source{1}[Content]
+		in
+		    Content
+	lineageTag: 8f173038-f7d2-4358-9af1-bc01b8136bba
+	queryGroup: 'Source\Source Data\04 Population\Population After 2019'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Binary
+
+expression pPopAfter2019SampleFile = #"Population After 2019 Sample File" meta [IsParameterQuery=true, BinaryIdentifier=#"Population After 2019 Sample File", Type="Binary", IsParameterQueryRequired=true]
+	lineageTag: 340f3e34-ec3b-45bd-ba38-d8c4ce1098ba
+	queryGroup: 'Source\Source Data\04 Population\Population After 2019'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Handle Population After 2019 for Fn' =
+		let
+		    Source = Excel.Workbook(pPopAfter2019SampleFile, null, true),
+		    #"Filtered Rows" = Table.SelectRows(Source, each not Text.Contains([Name], "הגדרות והסברים")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Data"}),
+		    Data = #"Removed Other Columns"{0}[Data],
+		    #"Removed Top Rows" = Table.Skip(Data,8),
+		    #"Filtered Rows1" = Table.SelectRows(#"Removed Top Rows", each ([Column4] <> null)),
+		    #"Removed Other Columns1" = Table.SelectColumns(#"Filtered Rows1",{"Column1", "Column2", "Column3", "Column4", "Column5"}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Removed Other Columns1",{"Column3"}),
+		    #"Filled Down" = Table.FillDown(#"Removed Columns",{"Column1", "Column2", "Column4", "Column5"}),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Filled Down", [PromoteAllScalars=true]),
+		    #"Promoted Headers1" = Table.PromoteHeaders(#"Promoted Headers", [PromoteAllScalars=true]),
+		    #"Filtered Rows2" = Table.SelectRows(#"Promoted Headers1", each ([מין] <> "סך הכל") and ([גיל] <> "סך הכל"))
+		in
+		    #"Filtered Rows2"
+	lineageTag: e3e965d8-7880-4d61-86aa-660c7635188e
+	queryGroup: 'Source\Source Data\04 Population\Population After 2019'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Handle Population After 2019' =
+		let
+		    Source = (pPopAfter2019SampleFile as binary) => let
+		    Source = Excel.Workbook(pPopAfter2019SampleFile, null, true),
+		    #"Filtered Rows" = Table.SelectRows(Source, each not Text.Contains([Name], "הגדרות והסברים")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Data"}),
+		    Data = #"Removed Other Columns"{0}[Data],
+		    #"Removed Top Rows" = Table.Skip(Data,8),
+		    #"Filtered Rows1" = Table.SelectRows(#"Removed Top Rows", each ([Column4] <> null)),
+		    #"Removed Other Columns1" = Table.SelectColumns(#"Filtered Rows1",{"Column1", "Column2", "Column3", "Column4", "Column5"}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Removed Other Columns1",{"Column3"}),
+		    #"Filled Down" = Table.FillDown(#"Removed Columns",{"Column1", "Column2", "Column4", "Column5"}),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Filled Down", [PromoteAllScalars=true]),
+		    #"Promoted Headers1" = Table.PromoteHeaders(#"Promoted Headers", [PromoteAllScalars=true]),
+		    #"Filtered Rows2" = Table.SelectRows(#"Promoted Headers1", each ([מין] <> "סך הכל") and ([גיל] <> "סך הכל"))
+		in
+		    #"Filtered Rows2"
+		in
+		    Source
+	lineageTag: 6f209d5b-d746-43da-8500-3f69ce886401
+	queryGroup: 'Source\Source Data\04 Population\Population After 2019'
+
+	annotation PBI_ResultType = Function
+
+expression 'Population After 2019 Before Append' =
+		let
+		    Source = #"04 Population",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] <> "אוכלוסייה 2019-2000.xlsx")),
+		    #"Extracted Text Before Delimiter" = Table.TransformColumns(#"Filtered Rows", {{"Name", each Text.BeforeDelimiter(_, "."), type text}}),
+		    #"Extracted Text After Delimiter" = Table.TransformColumns(#"Extracted Text Before Delimiter", {{"Name", each Text.AfterDelimiter(_, " "), type text}}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Extracted Text After Delimiter",{{"Name", "Year"}}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Year", Int64.Type}}),
+		    #"Invoked Custom Function" = Table.AddColumn(#"Changed Type", "Handle Population After 2019", each #"Handle Population After 2019"([Content])),
+		    #"Removed Columns" = Table.RemoveColumns(#"Invoked Custom Function",{"Content"}),
+		    #"Expanded Handle Population After 2019" = Table.ExpandTableColumn(#"Removed Columns", "Handle Population After 2019", {"מין", "גיל", "יהודים ואחרים", "ערבים(1)"}, {"מין", "גיל", "יהודים ואחרים", "ערבים(1)"}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Expanded Handle Population After 2019",{{"יהודים ואחרים", "Other"}, {"ערבים(1)", "Arab"}, {"מין", "Gender"}, {"גיל", "Age"}}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns1","זכרים","גברים",Replacer.ReplaceText,{"Gender"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","נקבות","נשים",Replacer.ReplaceText,{"Gender"}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Replaced Value1", {"Year", "Gender", "Age"}, "Attribute", "Value"),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Unpivoted Other Columns",{{"Age", type text}}),
+		    #"Renamed Columns2" = Table.RenameColumns(#"Changed Type1",{{"Attribute", "Population"}}),
+		    #"Changed Type2" = Table.TransformColumnTypes(#"Renamed Columns2",{{"Value", type text}}),
+		    #"Replaced Value2" = Table.ReplaceValue(#"Changed Type2","-","0",Replacer.ReplaceText,{"Value"}),
+		    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","..",p04ReplaceLowNumberWith,Replacer.ReplaceText,{"Value"}),
+		    #"Changed Type3" = Table.TransformColumnTypes(#"Replaced Value3",{{"Value", type number}}),
+		    #"Merged Queries" = Table.NestedJoin(#"Changed Type3", {"Age"}, #"Ages LUT", {"Age After 2019"}, "Ages", JoinKind.LeftOuter),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Merged Queries",{"Age"}),
+		    #"Expanded Ages" = Table.ExpandTableColumn(#"Removed Columns1", "Ages", {"Age"}, {"Age"})
+		in
+		    #"Expanded Ages"
+	lineageTag: c88e2561-ca6e-4887-a8e1-fd4699e68649
+	queryGroup: 'Source\Source Data\04 Population'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Population 2000 - 2019 for Fn -DISCONNECTED' =
+		let
+		    Source = #"2000 - 2019 Sample Sheet",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Column5] <> null)),
+		    #"Filled Down1" = Table.FillDown(#"Filtered Rows",{"Column1", "Column2", "Column3", "Column4"}),
+		    #"Removed Top Rows" = Table.Skip(#"Filled Down1",1),
+		    #"Replaced Value3" = Table.ReplaceValue(#"Removed Top Rows","מחוז*","מחוז",Replacer.ReplaceText,{"Column2"}),
+		    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","נפה*","נפה",Replacer.ReplaceText,{"Column3"}),
+		    #"Promoted Headers1" = Table.PromoteHeaders(#"Replaced Value4", [PromoteAllScalars=true]),
+		    #"Replaced Value2" = Table.ReplaceValue(#"Promoted Headers1","נפה","סך הכל",Replacer.ReplaceText,{"נפה"}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Replaced Value2", {"קבוצת אוכלוסייה", "מחוז", "נפה", "מין"}, "Attribute", "Value"),
+		    #"Renamed Columns" = Table.RenameColumns(#"Unpivoted Other Columns",{{"Attribute", "Age"}, {"מין", "Sex"}, {"נפה", "Nafa"}, {"מחוז", "District"}, {"קבוצת אוכלוסייה", "Population"}}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Value", type text}}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","-","0",Replacer.ReplaceText,{"Value"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","..",p04ReplaceLowNumberWith,Replacer.ReplaceText,{"Value"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Replaced Value1",{{"Value", type number}}),
+		    #"Replaced Value5" = Table.ReplaceValue(#"Changed Type1","סך הכל","סה""כ",Replacer.ReplaceText,{"Population", "District", "Nafa", "Sex", "Age"})
+		in
+		    #"Replaced Value5"
+	lineageTag: 287d97d3-7fea-444c-9404-e5b35f24152f
+	queryGroup: 'Source\Source Data\04 Population\Population 2000 - 2019'
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'Subject Category Manual Override' =
+		let
+		    Source = LUTs,
+		    Table5_Table = Source{[Item="Table5",Kind="Table"]}[Data]
+		in
+		    Table5_Table
+	lineageTag: e283ad47-ae3e-489e-aa3d-a3f5b6bfacda
+	queryGroup: Source\Definitions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Occupations LUT' =
+		let
+		    Source = #"Subjects And Occupations LUT",
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"קטגוריות - עבור הדשבורד", "מספר תחום"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Removed Other Columns", each ([מספר תחום] <> null)),
+		    #"Removed Duplicates" = Table.Distinct(#"Filtered Rows"),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Removed Duplicates",{{"מספר תחום", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: f38cb60c-85b6-42f2-ad45-a50c3885222c
+	queryGroup: Source\Definitions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '2021 Salaries Source' =
+		let
+		    Source = #"Source Data",
+		    #"Filtered Rows" = Table.SelectRows(Source, each Text.Contains([Folder Path], "/Source Data/05")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content", "Name"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    #"Removed Other Columns1" = Table.SelectColumns(#"Imported Excel Workbook",{"Data"}),
+		    Data = #"Removed Other Columns1"{0}[Data]
+		in
+		    Data
+	lineageTag: e811c1ef-4b72-45e7-a3a3-1ff2e334821c
+	queryGroup: 'Source\Source Data\05 Graduates Salaries 2021'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Graduates 2021' =
+		let
+		    Source = #"Source Data",
+		    #"Filtered Rows" = Table.SelectRows(Source, each Text.Contains([Folder Path], "/Source Data/05")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content", "Name"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    #"Removed Other Columns1" = Table.SelectColumns(#"Imported Excel Workbook",{"Data"}),
+		    Data = #"Removed Other Columns1"{0}[Data],
+		    #"Removed Top Rows" = Table.Skip(Data,5),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+		    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"Column2", "Subject Code"}}),
+		    #"Filtered Rows1" = Table.SelectRows(#"Renamed Columns", each ([Subject Code] <> null)),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Filtered Rows1",{{"Column1", "Population"}}),
+		    #"Filled Down" = Table.FillDown(#"Renamed Columns1",{"Population"}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Filled Down",{{"Subject Code", Int64.Type}}),
+		    #"Removed Other Columns2" = Table.SelectColumns(#"Changed Type",{"Population", "Subject Code", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Removed Other Columns2", {"Population", "Subject Code"}, "Attribute", "Value"),
+		    #"Filtered Rows2" = Table.SelectRows(#"Unpivoted Other Columns", each ([Value] <> "..")),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Filtered Rows2",{{"Value", Int64.Type}}),
+		    #"Renamed Columns2" = Table.RenameColumns(#"Changed Type1",{{"Attribute", "Graduation Year"}}),
+		    #"Changed Type2" = Table.TransformColumnTypes(#"Renamed Columns2",{{"Graduation Year", Int64.Type}}),
+		    #"Added Custom" = Table.AddColumn(#"Changed Type2", "Years Since Graduation", each 2021 - [Graduation Year]),
+		    #"Changed Type3" = Table.TransformColumnTypes(#"Added Custom",{{"Years Since Graduation", Int64.Type}}),
+		    #"Merged Queries" = Table.NestedJoin(#"Changed Type3", {"Subject Code"}, #"Occupations LUT", {"מספר תחום"}, "Occupations LUT", JoinKind.LeftOuter),
+		    #"Expanded Occupations LUT" = Table.ExpandTableColumn(#"Merged Queries", "Occupations LUT", {"קטגוריות - עבור הדשבורד"}, {"תחום"}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Expanded Occupations LUT",{"Subject Code"}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Removed Columns","יהודים ואחרים","Other",Replacer.ReplaceText,{"Population"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","ערבים","Arab",Replacer.ReplaceText,{"Population"})
+		in
+		    #"Replaced Value1"
+	lineageTag: 51da9043-1f71-4351-bffc-75ac3070f9c8
+	queryGroup: 'Source\Source Data\05 Graduates Salaries 2021'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Salaries 2021' =
+		let
+		    Source = #"2021 Salaries Source",
+		    #"Removed Top Rows" = Table.Skip(Source,5),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+		    #"Filtered Rows1" = Table.SelectRows(#"Promoted Headers", each ([Column17] <> null)),
+		    #"Renamed Columns" = Table.RenameColumns(#"Filtered Rows1",{{"Column16", "Population"}}),
+		    #"Filled Down" = Table.FillDown(#"Renamed Columns",{"Population"}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Filled Down",{{"Column17", "Subject Code"}}),
+		    #"Removed Other Columns2" = Table.SelectColumns(#"Renamed Columns1",{"Population", "Subject Code", "2010_1", "2011_2", "2012_3", "2013_4", "2014_5", "2015_6", "2016_7", "2017_8", "2018_9", "2019_10", "2020_11", "2021_12"}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Removed Other Columns2", {"Population", "Subject Code"}, "Attribute", "Value"),
+		    #"Renamed Columns2" = Table.RenameColumns(#"Unpivoted Other Columns",{{"Attribute", "Year"}}),
+		    #"Extracted Text Before Delimiter" = Table.TransformColumns(#"Renamed Columns2", {{"Year", each Text.BeforeDelimiter(_, "_"), type text}}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Extracted Text Before Delimiter",{{"Year", Int64.Type}, {"Value", type text}}),
+		    #"Filtered Rows2" = Table.SelectRows(#"Changed Type", each ([Value] <> "..")),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Filtered Rows2",{{"Value", type number}}),
+		    #"Added Custom" = Table.AddColumn(#"Changed Type1", "Years Since Graduation", each 2021 - [Year]),
+		    #"Changed Type2" = Table.TransformColumnTypes(#"Added Custom",{{"Years Since Graduation", Int64.Type}, {"Subject Code", Int64.Type}}),
+		    #"Merged Queries" = Table.NestedJoin(#"Changed Type2", {"Subject Code"}, #"Occupations LUT", {"מספר תחום"}, "Occupations LUT", JoinKind.LeftOuter),
+		    #"Expanded Occupations LUT" = Table.ExpandTableColumn(#"Merged Queries", "Occupations LUT", {"קטגוריות - עבור הדשבורד"}, {"תחום"}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Expanded Occupations LUT",{"Subject Code"}),
+		    #"Renamed Columns3" = Table.RenameColumns(#"Removed Columns",{{"Value", "Average Salary"}, {"Year", "Graduation Year"}}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns3","יהודים ואחרים","Other",Replacer.ReplaceText,{"Population"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","ערבים","Arab",Replacer.ReplaceText,{"Population"})
+		in
+		    #"Replaced Value1"
+	lineageTag: ee04e079-6bf7-4b70-a27e-f1cd9af76d6e
+	queryGroup: 'Source\Source Data\05 Graduates Salaries 2021'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '06 Employment Source' =
+		let
+		    Source = #"Sharepoint Folder",
+		    #"Filtered Rows" = Table.SelectRows(Source, each Text.Contains([Folder Path], "/Source Data/06"))
+		in
+		    #"Filtered Rows"
+	lineageTag: 0fd43f59-b696-4f46-b287-5e2290e0b001
+	queryGroup: 'Source\Source Data\06 Employment'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '06 Tenure Source' =
+		let
+		    Source = #"06 Employment Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each Text.Contains([Folder Path], "/ותק/")),
+		    #"Inserted Text After Delimiter" = Table.AddColumn(#"Filtered Rows", "Text After Delimiter", each Text.AfterDelimiter([Folder Path], "/", {1, RelativePosition.FromEnd}), type text),
+		    #"Extracted Text Before Delimiter" = Table.TransformColumns(#"Inserted Text After Delimiter", {{"Text After Delimiter", each Text.BeforeDelimiter(_, "/"), type text}}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Extracted Text Before Delimiter",{{"Text After Delimiter", "Tenure"}}),
+		    #"Inserted Text Before Delimiter" = Table.AddColumn(#"Renamed Columns", "Tenure Order", each Text.BeforeDelimiter([Tenure], "-"), type text),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Inserted Text Before Delimiter",{{"Tenure Order", Int64.Type}}),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"Name", "Content", "Tenure", "Tenure Order"})
+		in
+		    #"Removed Other Columns"
+	lineageTag: d0c5b650-6d31-4ba7-bcb0-68066b215a4e
+	queryGroup: 'Source\Source Data\06 Employment'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '06 Main Source' =
+		let
+		    Source = #"06 Employment Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "נתוני לינקדאין - הייטק - ראשי.xlsx")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    Hi_Tech_Table = #"Imported Excel Workbook"{[Item="Hi_Tech",Kind="Table"]}[Data]
+		in
+		    Hi_Tech_Table
+	lineageTag: 0cebed0f-e7bf-4b62-86a5-c026cf55a6f4
+	queryGroup: 'Source\Source Data\06 Employment'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '06 Companies Source' =
+		let
+		    Source = #"06 Employment Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "נתוני לינקדאין - הייטק חברות.xlsx")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    Table1_Table = #"Imported Excel Workbook"{[Item="Table1",Kind="Table"]}[Data],
+		    #"Added Custom" = Table.AddColumn(Table1_Table, "Company", each if [#"לאחר בדשבורד עם / לשנות ל"] <> null then [#"לאחר בדשבורד עם / לשנות ל"] else [Current Company], type text)
+		in
+		    #"Added Custom"
+	lineageTag: 85a5d853-6f4e-4e28-be07-3ea3676fbc57
+	queryGroup: 'Source\Source Data\06 Employment'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '06 Gender Source' =
+		let
+		    Source = #"06 Employment Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "נתוני לינקדאין - הייטק מגדר.xlsx")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    #"Hi-Tech_Sheet" = #"Imported Excel Workbook"{[Item="Hi-Tech",Kind="Sheet"]}[Data],
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Hi-Tech_Sheet", [PromoteAllScalars=true]),
+		    #"Trimmed Text" = Table.TransformColumns(#"Promoted Headers",{{"gender", Text.Trim, type text}}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Trimmed Text","female","נשים",Replacer.ReplaceText,{"gender"}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Replaced Value1","male","גברים",Replacer.ReplaceText,{"gender"}),
+		    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value","Male","גברים",Replacer.ReplaceText,{"gender"}),
+		    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","",null,Replacer.ReplaceValue,{"gender"})
+		in
+		    #"Replaced Value3"
+	lineageTag: f7089e66-1a82-4d33-acd2-e091feec5560
+	queryGroup: 'Source\Source Data\06 Employment'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '06 Positions Source' =
+		let
+		    Source = #"06 Employment Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "נתוני לינקדאין - הייטק תפקידים.xlsx")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    Table1_Table = #"Imported Excel Workbook"{[Item="Table1",Kind="Table"]}[Data]
+		in
+		    Table1_Table
+	lineageTag: f5df6ed6-f55d-4058-8341-360f82648ab9
+	queryGroup: 'Source\Source Data\06 Employment'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '06 Posistion Categories Source' =
+		let
+		    Source = #"06 Employment Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "נתוני לינקדאין - קטגוריות תפקידים.xlsx")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    Table2_Table = #"Imported Excel Workbook"{[Item="Table2",Kind="Table"]}[Data],
+		    #"Removed Other Columns1" = Table.SelectColumns(Table2_Table,{"תחום עיסוק", "תפקיד", "Is Hitech"}),
+		    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns1", {"תפקיד"})
+		in
+		    #"Removed Duplicates"
+	lineageTag: ccccb988-fee5-4f50-9ad3-516b0e9d9082
+	queryGroup: 'Source\Source Data\06 Employment'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Company Size Order LUT' =
+		let
+		    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("JcnBDQAgCATBXu6rJByKzRD6b0PB3042AqS4YmIhZ8BVx8NpmNar6X9SrLn/FhaswVdE5gU=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Company Size" = _t, Order = _t])
+		in
+		    Source
+	lineageTag: 71266681-a3dc-4625-ae1b-e6ef951af4cb
+	queryGroup: 'Source\Source Data\06 Employment'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Tenure Rows CSV Data' =
+		let
+		    Source = #"06 Tenure Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each Text.Contains([Name], ".csv")),
+		    #"Invoked Custom Function" = Table.AddColumn(#"Filtered Rows", "Handle Tenure File", each #"Handle Tenure File"([Content])),
+		    #"Removed Columns" = Table.RemoveColumns(#"Invoked Custom Function",{"Content"}),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Removed Columns",{"Tenure", "Tenure Order", "Handle Tenure File"}),
+		    #"Expanded Handle Tenure File" = Table.ExpandTableColumn(#"Removed Other Columns", "Handle Tenure File", {"Profile URL"}, {"Profile URL"}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Handle Tenure File",{{"Profile URL", type text}}),
+		    #"Filtered Rows1" = Table.SelectRows(#"Changed Type", each ([Profile URL] <> "")),
+		    #"Inserted Lowercased Text" = Table.AddColumn(#"Filtered Rows1", "lowercase", each Text.Lower([Profile URL]), type text),
+		    #"Removed Duplicates" = Table.Distinct(#"Inserted Lowercased Text", {"lowercase"}),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Removed Duplicates",{"lowercase"})
+		in
+		    #"Removed Columns1"
+	lineageTag: 0fe5cfcf-aaa1-48b6-946c-e9f104285125
+	queryGroup: 'Source\Source Data\06 Employment'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Tenure Sample File' =
+		let
+		    Source = #"06 Tenure Source",
+		    Content = Source{0}[Content]
+		in
+		    Content
+	lineageTag: ef311b72-fc4a-4f47-b810-569fdd86fae9
+	queryGroup: 'Source\Source Data\06 Employment\Handle Tenure File'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Binary
+
+expression pTenureSampleFile = #"Tenure Sample File" meta [IsParameterQuery=true, BinaryIdentifier=#"Tenure Sample File", Type="Binary", IsParameterQueryRequired=true]
+	lineageTag: 6d88adb7-adad-4df5-b177-a77057b4fefd
+	queryGroup: 'Source\Source Data\06 Employment\Handle Tenure File'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Handle Tenure File for Fn' =
+		let
+		    Source = pTenureSampleFile,
+		    #"Imported CSV" = Csv.Document(Source,[Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars=true]),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"Profile URL"})
+		in
+		    #"Removed Other Columns"
+	lineageTag: c25fe5cf-3aa0-4a80-9062-057dbd9021fa
+	queryGroup: 'Source\Source Data\06 Employment\Handle Tenure File'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Handle Tenure File' =
+		let
+		    Source = (pTenureSampleFile as binary) => let
+		    Source = pTenureSampleFile,
+		    #"Imported CSV" = Csv.Document(Source,[Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars=true]),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"Profile URL"})
+		in
+		    #"Removed Other Columns"
+		in
+		    Source
+	lineageTag: 0244d197-4eb4-4e55-9709-b180e12a49c2
+	queryGroup: 'Source\Source Data\06 Employment\Handle Tenure File'
+
+	annotation PBI_ResultType = Function
+
+expression '06 Location to District LUT' =
+		let
+		    Source = #"06 Employment Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each not Text.Contains([Folder Path], "ותק")),
+		    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each ([Name] = "נתוני לינקדאין - הייטק מחוז.xlsx")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows1",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    Export_Sheet = #"Imported Excel Workbook"{[Item="Export",Kind="Sheet"]}[Data],
+		    #"Promoted Headers" = Table.PromoteHeaders(Export_Sheet, [PromoteAllScalars=true]),
+		    #"Filtered Rows2" = Table.SelectRows(#"Promoted Headers", each ([#"אזור - להצגה בדשבורד"] <> null))
+		in
+		    #"Filtered Rows2"
+	lineageTag: 8337f465-c0d1-48ab-a73c-eca38c0d5e79
+	queryGroup: 'Source\Source Data\06 Employment'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '07 Training Source' =
+		let
+		    Source = #"Sharepoint Folder",
+		    #"Filtered Rows" = Table.SelectRows(Source, each Text.Contains([Folder Path], "/Source Data/07")),
+		    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each Text.Contains([Name], "תלמידי מהט לפי תחום לימוד ומאפיינים נוספים")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows1",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content)
+		in
+		    #"Imported Excel Workbook"
+	lineageTag: c514ba12-445f-4d22-bac5-e79d53b765ca
+	queryGroup: 'Source\Source Data\07 Training'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '07 Students by Nafa Source' =
+		let
+		    Source = #"07 Training Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "סטודנטים של מהט לפי נפה")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Data"}),
+		    Data = #"Removed Other Columns"{0}[Data]
+		in
+		    Data
+	lineageTag: 2536a23c-d3b7-421e-a7ee-004ce3605a7b
+	queryGroup: 'Source\Source Data\07 Training'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '07 Graduates by Nafa Source' =
+		let
+		    Source = #"07 Training Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "בוגרים של מהט לפי נפה")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Data"}),
+		    Data = #"Removed Other Columns"{0}[Data]
+		in
+		    Data
+	lineageTag: a94e93ec-becc-4f1c-a91e-3c0a8d38f666
+	queryGroup: 'Source\Source Data\07 Training'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '07 Students by Gender Source' =
+		let
+		    Source = #"07 Training Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "סטודנטים של מהט לפי מין")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Data"}),
+		    Data = #"Removed Other Columns"{0}[Data]
+		in
+		    Data
+	lineageTag: a9a0146b-0b0d-4aa1-9722-231a5e432a10
+	queryGroup: 'Source\Source Data\07 Training'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '07 Students by Nafa Clean' =
+		let
+		    Source = #"07 Students by Nafa Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Column3] <> null)),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Filtered Rows", [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{" מספר סטודנטים- חברה ערבית", type text}, {" מספר סטודנטים- כלל החברה", type text}}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","-","0",Replacer.ReplaceText,{" מספר סטודנטים- כלל החברה", " מספר סטודנטים- חברה ערבית"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","..",p07ReplaceLowNumberWith,Replacer.ReplaceText,{" מספר סטודנטים- כלל החברה", " מספר סטודנטים- חברה ערבית"}),
+		    #"Filled Down" = Table.FillDown(#"Replaced Value1",{"שם תחום לימודים", "נפת מגורים"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Filled Down",{{"שם תחום לימודים", "Training Subject"}, {"נפת מגורים", "Nafa"}, {"שנה", "Year"}, {" מספר סטודנטים- כלל החברה", "All Population Students"}, {" מספר סטודנטים- חברה ערבית", "Arab Population Students"}}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Renamed Columns",{{"Year", Int64.Type}, {"All Population Students", Int64.Type}, {"Arab Population Students", Int64.Type}}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Changed Type1",{{"Nafa", "Nafa o"}}),
+		    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns1", {"Nafa o"}, #"07 Nafa LUT", {"Input"}, "07 Nafa LUT", JoinKind.LeftOuter),
+		    #"Expanded 07 Nafa LUT" = Table.ExpandTableColumn(#"Merged Queries", "07 Nafa LUT", {"Output"}, {"07 Nafa LUT.Output"}),
+		    #"Added Conditional Column" = Table.AddColumn(#"Expanded 07 Nafa LUT", "Nafa", each if [07 Nafa LUT.Output] <> null then [07 Nafa LUT.Output] else [Nafa o], type text),
+		    #"Removed Columns" = Table.RemoveColumns(#"Added Conditional Column",{"Nafa o", "07 Nafa LUT.Output"})
+		in
+		    #"Removed Columns"
+	lineageTag: 04387124-d1ae-4b0a-8b72-1639ca6bdd35
+	queryGroup: 'Source\Source Data\07 Training'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '07 Graduates by Nafa Clean' =
+		let
+		    Source = #"07 Graduates by Nafa Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Column3] <> null)),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Filtered Rows", [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{" מספר סטודנטים- כלל החברה", type text}, {" מספר סטודנטים- חברה ערבית", type text}}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","-","0",Replacer.ReplaceText,{" מספר סטודנטים- כלל החברה", " מספר סטודנטים- חברה ערבית"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","..",p07ReplaceLowNumberWith,Replacer.ReplaceText,{" מספר סטודנטים- כלל החברה", " מספר סטודנטים- חברה ערבית"}),
+		    #"Filled Down" = Table.FillDown(#"Replaced Value1",{"שם תחום לימודים", "נפת מגורים"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Filled Down",{{"שם תחום לימודים", "Training Subject"}, {"נפת מגורים", "Nafa"}, {"שנה", "Year"}, {" מספר סטודנטים- כלל החברה", "All Population Students"}, {" מספר סטודנטים- חברה ערבית", "Arab Population Graduates"}}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Renamed Columns",{{"Year", Int64.Type}, {"All Population Students", Int64.Type}, {"Arab Population Graduates", Int64.Type}}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Changed Type1",{{"All Population Students", "All Population Graduates"}, {"Nafa", "Nafa o"}}),
+		    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns1", {"Nafa o"}, #"07 Nafa LUT", {"Input"}, "07 Nafa LUT", JoinKind.LeftOuter),
+		    #"Expanded 07 Nafa LUT" = Table.ExpandTableColumn(#"Merged Queries", "07 Nafa LUT", {"Output"}, {"07 Nafa LUT.Output"}),
+		    #"Added Conditional Column" = Table.AddColumn(#"Expanded 07 Nafa LUT", "Nafa", each if [07 Nafa LUT.Output] <> null then [07 Nafa LUT.Output] else [Nafa o], type text),
+		    #"Removed Columns" = Table.RemoveColumns(#"Added Conditional Column",{"Nafa o", "07 Nafa LUT.Output"})
+		in
+		    #"Removed Columns"
+	lineageTag: 6acf1783-8aec-44f1-bb21-766a8aee604e
+	queryGroup: 'Source\Source Data\07 Training'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '07 Students by Gender Clean' =
+		let
+		    Source = #"07 Students by Gender Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Column3] <> null)),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Filtered Rows", [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{" מספר סטודנטים- כלל החברה", type text}, {" מספר סטודנטים- חברה ערבית", type text}}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","-","0",Replacer.ReplaceText,{" מספר סטודנטים- כלל החברה", " מספר סטודנטים- חברה ערבית"}),
+		    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","..",p07ReplaceLowNumberWith,Replacer.ReplaceText,{" מספר סטודנטים- כלל החברה", " מספר סטודנטים- חברה ערבית"}),
+		    #"Filled Down" = Table.FillDown(#"Replaced Value1",{"שם תחום לימודים", "מגדר"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Filled Down",{{" מספר סטודנטים- כלל החברה", "All Population Students"}, {" מספר סטודנטים- חברה ערבית", "Arab Population Students"}, {"שם תחום לימודים", "Training Subject"}, {"מגדר", "Gender"}, {"שנה", "Year"}}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Renamed Columns",{{"Year", Int64.Type}, {"All Population Students", Int64.Type}, {"Arab Population Students", Int64.Type}})
+		in
+		    #"Changed Type1"
+	lineageTag: 6fa44d03-bf38-44e2-85fd-dc87b7ca1b35
+	queryGroup: 'Source\Source Data\07 Training'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression p02ReplaceLowNumberWith = "4" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: a541c7f9-f0f2-4583-ab0f-7e28735e8b55
+	queryGroup: Parameters
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression '07 Nafa LUT' =
+		let
+		    Source = #"Sharepoint Folder",
+		    #"Filtered Rows" = Table.SelectRows(Source, each Text.Contains([Folder Path], "/BI Definitions/")),
+		    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each ([Name] = "07 Nafa LUT.xlsx")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows1",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    #"Filtered Rows2" = Table.SelectRows(#"Imported Excel Workbook", each ([Kind] = "Table")),
+		    #"Removed Other Columns1" = Table.SelectColumns(#"Filtered Rows2",{"Data"}),
+		    Data = #"Removed Other Columns1"{0}[Data]
+		in
+		    Data
+	lineageTag: fee6d4d0-d8c5-4ef2-b520-be180525c0f2
+	queryGroup: 'Source\Source Data\07 Training'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '08 Bargrut Tech Folder' =
+		let
+		    Source = #"Sharepoint Folder",
+		    #"Filtered Rows" = Table.SelectRows(Source, each Text.Contains([Folder Path], "/08 "))
+		in
+		    #"Filtered Rows"
+	lineageTag: 5da5f768-d3cd-48a6-bcb3-8984b9af2d18
+	queryGroup: '08 Bagrut Tech'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '08 Bargrut Tech: Source' =
+		let
+		    Source = #"08 Bargrut Tech Folder",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "נתוני בגרות טק לפי ישוב.xlsx")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    Bagrut_tech_Table = #"Imported Excel Workbook"{[Item="Bagrut_tech",Kind="Table"]}[Data]
+		in
+		    Bagrut_tech_Table
+	lineageTag: c657a201-8b69-47f6-a8b2-82f37d4923ab
+	queryGroup: '08 Bagrut Tech'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '08 Bargrut Tech Target: Source' =
+		let
+		    Source = #"08 Bargrut Tech Folder",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "Bagrut-Tech Targets.xlsx")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    BagrutTech_Target_Table = #"Imported Excel Workbook"{[Item="BagrutTech_Target",Kind="Table"]}[Data]
+		in
+		    BagrutTech_Target_Table
+	lineageTag: 28123fed-298b-40f5-92ae-7ce835fcaded
+	queryGroup: '08 Bagrut Tech'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '08 Bargrut Tech: Clean' =
+		let
+		    Source = #"08 Bargrut Tech: Source",
+		    #"Renamed Columns" = Table.RenameColumns(Source,{{"מחזור סיום", "Year"}}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"מחוז חינוך", "סמל רשות מקומית", "מספר תושבים נוכחי", "אשכול למ""ס נוכחי", "זכאים לבגרות", "שיעור בזכאים לבגרות מהלומדים בי""ב", "מצטיינים", "שיעור המצטיינים מהלומדים בי""ב", "זכאים לבגרות שנבחנו באנגלית ברמה של 5 יח""ל", "שיעור הזכאים לבגרות שנבחנו באנגלית ברמה של 5 יח""ל מהלומדים בי""ב", "זכאים לבגרות שנבחנו במתמטיקה ברמה של 5 יח""ל", "שיעור הזכאים לבגרות שנבחנו במתמטיקה ברמה של 5 יח""ל מהלומדים בי""ב", "שיעור הזכאים לבגרות שנבחנו באנגלית 5 יח""ל ומתמטיקה 5 יח""ל ופיסיקה או מדעי המחשב ברמה של 5 יח""ל מהלומדים בי""ב"}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns",{{"זכאים לבגרות שנבחנו באנגלית 5 יח""ל ומתמטיקה 5 יח""ל ופיסיקה או מדעי המחשב ברמה של 5 יח""ל", "Bagrut-Tech"}, {"לומדים בי""ב", "12 Grade"}, {"מגדר", "Gender"}}),
+		    #"Trimmed Text" = Table.TransformColumns(#"Renamed Columns1",{{"שם רשות מקומית", Text.Trim, type text}}),
+		    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text",{{"שם רשות מקומית", Text.Clean, type text}}),
+		    #"Renamed Columns2" = Table.RenameColumns(#"Cleaned Text",{{"שם רשות מקומית", "שם רשות מקומית o"}}),
+		    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns2", {"שם רשות מקומית o"}, #"08 Rashut Bagrut-Tech to Rashut Corrected Lamas LUT", {"רשות בגרות-טק"}, "שם רשות מקומית", JoinKind.LeftOuter),
+		    #"Expanded שם רשות מקומית" = Table.ExpandTableColumn(#"Merged Queries", "שם רשות מקומית", {"רשות מתוקנת למ""ס"}, {"רשות מתוקנת למ""ס"}),
+		    #"Added Custom" = Table.AddColumn(#"Expanded שם רשות מקומית", "שם רשות מקומית", each if [#"רשות מתוקנת למ""ס"] <> null then [#"רשות מתוקנת למ""ס"] else [שם רשות מקומית o], type text),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom",{"שם רשות מקומית o", "רשות מתוקנת למ""ס"})
+		in
+		    #"Removed Columns1"
+	lineageTag: be4c0d26-7bda-450f-9955-6b922be7fd15
+	queryGroup: '08 Bagrut Tech'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression p04ReplaceLowNumberWith = "1.5" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 955a5eb6-911d-4a28-ab03-bcd58c113345
+	queryGroup: Parameters
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression p07ReplaceLowNumberWith = "1" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 0d940995-5260-46fc-8c93-6f25f099dd72
+	queryGroup: Parameters
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression '08 Misrot Tech Target: Source' =
+		let
+		    Source = #"08 Bargrut Tech Folder",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "יעדים למשרות טק.xlsx")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    KPI_Table = #"Imported Excel Workbook"{[Item="KPI",Kind="Table"]}[Data],
+		    #"Filtered Rows1" = Table.SelectRows(KPI_Table, each ([מגדר] <> "ALL")),
+		    #"Renamed Columns" = Table.RenameColumns(#"Filtered Rows1",{{"יעד לשנת 2035 באלפים", "Target (K)"}}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Target (K)", Int64.Type}}),
+		    #"Added Custom" = Table.AddColumn(#"Changed Type", "Year", each 2035),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"Year", Int64.Type}}),
+		    #"Multiplied Column" = Table.TransformColumns(#"Changed Type1", {{"Target (K)", each _ * 1000, type number}}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Multiplied Column",{{"Target (K)", "Target"}}),
+		    #"Changed Type2" = Table.TransformColumnTypes(#"Renamed Columns1",{{"Target", Int64.Type}})
+		in
+		    #"Changed Type2"
+	lineageTag: 1bd07e16-ac1e-4862-ae4f-0ee6f8a4b0b7
+	queryGroup: '08 Bagrut Tech'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '08 Misrot Tech: Source' =
+		let
+		    Source = #"08 Bargrut Tech Folder",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "מועסקים במשלחי יד משרות-טק לפי ועדת פרלמוטר 2020-2022.xlsx")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    Table2_Table = #"Imported Excel Workbook"{[Item="Table2",Kind="Table"]}[Data],
+		    #"Renamed Columns" = Table.RenameColumns(Table2_Table,{{"שנה", "Year"}, {"מגדר", "מגזר"}, {"סך מועסקים בכלל משלחי היד שברשימה בגיליון 2  (אלפים)", "Total Tech-Employed (K)"}, {"מזה: מספר נשים (אלפים)", "Women Tech-Employed"}}),
+		    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "Men Tech-Employed (K)", each [#"Total Tech-Employed (K)"] - [#"Women Tech-Employed"], type number),
+		    #"Removed Columns" = Table.RemoveColumns(#"Added Custom",{"Total Tech-Employed (K)"}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns",{{"Women Tech-Employed", "נשים"}, {"Men Tech-Employed (K)", "גברים"}}),
+		    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Renamed Columns1", {"Year", "מגזר"}, "Attribute", "Value"),
+		    #"Renamed Columns2" = Table.RenameColumns(#"Unpivoted Columns",{{"Attribute", "Sex"}}),
+		    #"Multiplied Column" = Table.TransformColumns(#"Renamed Columns2", {{"Value", each _ * 1000, type number}}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Multiplied Column",{{"Value", Int64.Type}}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","חברה ערבית","החברה הערבית",Replacer.ReplaceText,{"מגזר"}),
+		    #"Pivoted Column" = Table.Pivot(#"Replaced Value", List.Distinct(#"Replaced Value"[מגזר]), "מגזר", "Value", List.Sum),
+		    #"Added Custom1" = Table.AddColumn(#"Pivoted Column", "החברה היהודית", each [כלל האוכלוסיה] - [החברה הערבית]),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom1",{{"החברה היהודית", Int64.Type}}),
+		    #"Unpivoted Columns1" = Table.UnpivotOtherColumns(#"Changed Type1", {"Year", "Sex"}, "מגזר", "Value")
+		in
+		    #"Unpivoted Columns1"
+	lineageTag: 03113081-3f2f-4f33-a3e5-713adb496722
+	queryGroup: '08 Bagrut Tech'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '08 Rashut Bagrut-Tech to Rashut Corrected Lamas LUT' =
+		let
+		    Source = #"LUTs Lamas",
+		    RashutBagrutTech_to_RashutCorrectedLamas_Table = Source{[Item="RashutBagrutTech_to_RashutCorrectedLamas",Kind="Table"]}[Data]
+		in
+		    RashutBagrutTech_to_RashutCorrectedLamas_Table
+	lineageTag: 7faf6438-ff06-4c1f-bcc4-bcfb5e3fc705
+	queryGroup: '08 Bagrut Tech'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

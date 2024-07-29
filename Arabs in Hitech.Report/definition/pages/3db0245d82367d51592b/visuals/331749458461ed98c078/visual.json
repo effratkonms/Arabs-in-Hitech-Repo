@@ -1,0 +1,260 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "331749458461ed98c078",
+  "position": {
+    "x": 48,
+    "y": 304,
+    "z": 11000,
+    "width": 928,
+    "height": 1440,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Lamas Council Corrected"
+                    }
+                  },
+                  "Property": "Rashut Corrected"
+                }
+              },
+              "queryRef": "Lamas Council Corrected.Rashut Corrected",
+              "nativeQueryRef": "רשות מתוקנת למ\"ס",
+              "displayName": "רשות מתוקנת למ\"ס"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact 08 Bargrut Tech"
+                    }
+                  },
+                  "Property": "שם רשות מקומית"
+                }
+              },
+              "queryRef": "Fact 08 Bargrut Tech.שם רשות מקומית",
+              "nativeQueryRef": "רשות בגרות-טק",
+              "displayName": "רשות בגרות-טק"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact 08 Bargrut Tech"
+                    }
+                  },
+                  "Property": "Bagrut-Tech, % Eligible"
+                }
+              },
+              "queryRef": "Fact 08 Bargrut Tech.Bagrut-Tech, % Eligible",
+              "nativeQueryRef": "Bagrut-Tech, % Eligible"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact 08 Bargrut Tech"
+                    }
+                  },
+                  "Property": "SUM Bagrut-Tech, 12th Grade Students"
+                }
+              },
+              "queryRef": "Fact 08 Bargrut Tech.SUM Bagrut-Tech, 12th Grade Students",
+              "nativeQueryRef": "SUM Bagrut-Tech, 12th Grade Students"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact 08 Bargrut Tech"
+                    }
+                  },
+                  "Property": "SUM Bagrut-Tech, Eligible for Bagrut-Tech"
+                }
+              },
+              "queryRef": "Fact 08 Bargrut Tech.SUM Bagrut-Tech, Eligible for Bagrut-Tech",
+              "nativeQueryRef": "SUM Bagrut-Tech, Eligible for Bagrut-Tech"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Lamas Council Corrected"
+                  }
+                },
+                "Property": "Rashut Corrected"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "157.91126583798487D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Fact 08 Bargrut Tech.SUM Bagrut-Tech, 12th Grade Students"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "184.56524845444636D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Fact 08 Bargrut Tech.SUM Bagrut-Tech, Eligible for Bagrut-Tech"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "175.26026321262435D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Fact 08 Bargrut Tech.שם רשות מקומית"
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'רשויות ללא חיבור לנפה'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'right'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "18D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "spacing": [
+        {
+          "properties": {
+            "verticalSpacing": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

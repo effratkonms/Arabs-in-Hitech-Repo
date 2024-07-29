@@ -1,0 +1,40 @@
+table 'CG Select Population'
+	lineageTag: 1ba38ce3-44b2-4aaa-8e18-bd101f898b4a
+
+	calculationGroup
+
+		calculationItem 'החברה הערבית' =
+				
+				CALCULATE(
+				    SELECTEDMEASURE(),
+				    FILTER(
+				        ALL(Population),
+				        Population[Population] = "Arab"
+				    )
+				)
+
+		calculationItem 'כלל האוכלוסיה' =
+				
+				CALCULATE(
+				    SELECTEDMEASURE(),
+				    ALL(Population)
+				)
+
+	column Name
+		dataType: string
+		lineageTag: 6a296309-90d0-4e79-bf81-44c473af55b4
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		lineageTag: 66f480f3-11d0-42ef-9882-6f0399238198
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

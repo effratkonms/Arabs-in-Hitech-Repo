@@ -1,0 +1,27 @@
+DEFINE
+	MEASURE 'Manual Selected Population'[Selected Manual Population] = SELECTEDVALUE('Manual Selected Population'[Population])
+	MEASURE 'Fact Bagrut Qualifiers'[Total Special Bagrut] = // SUM('Fact Bagrut Qualifiers'[Value])
+		VAR selectedManualPopulation = [Selected Manual Population]
+		RETURN
+			SWITCH(
+				selectedManualPopulation,
+				"החברה הערבית", CALCULATE(
+					SUM('Fact Bagrut Qualifiers'[Value]),
+					FILTER(
+						ALL(Population),
+						Population[Population] = "Arab"
+					)
+				),
+				SUM('Fact Bagrut Qualifiers'[Value])
+			)
+	MEASURE 'Fact Bagrut Qualifiers'[Total Bagrut w Honors] = CALCULATE(
+			[Total Special Bagrut],
+			'Fact Bagrut Qualifiers'[Attribute] = "בגרות בהצטיינות"
+		)
+
+EVALUATE
+	SUMMARIZECOLUMNS(
+		"Selected Manual Population", 'Manual Selected Population'[Selected Manual Population],
+		"Total Special Bagrut", 'Fact Bagrut Qualifiers'[Total Special Bagrut],
+		"Total Bagrut w Honors", 'Fact Bagrut Qualifiers'[Total Bagrut w Honors]
+	)

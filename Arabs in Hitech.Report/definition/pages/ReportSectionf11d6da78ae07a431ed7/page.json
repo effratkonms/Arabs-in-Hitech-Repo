@@ -1,0 +1,112 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.0.0/schema.json",
+  "name": "ReportSectionf11d6da78ae07a431ed7",
+  "displayName": "בקרה: אוכלוסיה 2000-2019",
+  "displayOption": "FitToWidth",
+  "height": 1200,
+  "width": 1920,
+  "visibility": "HiddenInViewMode",
+  "objects": {
+    "filterCard": [
+      {
+        "properties": {
+          "textSize": {
+            "expr": {
+              "Literal": {
+                "Value": "12L"
+              }
+            }
+          }
+        },
+        "selector": {
+          "id": "Available"
+        }
+      }
+    ],
+    "outspace": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 0,
+                    "Percent": -0.1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "22b9776afa9d763bc2c0",
+      "target": "ec07b5622b95b8a40c70",
+      "type": "NoFilter"
+    },
+    {
+      "source": "bb2e4bfb7ae8ad11170a",
+      "target": "ec07b5622b95b8a40c70",
+      "type": "NoFilter"
+    },
+    {
+      "source": "f82d15ea0959ac6bc441",
+      "target": "ec07b5622b95b8a40c70",
+      "type": "NoFilter"
+    },
+    {
+      "source": "76607bf9ccec4bdbd43f",
+      "target": "ec07b5622b95b8a40c70",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ac6f7c8a32b940af6c57",
+      "target": "ec07b5622b95b8a40c70",
+      "type": "NoFilter"
+    },
+    {
+      "source": "1c6591ddf9d65a0b3d00",
+      "target": "ec07b5622b95b8a40c70",
+      "type": "NoFilter"
+    },
+    {
+      "source": "f82d15ea0959ac6bc441",
+      "target": "48ca5e9cd59747bc50bd",
+      "type": "NoFilter"
+    },
+    {
+      "source": "f82d15ea0959ac6bc441",
+      "target": "42fc562b17f2e64bc8a8",
+      "type": "NoFilter"
+    },
+    {
+      "source": "22b9776afa9d763bc2c0",
+      "target": "42fc562b17f2e64bc8a8",
+      "type": "NoFilter"
+    },
+    {
+      "source": "bb2e4bfb7ae8ad11170a",
+      "target": "42fc562b17f2e64bc8a8",
+      "type": "NoFilter"
+    },
+    {
+      "source": "76607bf9ccec4bdbd43f",
+      "target": "42fc562b17f2e64bc8a8",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ac6f7c8a32b940af6c57",
+      "target": "42fc562b17f2e64bc8a8",
+      "type": "NoFilter"
+    },
+    {
+      "source": "1c6591ddf9d65a0b3d00",
+      "target": "42fc562b17f2e64bc8a8",
+      "type": "NoFilter"
+    }
+  ]
+}
