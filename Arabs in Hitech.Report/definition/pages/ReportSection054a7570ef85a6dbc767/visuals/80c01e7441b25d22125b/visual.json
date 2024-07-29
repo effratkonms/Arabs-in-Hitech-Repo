@@ -61,8 +61,8 @@
                 }
               },
               "queryRef": "Key Metric.Key Metric, All Populations % Technological Subjects of All Subjects",
-              "nativeQueryRef": "כלל האוכלוסיה",
-              "displayName": "כלל האוכלוסיה"
+              "nativeQueryRef": "כלל האוכלוסייה",
+              "displayName": "כלל האוכלוסייה"
             }
           ]
         }

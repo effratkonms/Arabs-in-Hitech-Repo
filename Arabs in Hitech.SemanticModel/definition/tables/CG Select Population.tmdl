@@ -13,7 +13,7 @@ table 'CG Select Population'
 				    )
 				)
 
-		calculationItem 'כלל האוכלוסיה' =
+		calculationItem 'כלל האוכלוסייה' =
 				
 				CALCULATE(
 				    SELECTEDMEASURE(),

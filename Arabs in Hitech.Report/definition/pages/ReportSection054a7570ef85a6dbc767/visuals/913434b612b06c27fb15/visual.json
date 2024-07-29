@@ -61,8 +61,8 @@
                 }
               },
               "queryRef": "Fact Population for Reference.% Arabs in Higher Ed Age Group (Reference)",
-              "nativeQueryRef": "שיעור החברה הערבית מכלל האוכלוסיה – בקבוצת הגיל הרלוונטית",
-              "displayName": "שיעור החברה הערבית מכלל האוכלוסיה – בקבוצת הגיל הרלוונטית"
+              "nativeQueryRef": "שיעור החברה הערבית מכלל האוכלוסייה – בקבוצת הגיל הרלוונטית",
+              "displayName": "שיעור החברה הערבית מכלל האוכלוסייה – בקבוצת הגיל הרלוונטית"
             }
           ]
         }

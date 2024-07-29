@@ -68,5 +68,3 @@ table Calendar
 
 	annotation PBI_ResultType = Exception
 
-	annotation PBI_NavigationStepName = Navigation
-

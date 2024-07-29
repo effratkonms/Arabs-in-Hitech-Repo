@@ -7121,7 +7121,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "כלל האוכלוסיה": {
+			          "כלל האוכלוסייה": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -7213,7 +7213,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "שיעור חברה ערבית": {
+			          "מקצועות טכנולוגיים": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -7223,7 +7223,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "מקצועות טכנולוגיים": {
+			          "שיעור חברה ערבית": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -7503,7 +7503,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "סטודנטים": {
+			          "*סטודנטים": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -7513,7 +7513,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "*סטודנטים": {
+			          "סטודנטים": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -7983,7 +7983,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "כלל האוכלוסיה": {
+			          "כלל האוכלוסייה": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -8258,7 +8258,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "כלל האוכלוסיה בקבוצת הגיל הרלוונטית": {
+			          "כלל האוכלוסייה בקבוצת הגיל הרלוונטית": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -8268,7 +8268,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "שיעור החברה הערבית מכלל האוכלוסיה – בקבוצת הגיל הרלוונטית": {
+			          "שיעור החברה הערבית מכלל האוכלוסייה – בקבוצת הגיל הרלוונטית": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -9684,16 +9684,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "מועסקים במשרות הייטק מתוך בעלי השכלת הייטק": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        },
-			        {
 			          "מועסקים": {
 			            "State": "Suggested",
 			            "Source": {
@@ -9705,6 +9695,16 @@ cultureInfo en-US
 			        },
 			        {
 			          "עובדים": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "מועסקים במשרות הייטק מתוך בעלי השכלת הייטק": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10154,7 +10154,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "בוגרים, כלל האוכלוסיה": {
+			          "בוגרים, כלל האוכלוסייה": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10288,7 +10288,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "לפי נפה": {
+			          "סטודנטים, כלל האוכלוסייה": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10298,7 +10298,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "סטודנטים, כלל האוכלוסיה": {
+			          "לפי נפה": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10492,7 +10492,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "לפי מגדר": {
+			          "כלל האוכלוסייה": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10502,7 +10502,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "כלל האוכלוסיה": {
+			          "לפי מגדר": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",

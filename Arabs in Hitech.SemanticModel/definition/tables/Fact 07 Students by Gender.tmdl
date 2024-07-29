@@ -14,7 +14,7 @@ table 'Fact 07 Students by Gender'
 			SWITCH(
 			    SELECTEDVALUE('Manual Selected Population'[Population]),
 			    "החברה הערבית", [SUM Training Students By Gender, Arab Population],
-			    "כלל האוכלוסיה", [SUM Training Students By Gender, All Population]
+			    "כלל האוכלוסייה", [SUM Training Students By Gender, All Population]
 			)
 		formatString: #,0
 		lineageTag: ae0c3713-9c5d-4cf8-9247-0a60a9e1242c

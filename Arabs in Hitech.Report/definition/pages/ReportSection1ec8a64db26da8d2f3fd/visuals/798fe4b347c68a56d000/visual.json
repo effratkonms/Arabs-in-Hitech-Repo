@@ -41,8 +41,8 @@
                 }
               },
               "queryRef": "Fact 07 Graduates by Nafa.SUM Graduates By Nafa, All Population",
-              "nativeQueryRef": "בוגרים, כלל האוכלוסיה",
-              "displayName": "בוגרים, כלל האוכלוסיה"
+              "nativeQueryRef": "בוגרים, כלל האוכלוסייה",
+              "displayName": "בוגרים, כלל האוכלוסייה"
             },
             {
               "field": {
@@ -71,8 +71,8 @@
                 }
               },
               "queryRef": "Fact 07 Students by Nafa.SUM Students By Nafa, All Population",
-              "nativeQueryRef": "סטודנטים, כלל האוכלוסיה",
-              "displayName": "סטודנטים, כלל האוכלוסיה"
+              "nativeQueryRef": "סטודנטים, כלל האוכלוסייה",
+              "displayName": "סטודנטים, כלל האוכלוסייה"
             },
             {
               "field": {

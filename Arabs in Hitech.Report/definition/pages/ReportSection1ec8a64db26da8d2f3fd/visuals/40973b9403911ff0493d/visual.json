@@ -41,8 +41,8 @@
                 }
               },
               "queryRef": "Fact 07 Students by Gender.SUM Students By Gender, All Population",
-              "nativeQueryRef": "כלל האוכלוסיה",
-              "displayName": "כלל האוכלוסיה"
+              "nativeQueryRef": "כלל האוכלוסייה",
+              "displayName": "כלל האוכלוסייה"
             },
             {
               "field": {

@@ -95,7 +95,7 @@ table 'Fact Lamas Students by Institution'
 				    #"Removed Other Columns" = Table.SelectColumns(#"סטודנטים - מוסד_Sheet",{"Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}),
 				    #"Removed Top Rows" = Table.Skip(#"Removed Other Columns",6),
 				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
-				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"מקצוע", "Subject"}, {"מוסד", "Institution"}, {"שנים", "Years"}, {"כלל האוכלוסיה: תואר ראשון", "All: 1st: Total"}, {"כלל האוכלוסיה: חדשים ראשון", "All: 1st: New"}, {"כלל האוכלוסיה: שני ושלישי", "All: 2nd + 3rd"}, {"ערבים: תואר ראשון", "Arab: 1st: Total"}, {"ערבים: חדשים ראשון", "Arab: 1st: New"}, {"ערבים: שני ושלישי", "Arab: 2nd + 3rd"}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"מקצוע", "Subject"}, {"מוסד", "Institution"}, {"שנים", "Years"}, {"כלל האוכלוסייה: תואר ראשון", "All: 1st: Total"}, {"כלל האוכלוסייה: חדשים ראשון", "All: 1st: New"}, {"כלל האוכלוסייה: שני ושלישי", "All: 2nd + 3rd"}, {"ערבים: תואר ראשון", "Arab: 1st: Total"}, {"ערבים: חדשים ראשון", "Arab: 1st: New"}, {"ערבים: שני ושלישי", "Arab: 2nd + 3rd"}}),
 				    #"Filled Down" = Table.FillDown(#"Renamed Columns",{"Subject", "Institution"}),
 				    #"Invoke Fn" = Function.Invoke(#"Handle Lamas Higher Ed", {#"Filled Down", p02ReplaceLowNumberWith}),
 				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Invoke Fn", {"Subject", "Institution", "Years", "First Year", "Second Year"}, "Attribute", "Value"),
@@ -125,6 +125,4 @@ table 'Fact Lamas Students by Institution'
 				    #"Replaced Value7"
 
 	annotation PBI_ResultType = Table
-
-	annotation PBI_NavigationStepName = Navigation
 

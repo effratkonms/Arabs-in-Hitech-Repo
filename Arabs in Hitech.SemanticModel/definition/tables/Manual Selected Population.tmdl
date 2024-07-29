@@ -18,7 +18,7 @@ table 'Manual Selected Population'
 		mode: import
 		source =
 				let
-				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45Wuj7l+vTrE6+vuD5FAchcBGRMvD7z+iqlWB2g3Ozrc67PAYlPuD4VzJl6fSFQdopSbCwA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Population = _t])
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45Wuj7l+vTrE6+vuD5FAchcBGRMvD7z+iqlWB2g3Ozrc67PAYlPuD4VzJl6fSFQdub1KUqxsQA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Population = _t])
 				in
 				    Source
 

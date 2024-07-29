@@ -47,8 +47,8 @@
                 }
               },
               "queryRef": "Key Metric.Key Metric, All Populations",
-              "nativeQueryRef": "כלל האוכלוסיה",
-              "displayName": "כלל האוכלוסיה"
+              "nativeQueryRef": "כלל האוכלוסייה",
+              "displayName": "כלל האוכלוסייה"
             },
             {
               "field": {

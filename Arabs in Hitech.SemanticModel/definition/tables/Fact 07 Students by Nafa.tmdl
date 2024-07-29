@@ -14,7 +14,7 @@ table 'Fact 07 Students by Nafa'
 			SWITCH(
 			    SELECTEDVALUE('Manual Selected Population'[Population]),
 			    "החברה הערבית", [SUM Training Students By Nafa, Arab Population],
-			    "כלל האוכלוסיה", [SUM Training Students By Nafa, All Population]
+			    "כלל האוכלוסייה", [SUM Training Students By Nafa, All Population]
 			)
 		lineageTag: c17139d8-503f-4d44-b621-808263ab7071
 

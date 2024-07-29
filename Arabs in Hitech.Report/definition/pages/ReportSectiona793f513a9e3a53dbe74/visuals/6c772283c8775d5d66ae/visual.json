@@ -32,6 +32,23 @@
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Manual Selected Population"
+                  }
+                },
+                "Property": "Population"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
       }
     },
     "objects": {
@@ -108,7 +125,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'כלל האוכלוסיה'"
+                                "Value": "'כלל האוכלוסייה'"
                               }
                             }
                           ]

@@ -215,8 +215,6 @@ expression p01ReplaceLowNumberWith = "1.5" meta [IsParameterQuery=true, Type="Te
 
 	annotation PBI_ResultType = Text
 
-	annotation PBI_NavigationStepName = Navigation
-
 expression 'Handle 2_3 Students Sheet' =
 		let
 		    Source = (t as table, p01ReplaceLowNumberWith as text) => let
@@ -446,7 +444,7 @@ expression 'Sample table for Handle Lamas Higher Ed' =
 		    #"Removed Other Columns" = Table.SelectColumns(#"סטודנטים - מוסד_Sheet",{"Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}),
 		    #"Removed Top Rows" = Table.Skip(#"Removed Other Columns",6),
 		    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
-		    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"מקצוע", "Subject"}, {"מוסד", "Institution"}, {"שנים", "Years"}, {"כלל האוכלוסיה: תואר ראשון", "All: 1st: Total"}, {"כלל האוכלוסיה: חדשים ראשון", "All: 1st: New"}, {"כלל האוכלוסיה: שני ושלישי", "All: 2nd + 3rd"}, {"ערבים: תואר ראשון", "Arab: 1st: Total"}, {"ערבים: חדשים ראשון", "Arab: 1st: New"}, {"ערבים: שני ושלישי", "Arab: 2nd + 3rd"}})
+		    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"מקצוע", "Subject"}, {"מוסד", "Institution"}, {"שנים", "Years"}, {"כלל האוכלוסייה: תואר ראשון", "All: 1st: Total"}, {"כלל האוכלוסייה: חדשים ראשון", "All: 1st: New"}, {"כלל האוכלוסייה: שני ושלישי", "All: 2nd + 3rd"}, {"ערבים: תואר ראשון", "Arab: 1st: Total"}, {"ערבים: חדשים ראשון", "Arab: 1st: New"}, {"ערבים: שני ושלישי", "Arab: 2nd + 3rd"}})
 		in
 		    #"Renamed Columns"
 	lineageTag: 7aae0cdb-22ed-4660-bf90-3c648eea7f13
@@ -1471,8 +1469,6 @@ expression p02ReplaceLowNumberWith = "4" meta [IsParameterQuery=true, Type="Text
 	lineageTag: a541c7f9-f0f2-4583-ab0f-7e28735e8b55
 	queryGroup: Parameters
 
-	annotation PBI_NavigationStepName = Navigation
-
 	annotation PBI_ResultType = Text
 
 expression '07 Nafa LUT' =
@@ -1568,15 +1564,11 @@ expression p04ReplaceLowNumberWith = "1.5" meta [IsParameterQuery=true, Type="Te
 	lineageTag: 955a5eb6-911d-4a28-ab03-bcd58c113345
 	queryGroup: Parameters
 
-	annotation PBI_NavigationStepName = Navigation
-
 	annotation PBI_ResultType = Text
 
 expression p07ReplaceLowNumberWith = "1" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: 0d940995-5260-46fc-8c93-6f25f099dd72
 	queryGroup: Parameters
-
-	annotation PBI_NavigationStepName = Navigation
 
 	annotation PBI_ResultType = Text
 
@@ -1623,7 +1615,7 @@ expression '08 Misrot Tech: Source' =
 		    #"Changed Type" = Table.TransformColumnTypes(#"Multiplied Column",{{"Value", Int64.Type}}),
 		    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","חברה ערבית","החברה הערבית",Replacer.ReplaceText,{"מגזר"}),
 		    #"Pivoted Column" = Table.Pivot(#"Replaced Value", List.Distinct(#"Replaced Value"[מגזר]), "מגזר", "Value", List.Sum),
-		    #"Added Custom1" = Table.AddColumn(#"Pivoted Column", "החברה היהודית", each [כלל האוכלוסיה] - [החברה הערבית]),
+		    #"Added Custom1" = Table.AddColumn(#"Pivoted Column", "החברה היהודית", each [כלל האוכלוסייה] - [החברה הערבית]),
 		    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom1",{{"החברה היהודית", Int64.Type}}),
 		    #"Unpivoted Columns1" = Table.UnpivotOtherColumns(#"Changed Type1", {"Year", "Sex"}, "מגזר", "Value")
 		in

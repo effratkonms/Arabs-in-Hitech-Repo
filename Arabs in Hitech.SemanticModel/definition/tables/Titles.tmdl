@@ -1,7 +1,7 @@
 table Titles
 	lineageTag: 0c119b39-7a1c-4c69-b625-7747f266a74f
 
-	measure 'Title: Screen 01, Bottom-Right Table' = [Selected Subsection] & " במקצועות טכנולוגיים ומדעיים (כלל האוכלוסיה וחברה ערבית)"
+	measure 'Title: Screen 01, Bottom-Right Table' = [Selected Subsection] & " במקצועות טכנולוגיים ומדעיים (כלל האוכלוסייה וחברה ערבית)"
 		lineageTag: 1c199867-c568-4697-a15a-a26fcc8a592a
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}

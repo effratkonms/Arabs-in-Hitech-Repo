@@ -20,7 +20,5 @@ table '08 Population'
 				in
 				    #"Removed Duplicates"
 
-	annotation PBI_NavigationStepName = Navigation
-
 	annotation PBI_ResultType = Table
 

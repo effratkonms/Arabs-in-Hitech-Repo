@@ -57,7 +57,5 @@ table 'Fact 08 Mistrot Tech Target'
 				in
 				    Source
 
-	annotation PBI_NavigationStepName = Navigation
-
 	annotation PBI_ResultType = Table
 

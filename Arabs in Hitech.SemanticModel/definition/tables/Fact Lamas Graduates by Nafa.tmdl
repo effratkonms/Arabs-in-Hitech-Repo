@@ -87,7 +87,7 @@ table 'Fact Lamas Graduates by Nafa'
 				    #"Removed Other Columns" = Table.SelectColumns(#"מקבלי תארים - נפה וסוג מוסד_Sheet",{"Column1", "Column2", "Column3", "Column4", "Column5", "Column6"}),
 				    #"Removed Top Rows" = Table.Skip(#"Removed Other Columns",5),
 				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
-				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"מקצוע", "Subject"}, {"סוג מוסד", "Institution Type"}, {"שנים", "Years"}, {"כלל האוכלוסיה", "All"}, {"ערבים", "Arab"}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"מקצוע", "Subject"}, {"סוג מוסד", "Institution Type"}, {"שנים", "Years"}, {"כלל האוכלוסייה", "All"}, {"ערבים", "Arab"}}),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"All", type text}, {"Arab", type text}}),
 				    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","-","0",Replacer.ReplaceText,{"All", "Arab"}),
 				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","..",p02ReplaceLowNumberWith,Replacer.ReplaceText,{"All", "Arab"}),
@@ -116,6 +116,4 @@ table 'Fact Lamas Graduates by Nafa'
 				    #"Changed Type3"
 
 	annotation PBI_ResultType = Table
-
-	annotation PBI_NavigationStepName = Navigation
 
