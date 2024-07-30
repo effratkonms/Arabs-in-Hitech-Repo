@@ -39,16 +39,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Nafot WKT w YS"
+                      "Entity": "Nafa"
                     }
                   },
-                  "Property": "Nafa"
+                  "Property": "נפה"
                 }
               },
-              "queryRef": "Nafot WKT w YS.Nafa",
-              "nativeQueryRef": "אזור",
-              "active": true,
-              "displayName": "אזור"
+              "queryRef": "Nafa.נפה",
+              "nativeQueryRef": "נפה",
+              "active": true
             }
           ]
         }
@@ -477,6 +476,19 @@
             }
           }
         }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "section": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1abd90ae660e363996ae'"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "drillFilterOtherVisuals": true
@@ -544,21 +556,6 @@
           }
         },
         "type": "Advanced",
-        "howCreated": "User"
-      },
-      {
-        "name": "Filter27c5209fa52996926a23",
-        "ordinal": 5,
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Nafa"
-              }
-            },
-            "Property": "נפה"
-          }
-        },
         "howCreated": "User"
       },
       {

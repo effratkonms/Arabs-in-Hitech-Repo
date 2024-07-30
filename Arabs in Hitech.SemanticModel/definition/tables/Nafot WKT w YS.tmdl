@@ -10,7 +10,10 @@ table 'Nafot WKT w YS'
 			
 			VAR result = DIVIDE([Key Metric, Selected Years], [Area SQM]/10000000)
 			RETURN
-			IF(ISBLANK(result), 0, result)
+			SUMX(
+			    Nafa,
+			    IF(ISBLANK(result), 0, result)
+			)
 		formatString: 0.0
 		lineageTag: 2e90f66b-9a69-4e07-ad8e-4b99d96193cf
 
@@ -139,6 +142,11 @@ table 'Nafot WKT w YS'
 				)
 				
 				```
+
+	measure 'Selected Nafa' = SELECTEDVALUE(Nafa[נפה])
+		lineageTag: 2adbcac2-319e-46ba-89d9-7782cc55ca9e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column Id
 		dataType: string

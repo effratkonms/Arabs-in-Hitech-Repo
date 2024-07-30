@@ -6,9 +6,12 @@ table 'CG Zero if Blank'
 
 		calculationItem 'Zero if Blank' =
 				
-				VAR result = SELECTEDMEASURE()
-				RETURN
-				IF(ISBLANK(result), 0, result)
+				//SUMX(
+				//    Nafa,
+				    VAR result = SELECTEDMEASURE()
+				    RETURN
+				    IF(ISBLANK(result), 0, result)
+				//)
 
 	column 'Zero if Blank'
 		dataType: string

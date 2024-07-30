@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "18c8f4b5539b5f4745af",
+  "position": {
+    "x": 32,
+    "y": 288,
+    "width": 368,
+    "height": 160,
+    "z": 38000,
+    "tabOrder": 38000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Metric Bagrut Template"
+                    }
+                  },
+                  "Property": "Heb Metric"
+                }
+              },
+              "queryRef": "Key Metric Bagrut Template.Heb Metric",
+              "nativeQueryRef": "Heb Metric"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

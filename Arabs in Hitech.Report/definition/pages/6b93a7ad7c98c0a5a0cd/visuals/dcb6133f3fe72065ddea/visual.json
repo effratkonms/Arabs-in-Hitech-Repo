@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
-  "name": "b532bbddb50d5a535502",
+  "name": "dcb6133f3fe72065ddea",
   "position": {
-    "x": 1696.0000000000002,
-    "y": 352,
-    "z": 24000,
-    "width": 208,
-    "height": 288,
-    "tabOrder": 24000
+    "x": 688,
+    "y": 112,
+    "z": 4000,
+    "width": 160,
+    "height": 96,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "slicer",
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LinkedIn Positions"
+                      "Entity": "Manual Selected Population"
                     }
                   },
-                  "Property": "Is Hitech"
+                  "Property": "Population"
                 }
               },
-              "queryRef": "LinkedIn Positions.Is Hitech",
-              "nativeQueryRef": "Is Hitech",
+              "queryRef": "Manual Selected Population.Population",
+              "nativeQueryRef": "Population",
               "active": true
             }
           ]
@@ -56,8 +56,8 @@
                 "Version": 2,
                 "From": [
                   {
-                    "Name": "l",
-                    "Entity": "LinkedIn Positions",
+                    "Name": "m",
+                    "Entity": "Manual Selected Population",
                     "Type": 0
                   }
                 ],
@@ -70,10 +70,10 @@
                             "Column": {
                               "Expression": {
                                 "SourceRef": {
-                                  "Source": "l"
+                                  "Source": "m"
                                 }
                               },
-                              "Property": "Is Hitech"
+                              "Property": "Population"
                             }
                           }
                         ],
@@ -81,7 +81,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'במשרות הייטק'"
+                                "Value": "'החברה הערבית'"
                               }
                             }
                           ]
@@ -97,6 +97,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "isHidden": true
+  }
 }

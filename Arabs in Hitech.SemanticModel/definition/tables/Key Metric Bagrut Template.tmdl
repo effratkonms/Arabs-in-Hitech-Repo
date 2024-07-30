@@ -16,7 +16,7 @@ table 'Key Metric Bagrut Template'
 							)
 						)
 			```
-		formatString: #,0
+		formatString: 0
 		lineageTag: 3709c34c-7001-45c7-abe5-1443ce5a62b3
 
 	measure 'Key Bagrut Metric %' =
@@ -56,13 +56,13 @@ table 'Key Metric Bagrut Template'
 
 	measure 'Key Bagrut Metric' = ```
 			
-				VAR metricType = MAX('Key Metric Bagrut Template'[Metric Type])
-				RETURN
-					SWITCH(
-						metricType,
-						"#", [Key Bagrut Metric #],
-						"%", [Key Bagrut Metric %]				
-					)
+			VAR metricType = SELECTEDVALUE('Key Metric Bagrut Template'[Metric Type])
+			RETURN
+			SWITCH(
+			    metricType,
+			    "#", [Key Bagrut Metric #],
+			    "%", [Key Bagrut Metric %]				
+			)
 			```
 		lineageTag: 9711db0c-5165-4fda-8717-4d9708f98ce1
 
@@ -71,7 +71,7 @@ table 'Key Metric Bagrut Template'
 				RETURN
 				SWITCH(
 				    metricType,
-				    "#", "#,#",
+				    "#", "#,0",
 				    "%", "0.0%"
 				)
 
@@ -177,14 +177,11 @@ table 'Key Metric Bagrut Template'
 
 	measure 'Key Bagrut Metric Zero if Blank' =
 			
-			VAR result = [Key Bagrut Metric]
-			VAR metricType = MAX('Key Metric Bagrut Template'[Metric Type])
-			VAR r = IF(ISBLANK(result), 0, result)
-			RETURN
-			SWITCH(
-			    metricType,
-			    "#", r,
-			    "%", r * 100
+			SUMX(
+			    Nafa,
+			    VAR result = [Key Bagrut Metric]
+			    RETURN
+			    IF(ISBLANK(result), 0, result)
 			)
 		formatString: 0.0
 		lineageTag: 1dcde306-7b8c-4200-aa78-2f6fc478150e
@@ -193,6 +190,19 @@ table 'Key Metric Bagrut Template'
 		lineageTag: 3f1b26c7-3c4d-4aad-bdbe-bf825916cee6
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Key Bagrut Metric Zero if Blank (formatted for map tooltip)' =
+			
+			VAR result = [Key Bagrut Metric Zero if Blank]
+			VAR metricType = MAX('Key Metric Bagrut Template'[Metric Type])
+			RETURN
+			SWITCH(
+			    metricType,
+			    "#", FORMAT(result, "#,0"),
+			    "%", FORMAT(result, "0.0%")
+			)
+		formatString: 0.0
+		lineageTag: 9e0d0b9f-ea59-4123-bf3e-cd053ddba173
 
 	column Id
 		dataType: int64

@@ -9943,16 +9943,6 @@ cultureInfo en-US
 			          "LinkedIn KPI: employees not in hitech": {
 			            "State": "Generated"
 			          }
-			        },
-			        {
-			          "מועסקים לא בהיי-טק": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },

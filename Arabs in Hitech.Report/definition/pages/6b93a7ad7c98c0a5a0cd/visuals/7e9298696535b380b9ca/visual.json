@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
-  "name": "9653b98bc98e07d22e53",
+  "name": "7e9298696535b380b9ca",
   "position": {
-    "x": 1136,
-    "y": 512,
-    "z": 32000,
+    "x": 880,
+    "y": 0,
+    "z": 5000,
     "width": 400,
-    "height": 704,
-    "tabOrder": 32000
+    "height": 752,
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "iconMapV34089C0EB522B416294AA926F71B4FDBB",
@@ -20,29 +20,14 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Nafot WKT w YS"
+                      "Entity": "Key Metric Bagrut Template"
                     }
                   },
-                  "Property": "Map Measure"
+                  "Property": "Key Bagrut Metric #"
                 }
               },
-              "queryRef": "Nafot WKT w YS.Map Measure",
-              "nativeQueryRef": "מדד נבחר",
-              "displayName": "מדד נבחר"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Nafot WKT w YS"
-                    }
-                  },
-                  "Property": "Normalized Intensity"
-                }
-              },
-              "queryRef": "Nafot WKT w YS.Normalized Intensity",
-              "nativeQueryRef": "Normalized Intensity"
+              "queryRef": "Key Metric Bagrut Template.Key Bagrut Metric #",
+              "nativeQueryRef": "Key Bagrut Metric #"
             }
           ]
         },
@@ -53,16 +38,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Nafot WKT w YS"
+                      "Entity": "Nafa"
                     }
                   },
-                  "Property": "Nafa"
+                  "Property": "נפה"
                 }
               },
-              "queryRef": "Nafot WKT w YS.Nafa",
-              "nativeQueryRef": "אזור",
-              "active": true,
-              "displayName": "אזור"
+              "queryRef": "Nafa.נפה",
+              "nativeQueryRef": "נפה",
+              "active": true
             }
           ]
         }
@@ -74,10 +58,10 @@
               "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Nafot WKT w YS"
+                    "Entity": "Key Metric Bagrut Template"
                   }
                 },
-                "Property": "Map Measure"
+                "Property": "Key Bagrut Metric #"
               }
             },
             "direction": "Descending"
@@ -128,13 +112,6 @@
                   "Value": "'Geodesic'"
                 }
               }
-            },
-            "circleAndLines": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
             }
           }
         }
@@ -164,10 +141,10 @@
                         "Measure": {
                           "Expression": {
                             "SourceRef": {
-                              "Entity": "Nafot WKT w YS"
+                              "Entity": "Key Metric Bagrut Template"
                             }
                           },
-                          "Property": "Map Measure"
+                          "Property": "Key Bagrut Metric #"
                         }
                       },
                       "FillRule": {
@@ -182,7 +159,7 @@
                           "max": {
                             "color": {
                               "Literal": {
-                                "Value": "'#4F8ABB'"
+                                "Value": "'maxColor'"
                               }
                             }
                           },
@@ -225,7 +202,7 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 7,
+                      "ColorId": 2,
                       "Percent": 0
                     }
                   }
@@ -235,7 +212,7 @@
             "fillTransparency": {
               "expr": {
                 "Literal": {
-                  "Value": "50L"
+                  "Value": "0L"
                 }
               }
             }
@@ -369,20 +346,15 @@
           "properties": {
             "text": {
               "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Quantity or Density"
-                    }
-                  },
-                  "Property": "Selected Students Measure Details"
+                "Literal": {
+                  "Value": "'אזור מוסד לימודים'"
                 }
               }
             },
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -415,14 +387,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "18D"
                 }
               }
             },
             "bold": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -476,7 +448,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -503,6 +475,19 @@
             }
           }
         }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "section": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1abd90ae660e363996ae'"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "drillFilterOtherVisuals": true
@@ -510,8 +495,23 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "Filter9e79854113e2e7ef3bcb",
+        "name": "Filter37686cd656b80e2a4d01",
         "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "CG Zero if Blank"
+              }
+            },
+            "Property": "Zero if Blank"
+          }
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "Filter9e79854113e2e7ef3bcb",
+        "ordinal": 1,
         "field": {
           "Measure": {
             "Expression": {
@@ -527,7 +527,7 @@
       },
       {
         "name": "Filter02185a4df6f0df6f459d",
-        "ordinal": 1,
+        "ordinal": 2,
         "field": {
           "Measure": {
             "Expression": {
@@ -542,23 +542,24 @@
         "howCreated": "User"
       },
       {
-        "name": "Filtera6186ad773da47d5534b",
-        "ordinal": 2,
+        "name": "Filter7d98a4d43c201be30543",
+        "ordinal": 3,
         "field": {
-          "Column": {
+          "Measure": {
             "Expression": {
               "SourceRef": {
-                "Entity": "CG Zero if Blank"
+                "Entity": "Key Metric Bagrut Template"
               }
             },
-            "Property": "Zero if Blank"
+            "Property": "Key Bagrut Metric"
           }
         },
+        "type": "Advanced",
         "howCreated": "User"
       },
       {
-        "name": "Filter3ac133584d87835ac23f",
-        "ordinal": 3,
+        "name": "Filter73516fee42133d943374",
+        "ordinal": 6,
         "field": {
           "Column": {
             "Expression": {

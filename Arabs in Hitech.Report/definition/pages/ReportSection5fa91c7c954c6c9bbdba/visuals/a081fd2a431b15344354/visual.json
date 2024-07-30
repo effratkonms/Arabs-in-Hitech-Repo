@@ -32,6 +32,23 @@
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Key Metric Bagrut Template"
+                  }
+                },
+                "Property": "Metric Type"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
       }
     },
     "objects": {
@@ -88,7 +105,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'#'"
+                                "Value": "'%'"
                               }
                             }
                           ]

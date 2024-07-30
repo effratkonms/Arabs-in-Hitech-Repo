@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
-  "name": "b532bbddb50d5a535502",
+  "name": "cc0a65bd20e11555a8bf",
   "position": {
-    "x": 1696.0000000000002,
-    "y": 352,
-    "z": 24000,
-    "width": 208,
-    "height": 288,
-    "tabOrder": 24000
+    "x": 496,
+    "y": 112,
+    "z": 3000,
+    "width": 192,
+    "height": 176,
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "slicer",
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LinkedIn Positions"
+                      "Entity": "Key Metric Bagrut Template"
                     }
                   },
-                  "Property": "Is Hitech"
+                  "Property": "Subject"
                 }
               },
-              "queryRef": "LinkedIn Positions.Is Hitech",
-              "nativeQueryRef": "Is Hitech",
+              "queryRef": "Key Metric Bagrut Template.Subject",
+              "nativeQueryRef": "Subject",
               "active": true
             }
           ]
@@ -56,8 +56,8 @@
                 "Version": 2,
                 "From": [
                   {
-                    "Name": "l",
-                    "Entity": "LinkedIn Positions",
+                    "Name": "k",
+                    "Entity": "Key Metric Bagrut Template",
                     "Type": 0
                   }
                 ],
@@ -70,10 +70,10 @@
                             "Column": {
                               "Expression": {
                                 "SourceRef": {
-                                  "Source": "l"
+                                  "Source": "k"
                                 }
                               },
-                              "Property": "Is Hitech"
+                              "Property": "Subject"
                             }
                           }
                         ],
@@ -81,7 +81,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'במשרות הייטק'"
+                                "Value": "'מדעי המחשב'"
                               }
                             }
                           ]
@@ -97,6 +97,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "isHidden": true
+  }
 }

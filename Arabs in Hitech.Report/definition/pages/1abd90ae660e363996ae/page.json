@@ -1,0 +1,42 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.0.0/schema.json",
+  "name": "1abd90ae660e363996ae",
+  "displayName": "זכאות לבגרות - טולטיפ",
+  "displayOption": "ActualSize",
+  "height": 50,
+  "width": 250,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "Filterf80d7bfc95a99cbd10ed",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Nafot WKT w YS"
+              }
+            },
+            "Property": "Nafa"
+          }
+        },
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  },
+  "visibility": "HiddenInViewMode"
+}

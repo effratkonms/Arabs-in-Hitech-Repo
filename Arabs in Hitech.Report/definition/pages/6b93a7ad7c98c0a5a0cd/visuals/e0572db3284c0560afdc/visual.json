@@ -1,0 +1,370 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "e0572db3284c0560afdc",
+  "position": {
+    "x": 16,
+    "y": 288,
+    "z": 0,
+    "width": 784,
+    "height": 416.00000000000006,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Nafot WKT w YS"
+                    }
+                  },
+                  "Property": "Nafa"
+                }
+              },
+              "queryRef": "Nafot WKT w YS.Nafa",
+              "nativeQueryRef": "אזור",
+              "displayName": "אזור"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Metric Bagrut Template"
+                    }
+                  },
+                  "Property": "Key Bagrut Metric Zero if Blank"
+                }
+              },
+              "queryRef": "Key Metric Bagrut Template.Key Bagrut Metric Zero if Blank",
+              "nativeQueryRef": "מדד נבחר",
+              "displayName": "מדד נבחר"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Metric Bagrut Template"
+                    }
+                  },
+                  "Property": "Key Bagrut Metric"
+                }
+              },
+              "queryRef": "Key Metric Bagrut Template.Key Bagrut Metric",
+              "nativeQueryRef": "Key Bagrut Metric"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Metric Bagrut Template"
+                    }
+                  },
+                  "Property": "Key Bagrut Metric #"
+                }
+              },
+              "queryRef": "Key Metric Bagrut Template.Key Bagrut Metric #",
+              "nativeQueryRef": "Key Bagrut Metric #"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Metric Bagrut Template"
+                    }
+                  },
+                  "Property": "Key Bagrut Metric %"
+                }
+              },
+              "queryRef": "Key Metric Bagrut Template.Key Bagrut Metric %",
+              "nativeQueryRef": "Key Bagrut Metric %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Bagrut Qualifiers"
+                    }
+                  },
+                  "Property": "Total Special Bagrut"
+                }
+              },
+              "queryRef": "Fact Bagrut Qualifiers.Total Special Bagrut",
+              "nativeQueryRef": "Total Special Bagrut"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Metric Bagrut Template"
+                    }
+                  },
+                  "Property": "Key Bagrut Metric Zero if Blank (formatted for map tooltip)"
+                }
+              },
+              "queryRef": "Key Metric Bagrut Template.Key Bagrut Metric Zero if Blank (formatted for map)",
+              "nativeQueryRef": "Key Bagrut Metric Zero if Blank (formatted for map)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact Bagrut Qualifiers"
+                    }
+                  },
+                  "Property": "Total Special Bagrut"
+                }
+              },
+              "queryRef": "Fact Bagrut Qualifiers.Total Special Bagrut",
+              "nativeQueryRef": "Total Special Bagrut"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Key Metric Bagrut Template"
+                  }
+                },
+                "Property": "Key Bagrut Metric Zero if Blank"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "grid": [
+        {
+          "properties": {
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "109.72603537113639D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Key Metric Bagrut Template.Key Bagrut Metric Zero if Blank (formatted for map)"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'אזור מוסד לימודים'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'right'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "18D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'צפיפות'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "spacing": [
+        {
+          "properties": {
+            "verticalSpacing": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "Filter37686cd656b80e2a4d01",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "CG Zero if Blank"
+              }
+            },
+            "Property": "Zero if Blank"
+          }
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "Filter9e79854113e2e7ef3bcb",
+        "ordinal": 1,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Key Metric"
+              }
+            },
+            "Property": "Key Metric, Selected Years"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "Filter02185a4df6f0df6f459d",
+        "ordinal": 2,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Nafot WKT w YS"
+              }
+            },
+            "Property": "Map Metric, Noramlized by 10 Kilometers Squared"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "Filter27c5209fa52996926a23",
+        "ordinal": 5,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Nafa"
+              }
+            },
+            "Property": "נפה"
+          }
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "Filter73516fee42133d943374",
+        "ordinal": 6,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "CG Zero if Blank"
+              }
+            },
+            "Property": "Zero if Blank"
+          }
+        },
+        "howCreated": "User"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  }
+}
