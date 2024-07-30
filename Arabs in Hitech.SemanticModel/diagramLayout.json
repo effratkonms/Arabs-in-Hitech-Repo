@@ -1520,8 +1520,88 @@
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
       "tablesLocked": false
+    },
+    {
+      "ordinal": 12,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 294.1903652229924,
+            "y": 192.19883313045329
+          },
+          "nodeIndex": "Fact Higher Education",
+          "nodeLineageTag": "320e3da7-6c91-4086-8b6c-860e7693b296",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 95.376048815133117,
+            "y": 538.37694017890135
+          },
+          "nodeIndex": "Subject",
+          "nodeLineageTag": "4661982e-9fa2-4a35-870e-87e569705619",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 10,
+            "y": 118.84500552705867
+          },
+          "nodeIndex": "Population",
+          "nodeLineageTag": "bbc55e28-6e1b-4eed-a922-efbe0f6a3ac2",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 578.38010645995882,
+            "y": 405.49499918798119
+          },
+          "nodeIndex": "Calendar",
+          "nodeLineageTag": "5e5ddc37-8235-414b-8441-8ffee450b81e",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 452.42269189948365,
+            "y": -10
+          },
+          "nodeIndex": "Population Subsection",
+          "nodeLineageTag": "0f91ff93-4e18-408c-b393-671e6ff16546",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Layout 7",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
     }
   ],
-  "selectedDiagram": "Bagruyot",
+  "selectedDiagram": "Layout 7",
   "defaultDiagram": "All tables"
 }

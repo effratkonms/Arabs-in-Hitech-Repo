@@ -66,8 +66,8 @@
                 }
               },
               "queryRef": "Fact 2021 Graduates Salaries.Total Graduates 2021",
-              "nativeQueryRef": "בוגרים",
-              "displayName": "בוגרים"
+              "nativeQueryRef": "מקבלי תארים",
+              "displayName": "מקבלי תארים"
             }
           ]
         }
@@ -543,7 +543,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'בוגרים לפי תחום ושנה'"
+                  "Value": "'מקבלי תארים לפי תחום ושנה'"
                 }
               }
             }

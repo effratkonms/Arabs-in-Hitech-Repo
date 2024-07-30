@@ -298,9 +298,9 @@ expression 'Handle 3_3 Graduates Sheet' =
 expression 'Manual Totals' =
 		let
 		    Source = #"Manual Totals Source",
-		    #"Grouped Rows" = Table.Group(Source, {"Year", "סטודנטים/בוגרים"}, {{"Total", each List.Sum([Total]), type nullable number}, {"Arabs", each List.Sum([Arabs]), type nullable number}}),
+		    #"Grouped Rows" = Table.Group(Source, {"Year", "סטודנטים/מקבלי תארים"}, {{"Total", each List.Sum([Total]), type nullable number}, {"Arabs", each List.Sum([Arabs]), type nullable number}}),
 		    #"Changed Type" = Table.TransformColumnTypes(#"Grouped Rows",{{"Total", type number}, {"Arabs", type number}}),
-		    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"סטודנטים/בוגרים", "Population Subsection"}}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"סטודנטים/מקבלי תארים", "Population Subsection"}}),
 		    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "Subject", each "Total", type text),
 		    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Data Source", each "Manual", type text)
 		in

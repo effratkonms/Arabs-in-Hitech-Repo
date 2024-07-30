@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.0.0/schema.json",
   "name": "ReportSection6639d2a9f6b58e166a9d",
-  "displayName": "השכלה גבוהה - בוגרים לפי אזור",
+  "displayName": "השכלה גבוהה - מקבלי תארים לפי אזור",
   "displayOption": "FitToWidth",
   "height": 1760,
   "width": 1920,
@@ -48,7 +48,7 @@
                     [
                       {
                         "Literal": {
-                          "Value": "'בוגרים לפי נפה'"
+                          "Value": "'מקבלי תארים לפי נפה'"
                         }
                       }
                     ]

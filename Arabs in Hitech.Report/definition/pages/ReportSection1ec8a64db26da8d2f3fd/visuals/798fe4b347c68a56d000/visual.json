@@ -41,8 +41,8 @@
                 }
               },
               "queryRef": "Fact 07 Graduates by Nafa.SUM Graduates By Nafa, All Population",
-              "nativeQueryRef": "בוגרים, כלל האוכלוסייה",
-              "displayName": "בוגרים, כלל האוכלוסייה"
+              "nativeQueryRef": "מקבלי תארים, כלל האוכלוסייה",
+              "displayName": "מקבלי תארים, כלל האוכלוסייה"
             },
             {
               "field": {
@@ -56,8 +56,8 @@
                 }
               },
               "queryRef": "Fact 07 Graduates by Nafa.SUM Graduates By Nafa, Arab Population",
-              "nativeQueryRef": "בוגרים, החברה הערבית",
-              "displayName": "בוגרים, החברה הערבית"
+              "nativeQueryRef": "מקבלי תארים, החברה הערבית",
+              "displayName": "מקבלי תארים, החברה הערבית"
             },
             {
               "field": {

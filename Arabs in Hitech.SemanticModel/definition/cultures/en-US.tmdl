@@ -179,31 +179,6 @@ cultureInfo en-US
 			      ],
 			      "SemanticType": "Time"
 			    },
-			    "manual_totals_source.סטודנטים_בוגרים": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "Manual Totals Source",
-			          "ConceptualProperty": "סטודנטים/בוגרים"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "סטודנטים/בוגרים": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "סטודנטים בוגרים": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        }
-			      ]
-			    },
 			    "manual_totals_source.אוניברסיטאות_מכללות": {
 			      "Definition": {
 			        "Binding": {
@@ -7523,7 +7498,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "בוגרים": {
+			          "מקבלי תארים": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -9556,7 +9531,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "בוגרים": {
+			          "מקבלי תארים": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10154,7 +10129,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "בוגרים, כלל האוכלוסייה": {
+			          "מקבלי תארים, כלל האוכלוסייה": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10180,7 +10155,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "בוגרים, החברה הערבית": {
+			          "מקבלי תארים, החברה הערבית": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10236,7 +10211,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "בוגרים": {
+			          "מקבלי תארים": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10262,7 +10237,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "בוגרים": {
+			          "מקבלי תארים": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",

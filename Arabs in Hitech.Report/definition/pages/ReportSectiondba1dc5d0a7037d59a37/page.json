@@ -31,27 +31,5 @@
         }
       }
     ]
-  },
-  "visualInteractions": [
-    {
-      "source": "b532bbddb50d5a535502",
-      "target": "bcd6917832a042cecc03",
-      "type": "NoFilter"
-    },
-    {
-      "source": "b532bbddb50d5a535502",
-      "target": "e8398cb96d12cc4bdb6b",
-      "type": "NoFilter"
-    },
-    {
-      "source": "b532bbddb50d5a535502",
-      "target": "325f874846b9b8ecccd3",
-      "type": "NoFilter"
-    },
-    {
-      "source": "b532bbddb50d5a535502",
-      "target": "39e910901366baadb021",
-      "type": "NoFilter"
-    }
-  ]
+  }
 }

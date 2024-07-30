@@ -47,8 +47,8 @@
                 }
               },
               "queryRef": "Key Metric.Key Metric, Last Years",
-              "nativeQueryRef": "בוגרים",
-              "displayName": "בוגרים"
+              "nativeQueryRef": "מקבלי תארים",
+              "displayName": "מקבלי תארים"
             }
           ]
         }

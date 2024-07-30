@@ -14,17 +14,6 @@ table 'Manual Totals Source'
 
 		annotation SummarizationSetBy = User
 
-	column סטודנטים/בוגרים
-		dataType: string
-		isHidden
-		lineageTag: 26d09f92-a00b-4f39-902b-738da0d72ad6
-		summarizeBy: none
-		sourceColumn: סטודנטים/בוגרים
-
-		changedProperty = IsHidden
-
-		annotation SummarizationSetBy = Automatic
-
 	column אוניברסיטאות/מכללות
 		dataType: string
 		isHidden
@@ -82,6 +71,14 @@ table 'Manual Totals Source'
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'סטודנטים/מקבלי תארים'
+		dataType: string
+		lineageTag: 56237005-f288-4716-9ee7-3c348c9c9937
+		summarizeBy: none
+		sourceColumn: סטודנטים/מקבלי תארים
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Manual Totals Source' = m
 		mode: import
 		queryGroup: 'Data Model\Control'
@@ -102,13 +99,15 @@ table 'Manual Totals Source'
 				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom1",{{"Arabs", Int64.Type}}),
 				    #"Merged Queries" = Table.NestedJoin(#"Changed Type1", {"שנה עברית - מלא"}, #"Education Years LUT", {"שנה עברית - מלא"}, "Education Years LUT", JoinKind.LeftOuter),
 				    #"Expanded Education Years LUT" = Table.ExpandTableColumn(#"Merged Queries", "Education Years LUT", {"שנה לועזית - סטודנטים", "שנה לועזית - בוגרים"}, {"שנה לועזית - סטודנטים", "שנה לועזית - בוגרים"}),
-				    #"Added Conditional Column" = Table.AddColumn(#"Expanded Education Years LUT", "Year", each if [#"סטודנטים/בוגרים"] = "סטודנטים" then [#"שנה לועזית - סטודנטים"] else if [#"סטודנטים/בוגרים"] = "בוגרים" then [#"שנה לועזית - בוגרים"] else null),
+				    #"Added Conditional Column" = Table.AddColumn(#"Expanded Education Years LUT", "Year", each if [#"סטודנטים/מקבלי תארים"] = "סטודנטים" then [#"שנה לועזית - סטודנטים"] else if [#"סטודנטים/מקבלי תארים"] = "מקבלי תארים" then [#"שנה לועזית - בוגרים"] else null),
 				    #"Changed Type2" = Table.TransformColumnTypes(#"Added Conditional Column",{{"Year", Int64.Type}}),
-				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type2",{"Year", "שנה עברית - מלא", "סטודנטים/בוגרים", "אוניברסיטאות/מכללות", "הערות", "Total", "Arabs"})
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type2",{"אוניברסיטאות/מכללות", "סטודנטים/מקבלי תארים", "שנה עברית - מלא", "הערות", "Total", "Arabs", "Year"})
 				in
 				    #"Removed Other Columns"
 
 	changedProperty = IsHidden
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

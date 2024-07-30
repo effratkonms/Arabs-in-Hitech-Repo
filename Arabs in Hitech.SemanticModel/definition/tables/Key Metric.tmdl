@@ -1,25 +1,31 @@
 table 'Key Metric'
 	lineageTag: 46542970-c3a1-44f9-b20d-b59dbffd7778
 
-	measure 'Key Metric' = ```
-			VAR RESULT = 
-			SWITCH(
-			    SELECTEDVALUE('Key Metric'[Metric]),
-			    "SUM Higher Ed", [SUM Higher Ed],
-			    "SUM Students by Institution", [SUM Students by Institution],
-			    "SUM Students by Gender", [SUM Students by Gender],
-			    "SUM Graduates by Nafa", [SUM Graduates by Nafa]
-			)
-			RETURN
-			ROUNDUP(result,0)
-			```
+	measure 'Key Metric' =
+			VAR RESULT =
+					SWITCH(
+						SELECTEDVALUE('Key Metric'[Metric]),
+						"SUM Higher Ed", [SUM Higher Ed],
+						"SUM Students by Institution", [SUM Students by Institution],
+						"SUM Students by Gender", [SUM Students by Gender],
+						"SUM Graduates by Nafa", [SUM Graduates by Nafa]
+					)
+					RETURN
+						ROUNDUP(
+							result,
+							0
+						)
 		formatString: #,0
 		lineageTag: 65f2d9b9-3c6c-4834-a944-f2ddea284848
 
 	measure 'Selected Heb Key Metric' = SELECTEDVALUE('Key Metric'[Heb Metric])
 		lineageTag: d1c9af55-5362-45be-a59e-5aaecc4564f8
 
-	measure 'Key Metric, All Populations' = CALCULATE([Key Metric], ALL(Population))
+	measure 'Key Metric, All Populations' =
+			CALCULATE(
+						[Key Metric],
+						ALL(Population)
+					)
 		formatString: #,0
 		lineageTag: af1b502a-533b-49c5-93ec-6ae6d6ea417a
 
@@ -133,41 +139,46 @@ table 'Key Metric'
 		lineageTag: 8c29cb98-2dce-4a2a-8001-0616501f01dc
 
 	measure 'Key Metric, Arab or All Population' =
-			
 			VAR selectedSociety = SELECTEDVALUE(Societies[חברה])
-			RETURN
-			SWITCH(
-			    selectedSociety,
-			    "החברה הערבית",
-			    CALCULATE(
-			        [Key Metric],
-			        FILTER(
-			            ALL(Population),
-			            Population[Population] = "Arab"
-			        )
-			    ),
-			    [Key Metric, All Populations]
-			)
+					RETURN
+						SWITCH(
+							selectedSociety,
+							"החברה הערבית", CALCULATE(
+								[Key Metric],
+								FILTER(
+									ALL(Population),
+									Population[Population] = "Arab"
+								)
+							),
+							[Key Metric, All Populations]
+						)
 		formatString: #,0
 		lineageTag: fa0265da-3918-465e-9e8d-176eee6861f7
 
-	measure 'Key Metric Arab or All Population, All Subjects' = CALCULATE([Key Metric, Arab or All Population], ALL(Subject))
+	measure 'Key Metric Arab or All Population, All Subjects' =
+			CALCULATE(
+						[Key Metric, Arab or All Population],
+						ALL(Subject)
+					)
 		formatString: #,0
 		lineageTag: acf9aacb-f6fc-4ed4-a6eb-2a7a3499fa6b
 
 	measure 'Key Metric, Arab or All Population, All Technological Subjects' =
-			
 			CALCULATE(
-			    [Key Metric, Arab or All Population],
-			    FILTER(
-			        ALL(Subject),
-			        Subject[תחום] <> "לא הייטק"
-			    )
-			)
+						[Key Metric, Arab or All Population],
+						FILTER(
+							ALL(Subject),
+							Subject[תחום] <> "לא הייטק"
+						)
+					)
 		formatString: #,0
 		lineageTag: ec710282-6f54-4238-b417-1c347ade60d2
 
-	measure 'Key Metric, Arab or All Population % Technological Subjects of All Subjects' = DIVIDE([Key Metric, Arab or All Population, All Technological Subjects], [Key Metric Arab or All Population, All Subjects])
+	measure 'Key Metric, Arab or All Population % Technological Subjects of All Subjects' =
+			DIVIDE(
+						[Key Metric, Arab or All Population, All Technological Subjects],
+						[Key Metric Arab or All Population, All Subjects]
+					)
 		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: c79e5880-a52c-4a61-b63f-6b6e8f2ba54f
 
@@ -203,10 +214,12 @@ table 'Key Metric'
 		mode: import
 		source =
 				let
-				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("hY7PCoJAGMRfZdmzUGk9QliHIpBO4mFjt1qINXT30FuUGiT9QaGDb/S9Tp9pERR0GmaG3zC+T6GEExwhhQI1h2sHDmgTqGpDLerNJ2QkV2sRkSFH36OB9U0RuMAdcgI3TEtIW9DThgulY7LYkbGKtdRGy1Bha/+bSTCtfsy4QnERYeE0Cx9v33SBkrWsGzFumBZPeMqWDPN+g+4RPSNTP84hI3bXdlpqFm7NhtVfX+mABsED", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Heb Metric" = _t, Metric = _t, Order = _t]),
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("hY7BCoJAFEV/ZZi1UGl9QliLIpBW4mJiphJCQ8dFf2FqkGSiECT90Pud3qS1KWj1uPdxD8e2KdRwhhOkUOHN4dqDI8YEGhWoRq3ljEzczVYEZMwxD6ijfa8IFHCDnECJbQ1pN7RkxIUnQ7I6kKkXSldG0vU9/Or/MAm2zQ+MKTwuAnwYLaGEOxoXavSAuNX+YCo8WQcxA8YjJsWLMmdrhv2wZcTocMGNUs8hI3pfN7rVwt9HO6ak3+2IOs4T", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Heb Metric" = _t, Metric = _t, Order = _t]),
 				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Metric", type text}, {"Order", Int64.Type}})
 				in
 				    #"Changed Type"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

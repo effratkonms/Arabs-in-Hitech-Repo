@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
-  "name": "961c55f609bad0dd158a",
+  "name": "2349486343e2ae4fc465",
   "position": {
-    "x": 1334.9073438572409,
-    "y": 1301.9629375428963,
-    "z": 36000,
-    "width": 272.77968428277279,
-    "height": 52.711050102951269,
-    "tabOrder": 36000
+    "x": 1200,
+    "y": 272,
+    "z": 38000,
+    "width": 352,
+    "height": 176,
+    "tabOrder": 38000
   },
   "visual": {
     "visualType": "textbox",
@@ -19,11 +19,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "להסיר בלנק",
+                    "value": "אפרת: המדדים שנבחרו לא תואמים את הניסוח שמופיע מתחת. אני צריכה הסבר לגבי מה בדיוק אמורים להציג, כדי שאבין האם הבעיה היא בניסוח או במדד.",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "14pt",
-                      "color": "#31c20d"
+                      "fontSize": "16pt",
+                      "color": "#fe9666"
                     }
                   }
                 ],

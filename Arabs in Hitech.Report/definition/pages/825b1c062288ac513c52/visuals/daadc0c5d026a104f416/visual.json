@@ -1,38 +1,19 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
-  "name": "e8398cb96d12cc4bdb6b",
+  "name": "daadc0c5d026a104f416",
   "position": {
-    "x": 415.577967416602,
-    "y": 303.86346004654769,
-    "z": 24000,
-    "width": 560.0620636152056,
-    "height": 336.63304887509696,
-    "tabOrder": 18000
+    "x": 736,
+    "y": 352,
+    "z": 1000,
+    "width": 544,
+    "height": 288,
+    "tabOrder": 1000
   },
   "visual": {
-    "visualType": "clusteredBarChart",
+    "visualType": "card",
     "query": {
       "queryState": {
-        "Category": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "LinkedIn Positions"
-                    }
-                  },
-                  "Property": "תפקיד"
-                }
-              },
-              "queryRef": "LinkedIn Positions.תפקיד",
-              "nativeQueryRef": "תפקיד",
-              "active": true
-            }
-          ]
-        },
-        "Y": {
+        "Values": {
           "projections": [
             {
               "field": {
@@ -42,12 +23,12 @@
                       "Entity": "LinkedIn Main"
                     }
                   },
-                  "Property": "LinkedIn KPI: Employees not in Hitech"
+                  "Property": "Count Rows LinkedIn Main"
                 }
               },
-              "queryRef": "LinkedIn Main.LinkedIn KPI: Employees not in Hitech",
-              "nativeQueryRef": "מועסקים לא בהיי-טק",
-              "displayName": "מועסקים לא בהיי-טק"
+              "queryRef": "LinkedIn Main.Count Rows LinkedIn Main",
+              "nativeQueryRef": "עובדים",
+              "displayName": "עובדים"
             }
           ]
         }
@@ -62,134 +43,49 @@
                     "Entity": "LinkedIn Main"
                   }
                 },
-                "Property": "LinkedIn KPI: Employees not in Hitech"
+                "Property": "Count Rows LinkedIn Main"
               }
             },
             "direction": "Descending"
           }
-        ],
-        "isDefaultSort": true
+        ]
       }
     },
     "objects": {
       "labels": [
         {
           "properties": {
-            "labelDisplayUnits": {
+            "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "1D"
+                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
                 }
               }
             },
-            "labelPrecision": {
+            "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "0L"
+                  "Value": "30D"
                 }
               }
             },
-            "show": {
+            "bold": {
               "expr": {
                 "Literal": {
                   "Value": "true"
                 }
               }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "16D"
-                }
-              }
-            },
-            "fontFamily": {
-              "expr": {
-                "Literal": {
-                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
-                }
-              }
             }
           }
         }
       ],
-      "general": [
-        {
-          "properties": {
-            "responsive": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "categoryAxis": [
-        {
-          "properties": {
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "16D"
-                }
-              }
-            },
-            "maxMarginFactor": {
-              "expr": {
-                "Literal": {
-                  "Value": "50L"
-                }
-              }
-            },
-            "labelColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 1,
-                      "Percent": 0
-                    }
-                  }
-                }
-              }
-            },
-            "fontFamily": {
-              "expr": {
-                "Literal": {
-                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "valueAxis": [
+      "categoryLabels": [
         {
           "properties": {
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "dataPoint": [
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": -0.3
-                    }
-                  }
                 }
               }
             }
@@ -198,40 +94,20 @@
       ]
     },
     "visualContainerObjects": {
-      "background": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            }
-          }
-        }
-      ],
       "title": [
         {
           "properties": {
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'תפקידי מועסקים לא במשרות הייטק'"
+                  "Value": "'מועסקים לפי מגדר'"
                 }
               }
             },
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -285,7 +161,7 @@
           }
         }
       ],
-      "subTitle": [
+      "background": [
         {
           "properties": {
             "show": {
@@ -295,17 +171,10 @@
                 }
               }
             },
-            "alignment": {
+            "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "'right'"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "11D"
+                  "Value": "0D"
                 }
               }
             }
@@ -346,13 +215,27 @@
           }
         }
       ],
-      "visualTooltip": [
+      "subTitle": [
         {
           "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'right'"
+                }
+              }
+            },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "11D"
                 }
               }
             }

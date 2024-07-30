@@ -3,11 +3,11 @@
   "name": "a3dd394d16b0836540b8",
   "position": {
     "x": 1248,
-    "y": 864,
-    "z": 25000,
+    "y": 720,
+    "z": 21000,
     "width": 656,
-    "height": 448.00000000000006,
-    "tabOrder": 19000
+    "height": 448,
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "pivotTable",

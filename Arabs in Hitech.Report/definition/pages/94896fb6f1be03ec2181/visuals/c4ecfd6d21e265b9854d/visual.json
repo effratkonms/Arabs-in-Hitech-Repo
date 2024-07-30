@@ -27,8 +27,8 @@
                 }
               },
               "queryRef": "Fact 07 Graduates by Nafa.Training Graduates by Nafa",
-              "nativeQueryRef": "בוגרים",
-              "displayName": "בוגרים"
+              "nativeQueryRef": "מקבלי תארים",
+              "displayName": "מקבלי תארים"
             }
           ]
         },

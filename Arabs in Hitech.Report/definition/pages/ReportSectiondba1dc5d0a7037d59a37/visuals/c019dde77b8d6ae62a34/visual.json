@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
   "name": "c019dde77b8d6ae62a34",
   "position": {
-    "x": 1655.1269732326698,
-    "y": 292.54632807137955,
-    "z": 36000,
-    "width": 247.74193548387095,
-    "height": 168.67536032944406,
-    "tabOrder": 36000
+    "x": 224,
+    "y": 0,
+    "z": 32000,
+    "width": 224,
+    "height": 176,
+    "tabOrder": 32000
   },
   "visual": {
     "visualType": "card",
@@ -69,11 +69,41 @@
                   "Value": "1D"
                 }
               }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI Bold'', wf_segoe-ui_bold, helvetica, arial, sans-serif'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
             }
           }
         }
       ]
     },
     "drillFilterOtherVisuals": true
-  }
+  },
+  "parentGroupName": "2e96dbcf2299872aff11"
 }
