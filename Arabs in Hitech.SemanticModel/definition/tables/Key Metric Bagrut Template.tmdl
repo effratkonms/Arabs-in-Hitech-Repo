@@ -54,16 +54,16 @@ table 'Key Metric Bagrut Template'
 		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: f6a12558-140d-4ae6-9621-c6168844c665
 
-	measure 'Key Bagrut Metric' = ```
+	measure 'Key Bagrut Metric' =
 			
 			VAR metricType = SELECTEDVALUE('Key Metric Bagrut Template'[Metric Type])
 			RETURN
 			SWITCH(
 			    metricType,
 			    "#", [Key Bagrut Metric #],
-			    "%", [Key Bagrut Metric %]				
+			    "%", [Key Bagrut Metric %],
+			    [Key Bagrut Metric %]
 			)
-			```
 		lineageTag: 9711db0c-5165-4fda-8717-4d9708f98ce1
 
 		formatStringDefinition =

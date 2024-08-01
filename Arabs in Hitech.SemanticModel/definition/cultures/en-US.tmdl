@@ -9669,7 +9669,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "מועסקים במשרות הייטק מתוך בעלי השכלת הייטק": {
+			          "עובדים": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -9679,7 +9679,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "עובדים": {
+			          "מועסקים במשרות הייטק מתוך בעלי השכלת הייטק": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -30263,7 +30263,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "סטודנטים חדשים": {
+			          "סטודנטים חדשים מכלל האוכלוסיה": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -30273,7 +30273,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "סטודנטים חדשים מכלל האוכלוסיה": {
+			          "סטודנטים חדשים": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
