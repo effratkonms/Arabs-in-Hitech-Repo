@@ -936,16 +936,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "rate": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
 			          "importance": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -983,6 +973,16 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "use": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
 			          }
 			        }
 			      ]
@@ -2146,16 +2146,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "rate": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
 			          "importance": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -2193,6 +2183,16 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "use": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
 			          }
 			        }
 			      ]
@@ -3069,16 +3069,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "rate": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
 			          "importance": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -3116,6 +3106,16 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "use": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
 			          }
 			        }
 			      ]
@@ -3545,16 +3545,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "rate": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
 			          "importance": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -3592,6 +3582,16 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "use": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
 			          }
 			        }
 			      ]
@@ -9669,7 +9669,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "עובדים": {
+			          "מועסקים במשרות הייטק מתוך בעלי השכלת הייטק": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -9679,7 +9679,7 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "מועסקים במשרות הייטק מתוך בעלי השכלת הייטק": {
+			          "עובדים": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -11809,16 +11809,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "rate": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
 			          "importance": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -11856,6 +11846,16 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "use": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
 			          }
 			        }
 			      ]
@@ -15845,16 +15845,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "rate": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
 			          "importance": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -15892,6 +15882,16 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "use": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
 			          }
 			        }
 			      ]
@@ -17201,16 +17201,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "rate": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
 			          "importance": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -17248,6 +17238,16 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "use": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
 			          }
 			        }
 			      ]
@@ -18691,12 +18691,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "zero": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "CG zero": {
 			            "State": "Generated",
 			            "Weight": 0.97
@@ -18773,16 +18767,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "zippo": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
 			          "cg nothing": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -18794,6 +18778,16 @@ cultureInfo en-US
 			        },
 			        {
 			          "cg nil": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "cg zip": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
@@ -18826,12 +18820,6 @@ cultureInfo en-US
 			        },
 			        {
 			          "if blank": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "zero": {
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -18897,36 +18885,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "zippo": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "nil": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "zip": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
 			          "absolute": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -18934,6 +18892,36 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "straight-out": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "uncomprehending": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "empty": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
 			          }
 			        }
 			      ]
@@ -20562,12 +20550,6 @@ cultureInfo en-US
 			        },
 			        {
 			          "measure zero if blank": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "zero": {
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -28414,16 +28396,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "rate": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
 			          "importance": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -28461,6 +28433,16 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "use": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
 			          }
 			        }
 			      ]
@@ -29997,6 +29979,907 @@ cultureInfo en-US
 			        }
 			      ]
 			    },
+			    "manual_totals_source.סטודנטים_מקבלי_תארים": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Manual Totals Source",
+			          "ConceptualProperty": "סטודנטים/מקבלי תארים"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "סטודנטים/מקבלי תארים": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "סטודנטים מקבלי תארים": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Key Metric Bagrut Template",
+			          "ConceptualProperty": "Key Bagrut Metric Zero if Blank (formatted for map tooltip)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "key bagrut metric zero if blank (formatted for map tooltip)": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "key bagrut metric zero if blank": {
+			            "State": "Generated",
+			            "Weight": 0.75
+			          }
+			        }
+			      ]
+			    },
+			    "nafot_WKT_w_YS.selected_nafa": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Nafot WKT w YS",
+			          "ConceptualProperty": "Selected Nafa"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "selected nafa": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "fact 08 toar tech": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech.subject": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech",
+			          "ConceptualProperty": "Subject"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "subject": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "topic": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "substance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "theme": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "focus": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "question": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "issue": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "matter": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "business": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "specialty": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "field": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech.תואר_ראשון_סטודנטים_חדשים__כלל_האוכלוסייה": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech",
+			          "ConceptualProperty": "תואר ראשון סטודנטים חדשים - כלל האוכלוסייה"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "תואר ראשון סטודנטים חדשים - כלל האוכלוסייה": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "תואר ראשון סטודנטים חדשים כלל האוכלוסייה": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech.תואר_ראשון_סטודנטים_חדשים__ערבים": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech",
+			          "ConceptualProperty": "תואר ראשון סטודנטים חדשים - ערבים"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "תואר ראשון סטודנטים חדשים - ערבים": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "תואר ראשון סטודנטים חדשים ערבים": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech.year": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech",
+			          "ConceptualProperty": "Year"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "year": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population08_ToarTech_SUM_students_entire_population": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech",
+			          "ConceptualProperty": "08 ToarTech: SUM Students: Entire Population"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "08 ToarTech: SUM students: entire population": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "סטודנטים חדשים": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "סטודנטים חדשים מכלל האוכלוסיה": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech.v08_ToarTech__SUM_Students__Arab_Population08_ToarTech_SUM_students_arab_population": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech",
+			          "ConceptualProperty": "08 ToarTech: SUM Students: Arab Population"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "08 ToarTech: SUM students: arab population": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "סטודנטים חדשים מהחברה הערבית": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech.v08_ToarTech__Arab___of_All_Population08_ToarTech_arab__of_all_population": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech",
+			          "ConceptualProperty": "08 ToarTech: Arab % of All Population"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "08 ToarTech: arab % of all population": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "שיעור החברה הערבית": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population_PY08_ToarTech_SUM_students_entire_population_PY": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech",
+			          "ConceptualProperty": "08 ToarTech: SUM Students: Entire Population PY"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "08 ToarTech: SUM students: entire population PY": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "סטודנטים חדשים בשנה  הקודמת": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population_YoY08_ToarTech_SUM_students_entire_population_YoY": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech",
+			          "ConceptualProperty": "08 ToarTech: SUM Students: Entire Population YoY"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "08 ToarTech: SUM students: entire population YoY": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population___YoY08_ToarTech_SUM_students_entire_population__YoY": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech",
+			          "ConceptualProperty": "08 ToarTech: SUM Students: Entire Population % YoY"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "08 ToarTech: SUM students: entire population % YoY": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "שעור בפועל": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_entire_population": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech Target: Entire Population"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "fact 08 toar tech target: entire population": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_entire_population.year": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech Target: Entire Population",
+			          "ConceptualProperty": "Year"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_entire_population.yearly_rate_of_change": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech Target: Entire Population",
+			          "ConceptualProperty": "Yearly Rate of Change"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "yearly rate of change": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "yearly rate": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "yearly degree of change": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "yearly frequency of change": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "yearly percentage of change": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "yearly ratio of change": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "yearly quotient of change": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "yearly degree": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "yearly frequency": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "yearly percentage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "yearly ratio": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "yearly quotient": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_entire_population.v08_ToarTech_Target__Entire_Population08_ToarTech_target_entire_population": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech Target: Entire Population",
+			          "ConceptualProperty": "08 ToarTech Target: Entire Population"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "08 ToarTech target: entire population": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "יעד": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_entire_population.v08_ToarTech_Max_BvA__Entire_Population08_ToarTech_max_BvA_entire_population": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech Target: Entire Population",
+			          "ConceptualProperty": "08 ToarTech Max BvA: Entire Population"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "08 ToarTech max BvA: entire population": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_entire_population.v08_ToarTech_Min_BvA__Entrie_Population08_ToarTech_min_BvA_entrie_population": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech Target: Entire Population",
+			          "ConceptualProperty": "08 ToarTech Min BvA: Entrie Population"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "08 ToarTech min BvA: entrie population": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_arab_population": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech Target: Arab Population"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "fact 08 toar tech target: arab population": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_arab_population.year": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech Target: Arab Population",
+			          "ConceptualProperty": "Year"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_arab_population.rate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech Target: Arab Population",
+			          "ConceptualProperty": "Rate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "rate": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "frequency": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "ratio": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "quotient": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "proportion": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "speed": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "level": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "scale": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "tempo": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "velocity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "pace": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_arab_population.v08_ToarTech_Target__Arab_Population08_ToarTech_target_arab_population": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech Target: Arab Population",
+			          "ConceptualProperty": "08 ToarTech Target: Arab Population"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "08 ToarTech target: arab population": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "יעד": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech.zero": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Fact 08 Toar Tech",
+			          "ConceptualProperty": "Zero"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "zero": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "zippo": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "nil": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "zip": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "zilch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "naught": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
 			    "nafot_wkt.nafa": {
 			      "Definition": {
 			        "Binding": {
@@ -30020,6 +30903,197 @@ cultureInfo en-US
 			    }
 			  },
 			  "Relationships": {
+			    "fact_07_student_by_nafa_has_calendar": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 07 Students by Nafa"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_07_student_by_nafa": {
+			          "Target": {
+			            "Entity": "fact_07_student_by_nafa"
+			          }
+			        },
+			        "calendar": {
+			          "Target": {
+			            "Entity": "calendar"
+			          },
+			          "Nouns": [
+			            {
+			              "year": {
+			                "State": "Generated"
+			              }
+			            }
+			          ]
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_07_student_by_nafa"
+			            },
+			            "Object": {
+			              "Role": "calendar"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_07_student_by_nafa_have_calendars"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendar"
+			            },
+			            "Object": {
+			              "Role": "fact_07_student_by_nafa"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "calendars_have_fact_07_student_by_nafa"
+			        }
+			      ]
+			    },
+			    "LinkedIn_main_has_gender": {
+			      "Binding": {
+			        "ConceptualEntity": "LinkedIn Main"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "LinkedIn_main": {
+			          "Target": {
+			            "Entity": "LinkedIn_main"
+			          }
+			        },
+			        "gender": {
+			          "Target": {
+			            "Entity": "gender"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "LinkedIn_main"
+			            },
+			            "Object": {
+			              "Role": "gender"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "LinkedIn_mains_have_genders"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "gender"
+			            },
+			            "Object": {
+			              "Role": "LinkedIn_main"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "genders_have_LinkedIn_mains"
+			        }
+			      ]
+			    },
+			    "LinkedIn_main_has_LinkedIn_position": {
+			      "Binding": {
+			        "ConceptualEntity": "LinkedIn Main"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "LinkedIn_main": {
+			          "Target": {
+			            "Entity": "LinkedIn_main"
+			          }
+			        },
+			        "LinkedIn_position": {
+			          "Target": {
+			            "Entity": "LinkedIn_position"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "LinkedIn_main"
+			            },
+			            "Object": {
+			              "Role": "LinkedIn_position"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "LinkedIn_mains_have_LinkedIn_positions"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "LinkedIn_position"
+			            },
+			            "Object": {
+			              "Role": "LinkedIn_main"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "LinkedIn_positions_have_LinkedIn_mains"
+			        }
+			      ]
+			    },
+			    "LinkedIn_main_has_LinkedIn_company": {
+			      "Binding": {
+			        "ConceptualEntity": "LinkedIn Main"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "LinkedIn_main": {
+			          "Target": {
+			            "Entity": "LinkedIn_main"
+			          }
+			        },
+			        "LinkedIn_company": {
+			          "Target": {
+			            "Entity": "LinkedIn_company"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "LinkedIn_main"
+			            },
+			            "Object": {
+			              "Role": "LinkedIn_company"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "LinkedIn_mains_have_LinkedIn_companies"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "LinkedIn_company"
+			            },
+			            "Object": {
+			              "Role": "LinkedIn_main"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "LinkedIn_companies_have_LinkedIn_mains"
+			        }
+			      ]
+			    },
 			    "fact_2021_graduates_salary_has_population": {
 			      "Binding": {
 			        "ConceptualEntity": "Fact 2021 Graduates Salaries"
@@ -31997,6 +33071,732 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "subject_categories_have_subjects"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_has_zero": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech"
+			          }
+			        },
+			        "fact_08_toar_tech.zero": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech.zero"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech.zero"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_techs_have_zero"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_arab_population_has_v08_ToarTech_Target__Arab_Population08_ToarTech_target_arab_population": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech Target: Arab Population"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech_target_arab_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech_target_arab_population"
+			          }
+			        },
+			        "fact_08_toar_tech_target_arab_population.v08_ToarTech_Target__Arab_Population08_ToarTech_target_arab_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech_target_arab_population.v08_ToarTech_Target__Arab_Population08_ToarTech_target_arab_population"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech_target_arab_population"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech_target_arab_population.v08_ToarTech_Target__Arab_Population08_ToarTech_target_arab_population"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_tech_target_arab_populations_have_08_ToarTech_target_arab_population"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_arab_population_has_rate": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech Target: Arab Population"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech_target_arab_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech_target_arab_population"
+			          }
+			        },
+			        "fact_08_toar_tech_target_arab_population.rate": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech_target_arab_population.rate"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech_target_arab_population"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech_target_arab_population.rate"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_tech_target_arab_populations_have_rates"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_entire_population_has_v08_ToarTech_Min_BvA__Entrie_Population08_ToarTech_min_BvA_entrie_population": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech Target: Entire Population"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech_target_entire_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech_target_entire_population"
+			          }
+			        },
+			        "fact_08_toar_tech_target_entire_population.v08_ToarTech_Min_BvA__Entrie_Population08_ToarTech_min_BvA_entrie_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech_target_entire_population.v08_ToarTech_Min_BvA__Entrie_Population08_ToarTech_min_BvA_entrie_population"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech_target_entire_population"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech_target_entire_population.v08_ToarTech_Min_BvA__Entrie_Population08_ToarTech_min_BvA_entrie_population"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_tech_target_entire_populations_have_08_ToarTech_min_BvA_entrie_population"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_entire_population_has_v08_ToarTech_Max_BvA__Entire_Population08_ToarTech_max_BvA_entire_population": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech Target: Entire Population"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech_target_entire_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech_target_entire_population"
+			          }
+			        },
+			        "fact_08_toar_tech_target_entire_population.v08_ToarTech_Max_BvA__Entire_Population08_ToarTech_max_BvA_entire_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech_target_entire_population.v08_ToarTech_Max_BvA__Entire_Population08_ToarTech_max_BvA_entire_population"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech_target_entire_population"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech_target_entire_population.v08_ToarTech_Max_BvA__Entire_Population08_ToarTech_max_BvA_entire_population"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_tech_target_entire_populations_have_08_ToarTech_max_BvA_entire_population"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_entire_population_has_v08_ToarTech_Target__Entire_Population08_ToarTech_target_entire_population": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech Target: Entire Population"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech_target_entire_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech_target_entire_population"
+			          }
+			        },
+			        "fact_08_toar_tech_target_entire_population.v08_ToarTech_Target__Entire_Population08_ToarTech_target_entire_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech_target_entire_population.v08_ToarTech_Target__Entire_Population08_ToarTech_target_entire_population"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech_target_entire_population"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech_target_entire_population.v08_ToarTech_Target__Entire_Population08_ToarTech_target_entire_population"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_tech_target_entire_populations_have_08_ToarTech_target_entire_population"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_entire_population_has_yearly_rate_of_change": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech Target: Entire Population"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech_target_entire_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech_target_entire_population"
+			          }
+			        },
+			        "fact_08_toar_tech_target_entire_population.yearly_rate_of_change": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech_target_entire_population.yearly_rate_of_change"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech_target_entire_population"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech_target_entire_population.yearly_rate_of_change"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_tech_target_entire_populations_have_yearly_rate_of_change"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_has_v08_ToarTech__SUM_Students__Entire_Population___YoY08_ToarTech_SUM_students_entire_population__YoY": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech"
+			          }
+			        },
+			        "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population___YoY08_ToarTech_SUM_students_entire_population__YoY": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population___YoY08_ToarTech_SUM_students_entire_population__YoY"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population___YoY08_ToarTech_SUM_students_entire_population__YoY"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_techs_have_08_ToarTech_SUM_students_entire_population__YoY"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_has_v08_ToarTech__SUM_Students__Entire_Population_YoY08_ToarTech_SUM_students_entire_population_YoY": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech"
+			          }
+			        },
+			        "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population_YoY08_ToarTech_SUM_students_entire_population_YoY": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population_YoY08_ToarTech_SUM_students_entire_population_YoY"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population_YoY08_ToarTech_SUM_students_entire_population_YoY"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_techs_have_08_ToarTech_SUM_students_entire_population_YoY"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_has_v08_ToarTech__SUM_Students__Entire_Population_PY08_ToarTech_SUM_students_entire_population_PY": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech"
+			          }
+			        },
+			        "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population_PY08_ToarTech_SUM_students_entire_population_PY": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population_PY08_ToarTech_SUM_students_entire_population_PY"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population_PY08_ToarTech_SUM_students_entire_population_PY"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_techs_have_08_ToarTech_SUM_students_entire_population_PY"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_has_v08_ToarTech__Arab___of_All_Population08_ToarTech_arab__of_all_population": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech"
+			          }
+			        },
+			        "fact_08_toar_tech.v08_ToarTech__Arab___of_All_Population08_ToarTech_arab__of_all_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech.v08_ToarTech__Arab___of_All_Population08_ToarTech_arab__of_all_population"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech.v08_ToarTech__Arab___of_All_Population08_ToarTech_arab__of_all_population"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_techs_have_08_ToarTech_arab__of_all_population"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_has_v08_ToarTech__SUM_Students__Arab_Population08_ToarTech_SUM_students_arab_population": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech"
+			          }
+			        },
+			        "fact_08_toar_tech.v08_ToarTech__SUM_Students__Arab_Population08_ToarTech_SUM_students_arab_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech.v08_ToarTech__SUM_Students__Arab_Population08_ToarTech_SUM_students_arab_population"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech.v08_ToarTech__SUM_Students__Arab_Population08_ToarTech_SUM_students_arab_population"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_techs_have_08_ToarTech_SUM_students_arab_population"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_has_v08_ToarTech__SUM_Students__Entire_Population08_ToarTech_SUM_students_entire_population": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech"
+			          }
+			        },
+			        "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population08_ToarTech_SUM_students_entire_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population08_ToarTech_SUM_students_entire_population"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech.v08_ToarTech__SUM_Students__Entire_Population08_ToarTech_SUM_students_entire_population"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_techs_have_08_ToarTech_SUM_students_entire_population"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_has_תואר_ראשון_סטודנטים_חדשים__ערבים": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech"
+			          }
+			        },
+			        "fact_08_toar_tech.תואר_ראשון_סטודנטים_חדשים__ערבים": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech.תואר_ראשון_סטודנטים_חדשים__ערבים"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech.תואר_ראשון_סטודנטים_חדשים__ערבים"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_techs_have_תואר_ראשון_סטודנטים_חדשים__ערבים"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_has_תואר_ראשון_סטודנטים_חדשים__כלל_האוכלוסייה": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech"
+			          }
+			        },
+			        "fact_08_toar_tech.תואר_ראשון_סטודנטים_חדשים__כלל_האוכלוסייה": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech.תואר_ראשון_סטודנטים_חדשים__כלל_האוכלוסייה"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech.תואר_ראשון_סטודנטים_חדשים__כלל_האוכלוסייה"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_techs_have_תואר_ראשון_סטודנטים_חדשים__כלל_האוכלוסייה"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_has_subject": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech"
+			          }
+			        },
+			        "fact_08_toar_tech.subject": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech.subject"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech.subject"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_techs_have_subjects"
+			        }
+			      ]
+			    },
+			    "nafot_WKT_w_YS_has_selected_nafa": {
+			      "Binding": {
+			        "ConceptualEntity": "Nafot WKT w YS"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "nafot_WKT_w_YS": {
+			          "Target": {
+			            "Entity": "nafot_WKT_w_YS"
+			          }
+			        },
+			        "nafot_WKT_w_YS.selected_nafa": {
+			          "Target": {
+			            "Entity": "nafot_WKT_w_YS.selected_nafa"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "nafot_WKT_w_YS"
+			            },
+			            "Object": {
+			              "Role": "nafot_WKT_w_YS.selected_nafa"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "nafot_WKT_w_YSes_have_selected_nafa"
+			        }
+			      ]
+			    },
+			    "nafa_has_key_metric_bagrut_template_key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip": {
+			      "Binding": {
+			        "ConceptualEntity": "Nafa"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "nafa": {
+			          "Target": {
+			            "Entity": "nafa"
+			          }
+			        },
+			        "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip": {
+			          "Target": {
+			            "Entity": "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "nafa"
+			            },
+			            "Object": {
+			              "Role": "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "nafas_have_key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
+			        }
+			      ]
+			    },
+			    "manual_selected_population_has_key_metric_bagrut_template_key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip": {
+			      "Binding": {
+			        "ConceptualEntity": "Manual Selected Population"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "manual_selected_population": {
+			          "Target": {
+			            "Entity": "manual_selected_population"
+			          }
+			        },
+			        "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip": {
+			          "Target": {
+			            "Entity": "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "manual_selected_population"
+			            },
+			            "Object": {
+			              "Role": "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "manual_selected_populations_have_key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
+			        }
+			      ]
+			    },
+			    "key_metric_bagrut_template_has_key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip": {
+			      "Binding": {
+			        "ConceptualEntity": "Key Metric Bagrut Template"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "key_metric_bagrut_template": {
+			          "Target": {
+			            "Entity": "key_metric_bagrut_template"
+			          }
+			        },
+			        "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip": {
+			          "Target": {
+			            "Entity": "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "key_metric_bagrut_template"
+			            },
+			            "Object": {
+			              "Role": "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "key_metric_bagrut_templates_have_key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
+			        }
+			      ]
+			    },
+			    "fact_bagrut_qualifier_has_key_metric_bagrut_template_key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact Bagrut Qualifiers"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_bagrut_qualifier": {
+			          "Target": {
+			            "Entity": "fact_bagrut_qualifier"
+			          }
+			        },
+			        "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip": {
+			          "Target": {
+			            "Entity": "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_bagrut_qualifier"
+			            },
+			            "Object": {
+			              "Role": "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_bagrut_qualifiers_have_key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
+			        }
+			      ]
+			    },
+			    "fact_bagrut_denom_has_key_metric_bagrut_template_key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact Bagrut Denom"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_bagrut_denom": {
+			          "Target": {
+			            "Entity": "fact_bagrut_denom"
+			          }
+			        },
+			        "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip": {
+			          "Target": {
+			            "Entity": "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_bagrut_denom"
+			            },
+			            "Object": {
+			              "Role": "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_bagrut_denoms_have_key_bagrut_metric_zero_if_blank_formatted_for_map_tooltip"
 			        }
 			      ]
 			    },
@@ -42859,6 +44659,39 @@ cultureInfo en-US
 			        }
 			      ]
 			    },
+			    "nafa_has_key_metric_bagrut_template_key_bagrut_metric_zero_if_blank": {
+			      "Binding": {
+			        "ConceptualEntity": "Nafa"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "nafa": {
+			          "Target": {
+			            "Entity": "nafa"
+			          }
+			        },
+			        "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank": {
+			          "Target": {
+			            "Entity": "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "nafa"
+			            },
+			            "Object": {
+			              "Role": "key_metric_bagrut_template.key_bagrut_metric_zero_if_blank"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "nafas_have_key_bagrut_metric_zero_if_blank"
+			        }
+			      ]
+			    },
 			    "manual_selected_population_has_key_metric_bagrut_template_key_bagrut_metric_zero_if_blank": {
 			      "Binding": {
 			        "ConceptualEntity": "Manual Selected Population"
@@ -43219,6 +45052,39 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "nafot_WKT_w_YSes_have_map_metric_noramlized_by_10_kilometers_squared"
+			        }
+			      ]
+			    },
+			    "nafa_has_nafot_wkt_w_ys_map_metric_noramlized_by_10_kilometers_squared": {
+			      "Binding": {
+			        "ConceptualEntity": "Nafa"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "nafa": {
+			          "Target": {
+			            "Entity": "nafa"
+			          }
+			        },
+			        "nafot_wkt_w_ys.map_metric_noramlized_by_10_kilometers_squared": {
+			          "Target": {
+			            "Entity": "nafot_wkt_w_ys.map_metric_noramlized_by_10_kilometers_squared"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "nafa"
+			            },
+			            "Object": {
+			              "Role": "nafot_wkt_w_ys.map_metric_noramlized_by_10_kilometers_squared"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "nafas_have_map_metric_noramlized_by_10_kilometers_squared"
 			        }
 			      ]
 			    },
@@ -49151,197 +51017,6 @@ cultureInfo en-US
 			        }
 			      ]
 			    },
-			    "LinkedIn_main_has_LinkedIn_company": {
-			      "Binding": {
-			        "ConceptualEntity": "LinkedIn Main"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "LinkedIn_main": {
-			          "Target": {
-			            "Entity": "LinkedIn_main"
-			          }
-			        },
-			        "LinkedIn_company": {
-			          "Target": {
-			            "Entity": "LinkedIn_company"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "LinkedIn_main"
-			            },
-			            "Object": {
-			              "Role": "LinkedIn_company"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "LinkedIn_mains_have_LinkedIn_companies"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "LinkedIn_company"
-			            },
-			            "Object": {
-			              "Role": "LinkedIn_main"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "LinkedIn_companies_have_LinkedIn_mains"
-			        }
-			      ]
-			    },
-			    "LinkedIn_main_has_LinkedIn_position": {
-			      "Binding": {
-			        "ConceptualEntity": "LinkedIn Main"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "LinkedIn_main": {
-			          "Target": {
-			            "Entity": "LinkedIn_main"
-			          }
-			        },
-			        "LinkedIn_position": {
-			          "Target": {
-			            "Entity": "LinkedIn_position"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "LinkedIn_main"
-			            },
-			            "Object": {
-			              "Role": "LinkedIn_position"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "LinkedIn_mains_have_LinkedIn_positions"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "LinkedIn_position"
-			            },
-			            "Object": {
-			              "Role": "LinkedIn_main"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "LinkedIn_positions_have_LinkedIn_mains"
-			        }
-			      ]
-			    },
-			    "LinkedIn_main_has_gender": {
-			      "Binding": {
-			        "ConceptualEntity": "LinkedIn Main"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "LinkedIn_main": {
-			          "Target": {
-			            "Entity": "LinkedIn_main"
-			          }
-			        },
-			        "gender": {
-			          "Target": {
-			            "Entity": "gender"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "LinkedIn_main"
-			            },
-			            "Object": {
-			              "Role": "gender"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "LinkedIn_mains_have_genders"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "gender"
-			            },
-			            "Object": {
-			              "Role": "LinkedIn_main"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "genders_have_LinkedIn_mains"
-			        }
-			      ]
-			    },
-			    "fact_07_student_by_nafa_has_calendar": {
-			      "Binding": {
-			        "ConceptualEntity": "Fact 07 Students by Nafa"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_07_student_by_nafa": {
-			          "Target": {
-			            "Entity": "fact_07_student_by_nafa"
-			          }
-			        },
-			        "calendar": {
-			          "Target": {
-			            "Entity": "calendar"
-			          },
-			          "Nouns": [
-			            {
-			              "year": {
-			                "State": "Generated"
-			              }
-			            }
-			          ]
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_07_student_by_nafa"
-			            },
-			            "Object": {
-			              "Role": "calendar"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_07_student_by_nafa_have_calendars"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "calendar"
-			            },
-			            "Object": {
-			              "Role": "fact_07_student_by_nafa"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "calendars_have_fact_07_student_by_nafa"
-			        }
-			      ]
-			    },
 			    "fact_07_student_by_nafa_has_training_subject": {
 			      "Binding": {
 			        "ConceptualEntity": "Fact 07 Students by Nafa"
@@ -50255,6 +51930,165 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "nafas_have_lamas_council_corrected"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_has_calendar": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech"
+			          }
+			        },
+			        "calendar": {
+			          "Target": {
+			            "Entity": "calendar"
+			          },
+			          "Nouns": [
+			            {
+			              "year": {
+			                "State": "Generated"
+			              }
+			            }
+			          ]
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech"
+			            },
+			            "Object": {
+			              "Role": "calendar"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_techs_have_calendars"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendar"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "calendars_have_fact_08_toar_techs"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_entire_population_has_calendar": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech Target: Entire Population"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech_target_entire_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech_target_entire_population"
+			          }
+			        },
+			        "calendar": {
+			          "Target": {
+			            "Entity": "calendar"
+			          },
+			          "Nouns": [
+			            {
+			              "year": {
+			                "State": "Generated"
+			              }
+			            }
+			          ]
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech_target_entire_population"
+			            },
+			            "Object": {
+			              "Role": "calendar"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_tech_target_entire_populations_have_calendars"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendar"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech_target_entire_population"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "calendars_have_fact_08_toar_tech_target_entire_populations"
+			        }
+			      ]
+			    },
+			    "fact_08_toar_tech_target_arab_population_has_calendar": {
+			      "Binding": {
+			        "ConceptualEntity": "Fact 08 Toar Tech Target: Arab Population"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_08_toar_tech_target_arab_population": {
+			          "Target": {
+			            "Entity": "fact_08_toar_tech_target_arab_population"
+			          }
+			        },
+			        "calendar": {
+			          "Target": {
+			            "Entity": "calendar"
+			          },
+			          "Nouns": [
+			            {
+			              "year": {
+			                "State": "Generated"
+			              }
+			            }
+			          ]
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_08_toar_tech_target_arab_population"
+			            },
+			            "Object": {
+			              "Role": "calendar"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_08_toar_tech_target_arab_populations_have_calendars"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendar"
+			            },
+			            "Object": {
+			              "Role": "fact_08_toar_tech_target_arab_population"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "calendars_have_fact_08_toar_tech_target_arab_populations"
 			        }
 			      ]
 			    }

@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
-  "name": "f48864189078a35e0e04",
+  "name": "c57bc246722d613630e3",
   "position": {
-    "x": 512,
-    "y": 1072,
-    "z": 15000,
-    "width": 1392,
-    "height": 368,
-    "tabOrder": 19000
+    "x": 960.00000000000011,
+    "y": 1680,
+    "z": 24000,
+    "width": 944,
+    "height": 560,
+    "tabOrder": 24000
   },
   "visual": {
     "visualType": "lineChart",
@@ -33,6 +33,40 @@
             }
           ]
         },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact 08 Toar Tech"
+                    }
+                  },
+                  "Property": "08 ToarTech: SUM Students: Entire Population"
+                }
+              },
+              "queryRef": "Fact 08 Toar Tech.08 ToarTech: SUM Students: Entire Population",
+              "nativeQueryRef": "סטודנטים חדשים",
+              "displayName": "סטודנטים חדשים"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact 08 Toar Tech"
+                    }
+                  },
+                  "Property": "08 ToarTech: SUM Students: Entire Population PY"
+                }
+              },
+              "queryRef": "Fact 08 Toar Tech.08 ToarTech: SUM Students: Entire Population PY",
+              "nativeQueryRef": "סטודנטים חדשים בשנה  הקודמת",
+              "displayName": "סטודנטים חדשים בשנה  הקודמת"
+            }
+          ]
+        },
         "Y": {
           "projections": [
             {
@@ -40,45 +74,30 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Fact 08 Mistrot Tech"
+                      "Entity": "Fact 08 Toar Tech"
                     }
                   },
-                  "Property": "MAX Misrot Tech"
+                  "Property": "08 ToarTech: SUM Students: Entire Population % YoY"
                 }
               },
-              "queryRef": "Fact 08 Mistrot Tech Target.MAX Misrot Tech",
-              "nativeQueryRef": "מועסקים בפועל",
-              "displayName": "מועסקים בפועל"
+              "queryRef": "Fact 08 Toar Tech.08 ToarTech: SUM Students: Entire Population % YoY",
+              "nativeQueryRef": "שעור בפועל",
+              "displayName": "שעור בפועל"
             },
             {
               "field": {
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Fact 08 Mistrot Tech Target"
+                      "Entity": "Fact 08 Toar Tech Target: Entire Population"
                     }
                   },
-                  "Property": "SUM Misrot Tech Target"
+                  "Property": "08 ToarTech Target: Entire Population"
                 }
               },
-              "queryRef": "Fact 08 Mistrot Tech Target.MAX Misrot Tech Target",
+              "queryRef": "Fact 08 Toar Tech Target: Entire Population.08 ToarTech Target: Entire Population",
               "nativeQueryRef": "יעד",
               "displayName": "יעד"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Fact 08 Mistrot Tech"
-                    }
-                  },
-                  "Property": "Target Extrapolation, Misrot Tech"
-                }
-              },
-              "queryRef": "Fact 08 Mistrot Tech.Target Extrapolation, Misrot Tech",
-              "nativeQueryRef": "מסלול ליעד, הנחה: שיעור גידול שנתי קבוע",
-              "displayName": "מסלול ליעד, הנחה: שיעור גידול שנתי קבוע"
             }
           ]
         }
@@ -206,20 +225,6 @@
                   "Value": "false"
                 }
               }
-            },
-            "start": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            },
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "1000D"
-                }
-              }
             }
           }
         }
@@ -298,7 +303,7 @@
             }
           },
           "selector": {
-            "metadata": "Fact 08 Mistrot Tech Target.MAX Misrot Tech Target"
+            "metadata": "Fact 08 Toar Tech Target: Entire Population.08 ToarTech Target: Entire Population"
           }
         }
       ],
@@ -326,15 +331,10 @@
                 }
               }
             },
-            "markerColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": -0.3
-                    }
-                  }
+            "lineStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "'dashed'"
                 }
               }
             }
@@ -363,21 +363,16 @@
         },
         {
           "properties": {
-            "markerColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 2,
-                      "Percent": 0
-                    }
-                  }
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "Fact 08 Mistrot Tech Target.MAX Misrot Tech"
+            "metadata": "Fact 08 Toar Tech Target: Entire Population.08 ToarTech Target: Entire Population"
           }
         },
         {
@@ -388,38 +383,24 @@
                   "Value": "12D"
                 }
               }
-            }
-          },
-          "selector": {
-            "metadata": "Fact 08 Mistrot Tech Target.MAX Misrot Tech Target"
-          }
-        },
-        {
-          "properties": {
-            "showMarker": {
+            },
+            "strokeShow": {
               "expr": {
                 "Literal": {
                   "Value": "false"
                 }
               }
             },
-            "lineStyle": {
+            "markerShape": {
               "expr": {
                 "Literal": {
-                  "Value": "'dashed'"
-                }
-              }
-            },
-            "strokeWidth": {
-              "expr": {
-                "Literal": {
-                  "Value": "3D"
+                  "Value": "'circle'"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "Fact 08 Mistrot Tech.Target Extrapolation, Misrot Tech"
+            "metadata": "Fact 08 Toar Tech.08 ToarTech: SUM Students: Entire Population % YoY"
           }
         }
       ],
@@ -451,46 +432,6 @@
         },
         {
           "properties": {
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "24D"
-                }
-              }
-            },
-            "bold": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 1,
-                      "Percent": 0.6
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Fact 08 Mistrot Tech Target.MAX Misrot Tech Target"
-          }
-        },
-        {
-          "properties": {
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "18D"
-                }
-              }
-            },
             "color": {
               "solid": {
                 "color": {
@@ -503,21 +444,199 @@
                 }
               }
             },
-            "fontFamily": {
+            "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'''Segoe UI Semibold'', wf_segoe-ui_semibold, helvetica, arial, sans-serif'"
+                  "Value": "18D"
+                }
+              }
+            },
+            "leaderLines": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "enableBackground": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "enableDetailDataLabel": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "optimizeLabelDisplay": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "labelPosition": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Above'"
+                }
+              }
+            },
+            "minimumOffset": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "Fact 08 Mistrot Tech Target.MAX Misrot Tech"
+            "metadata": "Fact 08 Toar Tech.08 ToarTech: SUM Students: Entire Population % YoY"
           }
         },
         {
           "properties": {
-            "showSeries": {
+            "labelDensity": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Fact 08 Toar Tech Target: Entire Population.08 ToarTech Target: Entire Population"
+          }
+        }
+      ],
+      "error": [
+        {
+          "properties": {
+            "errorRange": {
+              "kind": "ErrorRange",
+              "explicit": {
+                "isRelative": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "false"
+                    }
+                  }
+                },
+                "lowerBound": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact 08 Toar Tech Target: Entire Population"
+                        }
+                      },
+                      "Property": "08 ToarTech Min BvA: Entrie Population"
+                    }
+                  }
+                },
+                "upperBound": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact 08 Toar Tech Target: Entire Population"
+                        }
+                      },
+                      "Property": "08 ToarTech Max BvA: Entire Population"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "roles": [
+                  "Rows",
+                  "Category"
+                ]
+              }
+            ],
+            "metadata": "Fact 08 Toar Tech Target: Entire Population.08 ToarTech Target: Entire Population",
+            "highlightMatching": 1
+          }
+        },
+        {
+          "properties": {
+            "enabled": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "markerSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Fact 08 Toar Tech Target: Entire Population.08 ToarTech Target: Entire Population"
+          }
+        },
+        {
+          "properties": {
+            "enabled": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "barWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "5D"
+                }
+              }
+            },
+            "barColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "markerSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "shadeShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "tooltipShow": {
               "expr": {
                 "Literal": {
                   "Value": "false"
@@ -526,7 +645,58 @@
             }
           },
           "selector": {
-            "metadata": "Fact 08 Mistrot Tech.Target Extrapolation, Misrot Tech"
+            "metadata": "Fact 08 Toar Tech.08 ToarTech: SUM Students: Entire Population % YoY"
+          }
+        },
+        {
+          "properties": {
+            "errorRange": {
+              "kind": "ErrorRange",
+              "explicit": {
+                "isRelative": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "false"
+                    }
+                  }
+                },
+                "lowerBound": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact 08 Toar Tech"
+                        }
+                      },
+                      "Property": "Zero"
+                    }
+                  }
+                },
+                "upperBound": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact 08 Toar Tech"
+                        }
+                      },
+                      "Property": "08 ToarTech: SUM Students: Entire Population % YoY"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "Fact 08 Toar Tech.08 ToarTech: SUM Students: Entire Population % YoY",
+            "highlightMatching": 1
           }
         }
       ],
@@ -547,27 +717,22 @@
                 }
               }
             },
-            "value": {
-              "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Fact 08 Mistrot Tech Target"
-                    }
-                  },
-                  "Property": "SUM Misrot Tech Target"
-                }
-              }
-            },
             "lineColor": {
               "solid": {
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 1,
-                      "Percent": 0.6
+                      "ColorId": 0,
+                      "Percent": -0.2
                     }
                   }
+                }
+              }
+            },
+            "style": {
+              "expr": {
+                "Literal": {
+                  "Value": "'solid'"
                 }
               }
             }
@@ -577,7 +742,7 @@
           }
         }
       ],
-      "xAxisReferenceLine": [
+      "seriesLabels": [
         {
           "properties": {
             "show": {
@@ -586,36 +751,42 @@
                   "Value": "true"
                 }
               }
-            },
-            "displayName": {
+            }
+          }
+        },
+        {
+          "properties": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "'X-Axis Constant Line 1'"
-                }
-              }
-            },
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "2035D"
-                }
-              }
-            },
-            "lineColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 1,
-                      "Percent": 0.6
-                    }
-                  }
+                  "Value": "false"
                 }
               }
             }
           },
           "selector": {
-            "id": "1"
+            "metadata": "Fact 08 Toar Tech.08 ToarTech: SUM Students: Entire Population % YoY"
+          }
+        },
+        {
+          "properties": {
+            "seriesFontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "19D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Fact 08 Toar Tech Target: Entire Population.08 ToarTech Target: Entire Population"
           }
         }
       ]
@@ -627,7 +798,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "' סך המועסקים במשרות-טק'"
+                  "Value": "'שיעור השינוי השנתי בכמות הסטודנטים החדשים למקצועות ההייטק, כלל האוכלוסייה'"
                 }
               }
             },

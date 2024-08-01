@@ -1,0 +1,99 @@
+table 'Fact 08 Toar Tech'
+	lineageTag: fb852691-382e-45f7-9512-aa188da4a0b9
+
+	measure '08 ToarTech: SUM Students: Entire Population' = SUM('Fact 08 Toar Tech'[תואר ראשון סטודנטים חדשים - כלל האוכלוסייה])
+		formatString: #,0
+		lineageTag: 343a9a73-22be-4690-b8e4-20fc9338f0f2
+
+	measure '08 ToarTech: SUM Students: Arab Population' = SUM('Fact 08 Toar Tech'[תואר ראשון סטודנטים חדשים - ערבים])
+		formatString: #,0
+		lineageTag: 1c8b32cd-03ae-494b-87ab-85465090f03a
+
+	measure '08 ToarTech: Arab % of All Population' = DIVIDE([08 ToarTech: SUM Students: Arab Population], [08 ToarTech: SUM Students: Entire Population])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: b22055a6-cab3-49fa-98d3-c15ede827ee2
+
+	measure '08 ToarTech: SUM Students: Entire Population PY' =
+			
+			CALCULATE(
+			    [08 ToarTech: SUM Students: Entire Population],
+			    'Calendar'[Year] = MAX('Calendar'[Year]) - 1
+			)
+		formatString: #,0
+		lineageTag: 6e0a1257-a93b-4172-b803-6d5979fc3207
+
+	measure '08 ToarTech: SUM Students: Entire Population YoY' =
+			
+			VAR currentYear = [08 ToarTech: SUM Students: Entire Population]
+			VAR prevYear = [08 ToarTech: SUM Students: Entire Population PY]
+			RETURN
+			IF(
+			    NOT(ISBLANK(currentYear)) && NOT(ISBLANK(prevYear)),
+			    currentYear - prevYear
+			)
+		formatString: +#,0;-#,0;
+		lineageTag: 788519ff-35ea-4430-9b97-4817c3688370
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure '08 ToarTech: SUM Students: Entire Population % YoY' = DIVIDE([08 ToarTech: SUM Students: Entire Population YoY], [08 ToarTech: SUM Students: Entire Population PY])
+		formatString: +0.0%;-0.0%;0.0%
+		lineageTag: 99033f37-c25f-4559-8b2d-54f335ed0008
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure Zero = 0
+		lineageTag: b951d5a6-a639-45f2-8188-8a2a4ac5b943
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Subject
+		dataType: string
+		lineageTag: 0d80fa34-3263-4774-b687-c86bba54b6a4
+		summarizeBy: none
+		sourceColumn: Subject
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'תואר ראשון סטודנטים חדשים - כלל האוכלוסייה'
+		dataType: double
+		lineageTag: df77139d-901b-4078-adb1-bc80405c6b94
+		summarizeBy: sum
+		sourceColumn: תואר ראשון סטודנטים חדשים - כלל האוכלוסייה
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'תואר ראשון סטודנטים חדשים - ערבים'
+		dataType: double
+		lineageTag: 174b6d66-ac22-4a91-9433-be9be8fee036
+		summarizeBy: sum
+		sourceColumn: תואר ראשון סטודנטים חדשים - ערבים
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 87d78276-c185-450c-8be3-e897d6c96a57
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact 08 Toar Tech' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = #"08 Toar Tech: Clean All Years"
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

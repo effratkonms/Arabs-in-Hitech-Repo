@@ -1498,7 +1498,7 @@ expression '08 Bargrut Tech Folder' =
 		in
 		    #"Filtered Rows"
 	lineageTag: 5da5f768-d3cd-48a6-bcb3-8984b9af2d18
-	queryGroup: '08 Bagrut Tech'
+	queryGroup: '08 Tech'
 
 	annotation PBI_NavigationStepName = Navigation
 
@@ -1515,9 +1515,7 @@ expression '08 Bargrut Tech: Source' =
 		in
 		    Bagrut_tech_Table
 	lineageTag: c657a201-8b69-47f6-a8b2-82f37d4923ab
-	queryGroup: '08 Bagrut Tech'
-
-	annotation PBI_NavigationStepName = Navigation
+	queryGroup: '08 Tech'
 
 	annotation PBI_ResultType = Table
 
@@ -1532,9 +1530,7 @@ expression '08 Bargrut Tech Target: Source' =
 		in
 		    BagrutTech_Target_Table
 	lineageTag: 28123fed-298b-40f5-92ae-7ce835fcaded
-	queryGroup: '08 Bagrut Tech'
-
-	annotation PBI_NavigationStepName = Navigation
+	queryGroup: '08 Tech'
 
 	annotation PBI_ResultType = Table
 
@@ -1554,9 +1550,7 @@ expression '08 Bargrut Tech: Clean' =
 		in
 		    #"Removed Columns1"
 	lineageTag: be4c0d26-7bda-450f-9955-6b922be7fd15
-	queryGroup: '08 Bagrut Tech'
-
-	annotation PBI_NavigationStepName = Navigation
+	queryGroup: '08 Tech'
 
 	annotation PBI_ResultType = Table
 
@@ -1591,9 +1585,7 @@ expression '08 Misrot Tech Target: Source' =
 		in
 		    #"Changed Type2"
 	lineageTag: 1bd07e16-ac1e-4862-ae4f-0ee6f8a4b0b7
-	queryGroup: '08 Bagrut Tech'
-
-	annotation PBI_NavigationStepName = Navigation
+	queryGroup: '08 Tech'
 
 	annotation PBI_ResultType = Table
 
@@ -1621,9 +1613,7 @@ expression '08 Misrot Tech: Source' =
 		in
 		    #"Unpivoted Columns1"
 	lineageTag: 03113081-3f2f-4f33-a3e5-713adb496722
-	queryGroup: '08 Bagrut Tech'
-
-	annotation PBI_NavigationStepName = Navigation
+	queryGroup: '08 Tech'
 
 	annotation PBI_ResultType = Table
 
@@ -1634,7 +1624,156 @@ expression '08 Rashut Bagrut-Tech to Rashut Corrected Lamas LUT' =
 		in
 		    RashutBagrutTech_to_RashutCorrectedLamas_Table
 	lineageTag: 7faf6438-ff06-4c1f-bcc4-bcfb5e3fc705
-	queryGroup: '08 Bagrut Tech'
+	queryGroup: '08 Tech'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '08 Toar Tech: Source' =
+		let
+		    Source = #"08 Bargrut Tech Folder",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "תואר טק.xlsm")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content),
+		    #"Filtered Rows1" = Table.SelectRows(#"Imported Excel Workbook", each ([Kind] = "Sheet")),
+		    #"Removed Other Columns1" = Table.SelectColumns(#"Filtered Rows1",{"Name", "Data"})
+		in
+		    #"Removed Other Columns1"
+	lineageTag: 04406650-49a6-481c-a912-2dc311a46ac8
+	queryGroup: '08 Tech'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '08 Toar Tech: Sample Sheet' =
+		let
+		    Source = #"08 Toar Tech: Source",
+		    #"Filtered Rows" = Table.SelectRows(Source, each [Name] = "תשפא"),
+		    Data = #"Filtered Rows"{0}[Data]
+		in
+		    Data
+	lineageTag: fd29fbc7-51d8-4b62-8887-cb7d08d3ef2d
+	queryGroup: '08 Tech'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '08 Toal Tech: Handle Sample Sheet for Fn - DISCNNECTED' =
+		let
+		    Source = #"08 Toar Tech: Sample Sheet",
+		    #"Removed Top Rows" = Table.Skip(Source,5),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+		    #"Filtered Rows1" = Table.SelectRows(#"Promoted Headers", each ([מקצוע לימוד] <> null) and ([Is Bold] = false)),
+		    #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows1",{"Is Bold"}),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Removed Columns",{"מקצוע לימוד", "תואר ראשון סטודנטים חדשים - כלל האוכלוסייה", "תואר ראשון סטודנטים חדשים - ערבים", "מקצועות לימוד - תואר טק"}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Removed Other Columns",{{"תואר ראשון סטודנטים חדשים - כלל האוכלוסייה", type text}, {"תואר ראשון סטודנטים חדשים - ערבים", type text}}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","..",#"p08ReplaceLowNumberWith-ToarTech",Replacer.ReplaceText,{"תואר ראשון סטודנטים חדשים - כלל האוכלוסייה", "תואר ראשון סטודנטים חדשים - ערבים"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Replaced Value",{{"מקצוע לימוד", "Subject"}}),
+		    #"Filtered Rows" = Table.SelectRows(#"Renamed Columns", each ([#"מקצועות לימוד - תואר טק"] = "כן")),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Filtered Rows",{"מקצועות לימוד - תואר טק"})
+		in
+		    #"Removed Columns1"
+	lineageTag: 2c665e73-187b-4a38-96f4-d6e5e3076e77
+	queryGroup: '08 Tech\08 Toal Tech: Handle Sample Sheet'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression p08ReplaceLowNumberWith-ToarTech = "1" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: b7616029-1e6f-4ea7-aecb-9d6a9c41d876
+	queryGroup: '08 Tech\08 Toal Tech: Handle Sample Sheet'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression '08 Toal Tech: Handle Sample Sheet' =
+		let
+		    Source = (t as table, #"p08ReplaceLowNumberWith-ToarTech" as text) => let
+		        Source = t,
+		        #"Removed Top Rows" = Table.Skip(Source,5),
+		        #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+		        #"Filtered Rows1" = Table.SelectRows(#"Promoted Headers", each ([מקצוע לימוד] <> null) and ([Is Bold] = false)),
+		        #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows1",{"Is Bold"}),
+		        #"Removed Other Columns" = Table.SelectColumns(#"Removed Columns",{"מקצוע לימוד", "תואר ראשון סטודנטים חדשים - כלל האוכלוסייה", "תואר ראשון סטודנטים חדשים - ערבים", "מקצועות לימוד - תואר טק"}),
+		        #"Changed Type" = Table.TransformColumnTypes(#"Removed Other Columns",{{"תואר ראשון סטודנטים חדשים - כלל האוכלוסייה", type text}, {"תואר ראשון סטודנטים חדשים - ערבים", type text}}),
+		        #"Replaced Value" = Table.ReplaceValue(#"Changed Type","..",#"p08ReplaceLowNumberWith-ToarTech",Replacer.ReplaceText,{"תואר ראשון סטודנטים חדשים - כלל האוכלוסייה", "תואר ראשון סטודנטים חדשים - ערבים"}),
+		        #"Renamed Columns" = Table.RenameColumns(#"Replaced Value",{{"מקצוע לימוד", "Subject"}}),
+		        #"Filtered Rows" = Table.SelectRows(#"Renamed Columns", each ([#"מקצועות לימוד - תואר טק"] = "כן")),
+		        #"Removed Columns1" = Table.RemoveColumns(#"Filtered Rows",{"מקצועות לימוד - תואר טק"})
+		    in
+		        #"Removed Columns1"
+		in
+		    Source
+	lineageTag: 01b99fba-0bfb-4571-ae78-675bfe9078c0
+	queryGroup: '08 Tech\08 Toal Tech: Handle Sample Sheet'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression '08 Toar Tech: Clean All Years' =
+		let
+		    Source = #"08 Toar Tech: Source",
+		    #"Invoked Custom Function" = Table.AddColumn(Source, "08 Toal Tech: Handle Sample Sheet", each #"08 Toal Tech: Handle Sample Sheet"([Data], #"p08ReplaceLowNumberWith-ToarTech")),
+		    #"Removed Columns" = Table.RemoveColumns(#"Invoked Custom Function",{"Data"}),
+		    #"Expanded 08 Toal Tech: Handle Sample Sheet" = Table.ExpandTableColumn(#"Removed Columns", "08 Toal Tech: Handle Sample Sheet", {"Subject", "תואר ראשון סטודנטים חדשים - כלל האוכלוסייה", "תואר ראשון סטודנטים חדשים - ערבים"}, {"Subject", "תואר ראשון סטודנטים חדשים - כלל האוכלוסייה", "תואר ראשון סטודנטים חדשים - ערבים"}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Expanded 08 Toal Tech: Handle Sample Sheet",{{"Subject", type text}, {"תואר ראשון סטודנטים חדשים - כלל האוכלוסייה", type number}, {"תואר ראשון סטודנטים חדשים - ערבים", type number}}),
+		    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"Name"}, #"Education Years LUT", {"שנה עברית ללא מרכאות"}, "Education Years LUT", JoinKind.LeftOuter),
+		    #"Expanded Education Years LUT" = Table.ExpandTableColumn(#"Merged Queries", "Education Years LUT", {"שנה לועזית - סטודנטים"}, {"Year"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Expanded Education Years LUT",{{"Year", Int64.Type}}),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Changed Type1",{"Name"})
+		in
+		    #"Removed Columns1"
+	lineageTag: c55ddb79-ad4e-4e9a-b63d-215963f57012
+	queryGroup: '08 Tech'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '08 Toar Tech Targets' =
+		let
+		    Source = #"08 Bargrut Tech Folder",
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "Toar-Tech Targets.xlsx")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Content"}),
+		    Content = #"Removed Other Columns"{0}[Content],
+		    #"Imported Excel Workbook" = Excel.Workbook(Content)
+		in
+		    #"Imported Excel Workbook"
+	lineageTag: 9fcb72e7-ae96-4c58-90c1-7ed75e185037
+	queryGroup: '08 Tech'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '08 Toar Tech Target: Entire Population' =
+		let
+		    Source = #"08 Toar Tech Targets",
+		    TotarTechTarget_EntirePopulation_Table = Source{[Item="TotarTechTarget_EntirePopulation",Kind="Table"]}[Data]
+		in
+		    TotarTechTarget_EntirePopulation_Table
+	lineageTag: bc202252-9d19-48d0-a045-009c1b42e818
+	queryGroup: '08 Tech'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '08 Toar Tech Target: Arab Population' =
+		let
+		    Source = #"08 Toar Tech Targets",
+		    TotarTechTarget_ArabPopulation_Table = Source{[Item="TotarTechTarget_ArabPopulation",Kind="Table"]}[Data]
+		in
+		    TotarTechTarget_ArabPopulation_Table
+	lineageTag: 76714e2a-4fe3-4812-8b83-5c496497331e
+	queryGroup: '08 Tech'
 
 	annotation PBI_NavigationStepName = Navigation
 

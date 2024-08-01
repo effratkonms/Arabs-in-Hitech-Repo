@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
-  "name": "c7f8f85f8a71710eb8db",
+  "name": "fb9491641f420cf0f311",
   "position": {
     "x": 16,
-    "y": 2240,
-    "z": 6000,
-    "width": 1872.0000000000002,
-    "height": 48,
-    "tabOrder": 9000
+    "y": 1504,
+    "z": 23000,
+    "width": 1888,
+    "height": 64,
+    "tabOrder": 23000
   },
   "visual": {
     "visualType": "shape",
@@ -81,7 +81,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'מבוסס על נתוני משרד החינוך'"
+                  "Value": "'תואר-טק'"
                 }
               }
             },
@@ -100,7 +100,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "25D"
                 }
               }
             },
@@ -121,7 +121,7 @@
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
+                  "Value": "'''Segoe UI Semibold'', wf_segoe-ui_semibold, helvetica, arial, sans-serif'"
                 }
               }
             }
@@ -139,7 +139,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },

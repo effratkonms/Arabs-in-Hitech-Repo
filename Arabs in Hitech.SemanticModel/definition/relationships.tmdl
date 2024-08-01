@@ -260,3 +260,15 @@ relationship c6631f0e-963f-4d23-ec4c-cc913460876c
 	fromColumn: 'Fact Bagrut Denom'.'שם רשות'
 	toColumn: 'Lamas Council Corrected'.'Rashut Corrected'
 
+relationship c19a2d2d-8a0c-9ab7-df16-52f921de33c2
+	fromColumn: 'Fact 08 Toar Tech'.Year
+	toColumn: Calendar.Year
+
+relationship 1e6f93c0-187a-f4ce-7802-6a684202c1a1
+	fromColumn: 'Fact 08 Toar Tech Target: Entire Population'.Year
+	toColumn: Calendar.Year
+
+relationship 7d582212-796c-28df-0089-467e985514ea
+	fromColumn: 'Fact 08 Toar Tech Target: Arab Population'.Year
+	toColumn: Calendar.Year
+

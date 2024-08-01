@@ -1,0 +1,52 @@
+table 'Fact 08 Toar Tech Target: Entire Population'
+	lineageTag: 3dc5ddb1-2e8b-4269-ba19-149d4d5832a9
+
+	measure '08 ToarTech Target: Entire Population' = MAX('Fact 08 Toar Tech Target: Entire Population'[Yearly Rate of Change])
+		formatString: +0.0%;-0.0%;0.0%
+		lineageTag: 12d7a1df-3eed-49c1-aa48-3b1e5f3cae35
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure '08 ToarTech Max BvA: Entire Population' = MAX([08 ToarTech Target: Entire Population], [08 ToarTech: SUM Students: Entire Population % YoY])
+		lineageTag: a4f1cf85-d8a4-4872-9602-8f7aeb3f7871
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '08 ToarTech Min BvA: Entrie Population' = MIN([08 ToarTech Target: Entire Population], [08 ToarTech: SUM Students: Entire Population % YoY])
+		lineageTag: 9d52e67c-a73d-4620-a341-78bcc2568e51
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Year
+		dataType: double
+		lineageTag: 5b9451af-7399-469e-9cde-f9890002708e
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Yearly Rate of Change'
+		dataType: double
+		lineageTag: 4d12e723-d4b8-44e1-87a3-b478cbc181e0
+		summarizeBy: sum
+		sourceColumn: Yearly Rate of Change
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Fact 08 Toar Tech Target: Entire Population' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = #"08 Toar Tech Target: Entire Population"
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

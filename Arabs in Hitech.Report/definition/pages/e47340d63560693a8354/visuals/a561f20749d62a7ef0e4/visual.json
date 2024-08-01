@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
-  "name": "f48864189078a35e0e04",
+  "name": "a561f20749d62a7ef0e4",
   "position": {
-    "x": 512,
-    "y": 1072,
-    "z": 15000,
-    "width": 1392,
-    "height": 368,
-    "tabOrder": 19000
+    "x": 16,
+    "y": 1680,
+    "z": 26002,
+    "width": 927.99999999999989,
+    "height": 560,
+    "tabOrder": 26002
   },
   "visual": {
     "visualType": "lineChart",
@@ -33,6 +33,40 @@
             }
           ]
         },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact 08 Toar Tech"
+                    }
+                  },
+                  "Property": "08 ToarTech: SUM Students: Arab Population"
+                }
+              },
+              "queryRef": "Fact 08 Toar Tech.08 ToarTech: SUM Students: Arab Population",
+              "nativeQueryRef": "סטודנטים חדשים מהחברה הערבית",
+              "displayName": "סטודנטים חדשים מהחברה הערבית"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact 08 Toar Tech"
+                    }
+                  },
+                  "Property": "08 ToarTech: SUM Students: Entire Population"
+                }
+              },
+              "queryRef": "Fact 08 Toar Tech.08 ToarTech: SUM Students: Entire Population",
+              "nativeQueryRef": "סטודנטים חדשים מכלל האוכלוסיה",
+              "displayName": "סטודנטים חדשים מכלל האוכלוסיה"
+            }
+          ]
+        },
         "Y": {
           "projections": [
             {
@@ -40,45 +74,30 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Fact 08 Mistrot Tech"
+                      "Entity": "Fact 08 Toar Tech"
                     }
                   },
-                  "Property": "MAX Misrot Tech"
+                  "Property": "08 ToarTech: Arab % of All Population"
                 }
               },
-              "queryRef": "Fact 08 Mistrot Tech Target.MAX Misrot Tech",
-              "nativeQueryRef": "מועסקים בפועל",
-              "displayName": "מועסקים בפועל"
+              "queryRef": "Fact 08 Toar Tech.08 ToarTech: Arab % of All Population",
+              "nativeQueryRef": "שיעור החברה הערבית",
+              "displayName": "שיעור החברה הערבית"
             },
             {
               "field": {
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Fact 08 Mistrot Tech Target"
+                      "Entity": "Fact 08 Toar Tech Target: Arab Population"
                     }
                   },
-                  "Property": "SUM Misrot Tech Target"
+                  "Property": "08 ToarTech Target: Arab Population"
                 }
               },
-              "queryRef": "Fact 08 Mistrot Tech Target.MAX Misrot Tech Target",
+              "queryRef": "Fact 08 Toar Tech Target: Arab Population.08 ToarTech Target: Arab Population",
               "nativeQueryRef": "יעד",
               "displayName": "יעד"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Fact 08 Mistrot Tech"
-                    }
-                  },
-                  "Property": "Target Extrapolation, Misrot Tech"
-                }
-              },
-              "queryRef": "Fact 08 Mistrot Tech.Target Extrapolation, Misrot Tech",
-              "nativeQueryRef": "מסלול ליעד, הנחה: שיעור גידול שנתי קבוע",
-              "displayName": "מסלול ליעד, הנחה: שיעור גידול שנתי קבוע"
             }
           ]
         }
@@ -217,7 +236,7 @@
             "labelDisplayUnits": {
               "expr": {
                 "Literal": {
-                  "Value": "1000D"
+                  "Value": "0D"
                 }
               }
             }
@@ -280,25 +299,6 @@
           },
           "selector": {
             "metadata": "Key Metric.Key Metric, All Populations"
-          }
-        },
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": -0.3
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Fact 08 Mistrot Tech Target.MAX Misrot Tech Target"
           }
         }
       ],
@@ -377,7 +377,7 @@
             }
           },
           "selector": {
-            "metadata": "Fact 08 Mistrot Tech Target.MAX Misrot Tech"
+            "metadata": "Fact 08 Toar Tech.08 ToarTech: Arab % of All Population"
           }
         },
         {
@@ -391,35 +391,7 @@
             }
           },
           "selector": {
-            "metadata": "Fact 08 Mistrot Tech Target.MAX Misrot Tech Target"
-          }
-        },
-        {
-          "properties": {
-            "showMarker": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "lineStyle": {
-              "expr": {
-                "Literal": {
-                  "Value": "'dashed'"
-                }
-              }
-            },
-            "strokeWidth": {
-              "expr": {
-                "Literal": {
-                  "Value": "3D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Fact 08 Mistrot Tech.Target Extrapolation, Misrot Tech"
+            "metadata": "Fact 08 Toar Tech Target: Arab Population.08 ToarTech Target: Arab Population"
           }
         }
       ],
@@ -446,6 +418,13 @@
                   "Value": "14D"
                 }
               }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
             }
           }
         },
@@ -465,29 +444,17 @@
                 }
               }
             },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 1,
-                      "Percent": 0.6
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Fact 08 Mistrot Tech Target.MAX Misrot Tech Target"
-          }
-        },
-        {
-          "properties": {
-            "fontSize": {
+            "labelPosition": {
               "expr": {
                 "Literal": {
-                  "Value": "18D"
+                  "Value": "'Under'"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             },
@@ -496,37 +463,16 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 2,
-                      "Percent": 0
+                      "ColorId": 0,
+                      "Percent": -0.5
                     }
                   }
                 }
               }
-            },
-            "fontFamily": {
-              "expr": {
-                "Literal": {
-                  "Value": "'''Segoe UI Semibold'', wf_segoe-ui_semibold, helvetica, arial, sans-serif'"
-                }
-              }
             }
           },
           "selector": {
-            "metadata": "Fact 08 Mistrot Tech Target.MAX Misrot Tech"
-          }
-        },
-        {
-          "properties": {
-            "showSeries": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Fact 08 Mistrot Tech.Target Extrapolation, Misrot Tech"
+            "metadata": "Fact 08 Toar Tech Target: Arab Population.08 ToarTech Target: Arab Population"
           }
         }
       ],
@@ -547,18 +493,6 @@
                 }
               }
             },
-            "value": {
-              "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Fact 08 Mistrot Tech Target"
-                    }
-                  },
-                  "Property": "SUM Misrot Tech Target"
-                }
-              }
-            },
             "lineColor": {
               "solid": {
                 "color": {
@@ -568,6 +502,13 @@
                       "Percent": 0.6
                     }
                   }
+                }
+              }
+            },
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "0.2D"
                 }
               }
             }
@@ -597,7 +538,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "2035D"
+                  "Value": "2028D"
                 }
               }
             },
@@ -627,7 +568,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "' סך המועסקים במשרות-טק'"
+                  "Value": "'שיעור החברה הערבית מתוך כלל האוכלוסיה, סטודנטים חדשים למקצועות ההייטק'"
                 }
               }
             },

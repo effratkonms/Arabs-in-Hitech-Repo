@@ -1,0 +1,40 @@
+table 'Fact 08 Toar Tech Target: Arab Population'
+	lineageTag: ad593ad5-363c-48ea-bce4-2454bdd9e393
+
+	measure '08 ToarTech Target: Arab Population' = MAX('Fact 08 Toar Tech Target: Arab Population'[Rate])
+		formatString: 0%;-0%;0%
+		lineageTag: 242f81d0-ce3d-435e-ab95-3b84c78f10f5
+
+	column Year
+		dataType: double
+		lineageTag: 7536ddf6-7994-4b6f-9643-38cfea4d73d2
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Rate
+		dataType: double
+		lineageTag: fa624d05-8431-4ff3-adc6-18750328cf1c
+		summarizeBy: sum
+		sourceColumn: Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Fact 08 Toar Tech Target: Arab Population' = m
+		mode: import
+		queryGroup: 'Data Model\Facts'
+		source =
+				let
+				    Source = #"08 Toar Tech Target: Arab Population"
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
